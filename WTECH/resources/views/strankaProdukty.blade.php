@@ -17,14 +17,14 @@
 
     <div class="flex-grow">
     <!-- 🔹 Navigačný panel -->
-    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
         </a>
         <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
         <div class="flex space-x-4">
-            <a href="#" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
-            <a href="#" class="text-gray-700 text-xl"><i class="fas fa-user"></i></a>
+            <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
+            <a href="{{ route('loginForm') }}" class="text-gray-700 text-xl"><i class="fas fa-user"></i></a>
         </div>
     </nav>
 
@@ -91,10 +91,10 @@
         </div>
     </div>
 
-    <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow ">
+    <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow rounded-md">
         <h4 class="text-2xl font-bold mb-10">Telefóny iPhone</h4>
         <div class="flex flex-wrap justify-center gap-10">
-            <a href="strankaProdukty" class="w-full md:w-4/5">
+            <a href="{{ route('produktView') }}" class="w-full md:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center shadow-md w-full min-w-[300px] h-auto gap-4">
                     <div class="flex space-x-4">
                         <div class="h-38 w-38 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center bg-gray-500 rounded"></div>
@@ -109,14 +109,14 @@
                             <span class="ml-4">RAM: 8GB</span>
                         </div>
                         <div class="w-full flex justify-center md:justify-end mt-4">
-                            <button class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                            <button id="buyButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
                                 Kúpiť
                             </button>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="strankaProdukty" class="w-full md:w-4/5">
+            <a href="{{ route('produktView') }}" class="w-full md:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center shadow-md w-full min-w-[300px] h-auto gap-4">
                     <div class="flex space-x-4">
                         <div class="h-38 w-38 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center bg-gray-500 rounded"></div>
@@ -131,14 +131,14 @@
                             <span class="ml-4">RAM: 8GB</span>
                         </div>
                         <div class="w-full flex justify-center md:justify-end mt-4">
-                            <button class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                            <button id="buyButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
                                 Kúpiť
                             </button>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="strankaProdukty" class="w-full md:w-4/5">
+            <a href="{{ route('produktView') }}" class="w-full md:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center shadow-md w-full min-w-[300px] h-auto gap-4">
                     <div class="flex space-x-4">
                         <div class="h-38 w-38 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center bg-gray-500 rounded"></div>
@@ -153,13 +153,16 @@
                             <span class="ml-4">RAM: 8GB</span>
                         </div>
                         <div class="w-full flex justify-center md:justify-end mt-4">
-                            <button class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                            <button id="buyButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
                                 Kúpiť
                             </button>
                         </div>
                     </div>
                 </div>
             </a>
+
+
+
         </div>
     </div>
 
@@ -178,5 +181,13 @@
 
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.querySelectorAll("button").forEach(button => {
+            button.addEventListener("click", function(event) {
+                event.stopPropagation();  // Zabráni prekliknutiu na <a>
+                event.preventDefault();   // Zabráni presmerovaniu odkazu
+            });
+        });
+    </script>
 </body>
 </html>

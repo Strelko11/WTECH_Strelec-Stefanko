@@ -16,3 +16,39 @@
 }
 
 
+
+
+/* Animácia fade + slide pre obrázky */
+.fade-slide {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#gallery-modal {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#gallery-modal.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Animácia prechodu obrázkov */
+.fade-slide {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+}
