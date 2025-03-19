@@ -1,16 +1,5 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-}
-
 .custom-shadow {
     box-shadow: -5px 0  10px rgba(0, 0, 0, 0.1), 5px  0 10px rgba(0, 0, 0, 0.1);
 }
@@ -83,4 +72,31 @@
     border-radius: 6px;
     padding: 4px;
     outline: none;
+}
+
+#hs-pass-values-to-inputs {
+    width: 100%;
+    max-width: 400px; /* Alebo podľa potreby */
+    height: 10px;
+    margin-top: 10px;
+}
+
+.noUi-connect {
+    background: #6b7280 !important; /* Tmavá sivá */
+}
+
+/* Farba základnej dráhy slidera */
+.noUi-base {
+    background: #d1d5db; /* Svetlo sivá */
+}
+
+/* Farba rukovätí (handle) */
+.noUi-handle {
+    background: #9ca3af !important; /* Stredne sivá */
+    border: 2px solid #6b7280 !important; /* Tmavý okraj */
+}
+
+/* Pri hoveri na rukoväť */
+.noUi-handle:hover {
+    background: #6b7280 !important; /* Tmavšia sivá */
 }

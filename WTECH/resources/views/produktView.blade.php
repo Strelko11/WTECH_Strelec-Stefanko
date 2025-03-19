@@ -7,36 +7,35 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     <script src="{{ mix('resources/js/app.js') }}" defer></script>
-    <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
+    <script src="{{mix('resources/js/produktCounter.js') }}" defer></script>
+
 
 
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
-
     <div class="flex-grow">
-        <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
+        <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
             <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
                 <i class="fas fa-globe mr-2"></i> TechSphere
             </a>
-            <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
+            <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">
             <div class="flex space-x-4">
-                <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
+                <a href="{{ route('kosikView') }}" class="text-white text-xl"><i class="fas fa-shopping-cart"></i></a>
 
                 <div class="relative group">
-
-                    <button class="text-gray-700 text-xl focus:outline-none">
+                    <button class="text-white text-xl focus:outline-none">
                         <i class="fas fa-user"></i>
                     </button>
-                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border custom-shadow">
-                        <div class="px-4 py-3 text-sm text-black  ">
+                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-gray-300">
+                        <div class="px-4 py-3 text-sm text-black">
                             <div>Meno používateľa</div>
                             <div class="font-medium truncate">E-mail používateľa</div>
-                          </div>
-                        <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">Prihlásiť sa</a>
-                        <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-200">Admin</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-b-lg">Sign out</a>
+                        </div>
+                        <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
+                        <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-b-lg">Sign out</a>
                     </div>
                 </div>
             </div>
@@ -45,29 +44,30 @@
     <div class="w-full max-w-[90%] mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 rounded-md">
         <div class="flex flex-col md:flex-row gap-6 items-start">
             <div class="w-full md:w-1/2 flex flex-col items-center">
-                <div class="cursor-pointer relative h-80 md:h-96 bg-white flex items-center justify-center rounded-lg border-2 overflow-hidden w-full">
+                <div class="cursor-pointer relative h-80 md:h-96 bg-white flex items-center justify-center rounded-lg  overflow-hidden w-full border border-gray-400" >
                     <img id="main-image" src="https://image.alza.cz/products/RI051c4/RI051c4.jpg?width=2000&height=2000"
                         alt="Fotka produktu"
                         class="w-full h-full object-contain cursor-pointer fade-slide active"
-                        onclick="openGallery()">
+                        onclick="openGallery()"
+                        >
                 </div>
                 <div class="flex gap-2 md:gap-4 mt-4 justify-center">
-                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center">
+                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center border border-gray-400">
                         <img src="https://image.alza.cz/products/RI051c4/RI051c4.jpg?width=2000&height=2000"
                             class="max-w-full max-h-full cursor-pointer object-contain"
                             onclick="changeImage(0)">
                     </div>
-                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center">
+                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center border border-gray-400">
                         <img src="https://image.alza.cz/products/RI051c4/RI051c4-01.jpg?width=2000&height=2000"
                             class="max-w-full max-h-full cursor-pointer object-contain"
                             onclick="changeImage(1)">
                     </div>
-                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center">
+                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center border border-gray-400">
                         <img src="https://image.alza.cz/products/RI051c4/RI051c4-02.jpg?width=1400&height=1400"
                             class="max-w-full max-h-full cursor-pointer object-contain"
                             onclick="changeImage(2)">
                     </div>
-                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center">
+                    <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center border border-gray-400">
                         <img src="https://image.alza.cz/products/RI051c4/RI051c4-03.jpg?width=1400&height=1400"
                             class="max-w-full max-h-full cursor-pointer object-contain"
                             onclick="changeImage(3)">
@@ -75,28 +75,28 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 flex flex-col gap-4 items-center text-center">
-                <div class="bg-gray-300 rounded-lg p-4 text-2xl font-bold w-full">
+                <div class="bg-gray-200 rounded-lg border border-gray-400 p-4 text-2xl font-bold w-full">
                     iPhone 16 Pro 256 GB – Púštny Titán
                 </div>
 
-                <div class="bg-gray-300 rounded-lg p-4 text-lg w-full">
+                <div class="bg-gray-200 rounded-lg p-4 border border-gray-400 text-lg w-full">
                     <p>Mobilný telefón – 6,3" Super Retina XDR OLED 2622 × 1206 (120 Hz), operačná pamäť 8 GB, vnútorná pamäť 256 GB, single SIM + eSIM, procesor Apple A18 Pro, fotoaparát: 48 Mpx (f/1,78) hlavný + 48 Mpx širokouhlý + 12 Mpx teleobjektív, predná kamera 12 Mpx, GPS, NFC, LTE, 5G, USB-C, vodoodolný podľa IP68, rýchle nabíjanie, bezdrôtové nabíjanie 25 W, batéria 3582 mAh, model 2024, iOS</p>
                 </div>
                 <div class="flex gap-4 w-full">
-                    <div class="bg-gray-300 rounded-lg p-4 text-lg font-semibold w-1/3 md:w-1/4 text-center">
+                    <div class="bg-gray-200 rounded-lg p-4 text-lg border  border-gray-400 font-semibold w-1/3 md:w-1/4 text-center">
                         1 299 €
                     </div>
                     <div class="quantity-container ml-auto">
-                        <button class="quantity-btn" id="decrease">−</button>
+                        <button class="quantity-btn bg-gray-200 border-gray-400" id="decrease">−</button>
                         <input type="text" id="quantity" value="1" readonly>
-                        <button class="quantity-btn" id="increase">+</button>
+                        <button class="quantity-btn  bg-gray-200 border-gray-400" id="increase">+</button>
                     </div>
-                    <button class="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold px-6 py-3 rounded-lg ml-auto w-2/3 md:w-1/4">
+                    <button class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg ml-auto w-2/3 md:w-1/4">
                         Do košíka
                     </button>
 
                 </div>
-                <div class="bg-gray-300 rounded-lg p-4 text-lg w-full">
+                <div class="bg-gray-200 rounded-lg p-4 border border-gray-400 text-lg w-full">
                     <p>Na sklade > 5 ks</p>
                 </div>
             </div>
@@ -198,7 +198,7 @@
     </div>
 
 
-    <footer class="text-center py-4 bg-gray-200 mt-6 border-t">
+    <footer class="text-center py-4 bg-gray-900 mt-6 border-t  text-white">
         <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
     </footer>
 
