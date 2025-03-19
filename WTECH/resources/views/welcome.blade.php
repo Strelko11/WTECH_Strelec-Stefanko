@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shop</title>
+    <title>TechSphere</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,8 +15,8 @@
 
 
 
-    <div class="flex-grow  ">
-    <!-- 🔹 Navigačný panel -->
+    <div class="flex-grow ">
+
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
@@ -24,7 +24,22 @@
         <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
         <div class="flex space-x-4">
             <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
-            <a href="{{ route('loginForm') }}" class="text-gray-700 text-xl"><i class="fas fa-user"></i></a>
+
+            <div class="relative group">
+
+                <button class="text-gray-700 text-xl focus:outline-none">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border custom-shadow">
+                    <div class="px-4 py-3 text-sm text-black  ">
+                        <div>Meno používateľa</div>
+                        <div class="font-medium truncate">E-mail používateľa</div>
+                      </div>
+                    <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">Prihlásiť sa</a>
+                    <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-200">Admin</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-b-lg">Sign out</a>
+                </div>
+            </div>
         </div>
     </nav>
 

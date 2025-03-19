@@ -3,33 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shop</title>
+    <title>TechSphere</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        @vite(['resources/css/app.css'])
-        <script src="{{ mix('resources/js/app.js') }}" defer></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="{{ mix('resources/js/app.js') }}" defer></script>
+    <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
 
 
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
 
     <div class="flex-grow">
-    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-        <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
-            <i class="fas fa-globe mr-2"></i> TechSphere
-        </a>
-        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
-        <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
-            <a href="{{ route('loginForm') }}" class="text-gray-700 text-xl"><i class="fas fa-user"></i></a>
-        </div>
-    </nav>
+        <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
+            <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
+                <i class="fas fa-globe mr-2"></i> TechSphere
+            </a>
+            <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
+            <div class="flex space-x-4">
+                <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
+
+                <div class="relative group">
+
+                    <button class="text-gray-700 text-xl focus:outline-none">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border custom-shadow">
+                        <div class="px-4 py-3 text-sm text-black  ">
+                            <div>Meno používateľa</div>
+                            <div class="font-medium truncate">E-mail používateľa</div>
+                          </div>
+                        <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">Prihlásiť sa</a>
+                        <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-200">Admin</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-b-lg">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
     <div class="w-full max-w-[90%] mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 rounded-md">
         <div class="flex flex-col md:flex-row gap-6 items-start">
             <div class="w-full md:w-1/2 flex flex-col items-center">
-                <div class="relative h-80 md:h-96 bg-white flex items-center justify-center rounded-lg border-2 overflow-hidden w-full">
+                <div class="cursor-pointer relative h-80 md:h-96 bg-white flex items-center justify-center rounded-lg border-2 overflow-hidden w-full">
                     <img id="main-image" src="https://image.alza.cz/products/RI051c4/RI051c4.jpg?width=2000&height=2000"
                         alt="Fotka produktu"
                         class="w-full h-full object-contain cursor-pointer fade-slide active"
@@ -70,9 +86,15 @@
                     <div class="bg-gray-300 rounded-lg p-4 text-lg font-semibold w-1/3 md:w-1/4 text-center">
                         1 299 €
                     </div>
+                    <div class="quantity-container ml-auto">
+                        <button class="quantity-btn" id="decrease">−</button>
+                        <input type="text" id="quantity" value="1" readonly>
+                        <button class="quantity-btn" id="increase">+</button>
+                    </div>
                     <button class="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold px-6 py-3 rounded-lg ml-auto w-2/3 md:w-1/4">
                         Do košíka
                     </button>
+
                 </div>
                 <div class="bg-gray-300 rounded-lg p-4 text-lg w-full">
                     <p>Na sklade > 5 ks</p>
@@ -102,6 +124,7 @@
             </button>
         </div>
     </div>
+
     <div class="w-full max-w-[90%] mx-auto px-4 py-6 border-l border-r border-gray-400 custom-shadow mt-6 rounded-md">
         <h2 class="text-2xl font-bold mb-4">Technické parametre</h2>
 

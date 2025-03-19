@@ -17,9 +17,9 @@
 
     <div class="flex-grow">
     <!-- 🔹 Navigačný panel -->
-    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50 ">
         <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
-            <i class="fas fa-globe mr-2"></i> TechSphere
+            <i class="fas fa-globe mr-2"></i> TechSphere Admin
         </a>
         <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
         <div class="flex space-x-4">
@@ -32,8 +32,8 @@
                 </button>
                 <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border custom-shadow">
                     <div class="px-4 py-3 text-sm text-black  ">
-                        <div>Meno používateľa</div>
-                        <div class="font-medium truncate">E-mail používateľa</div>
+                        <div>Meno Admina</div>
+                        <div class="font-medium truncate">E-mail Admina</div>
                       </div>
                     <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">Prihlásiť sa</a>
                     <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-200">Admin</a>
@@ -44,72 +44,53 @@
     </nav>
 
 
-    <!-- 🔹 Hlavná sekcia -->
-    <div class="w-full mt-24 border-b border-gray-400 shadow-md px-15  pt-15  pb-5">
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-8">
-                <h1 class="text-4xl font-bold">Prinášame budúcnosť technológií do vašich rúk.</h1>
-                <p class="mt-2 text-gray-600 text-xl ">Najnovšie smartfóny a tablety za skvelé ceny. Rýchle doručenie, spoľahlivosť a odborné poradenstvo. Vyberte si to najlepšie ešte dnes.</p>
-            </div>
-            <div class="col-span-4 flex justify-center  bg-gray-300 h-40 w-40 rounded-lg">
-                <img src="https://static.vecteezy.com/system/resources/previews/022/722/945/non_2x/samsung-galaxy-s23-ultra-transparent-image-free-png.png" alt="">
-            </div>
-        </div>
-    </div>
 
-    <div class="flex flex-wrap justify-center gap-6 my-6">
+
+    <div class="flex flex-wrap justify-center gap-6  pt-28 pb-8">
 
         <div>
-            <label for="priceFilter" class="text-lg font-semibold">Cena:</label>
+            <label for="priceFilter" class="text-lg font-semibold">Typ zariadenia</label>
             <select id="priceFilter" class="px-4 py-2 border rounded-lg">
-                <option value="all">Všetky ceny</option>
-                <option value="top">Najdrahšie</option>
-                <option value="bottom">Najlacnejšie</option>
-                <option value="low">Do 500 €</option>
-                <option value="mid">500 € - 1000 €</option>
-                <option value="high">1000 € a viac</option>
+                <option value="all">Všetky typy</option>
+                <option value="low">Telefón</option>
+                <option value="mid">Tablet</option>
             </select>
         </div>
 
 
         <div>
-            <label for="seriesFilter" class="text-lg font-semibold">Séria:</label>
+            <label for="seriesFilter" class="text-lg font-semibold">Značka:</label>
             <select id="seriesFilter" class="px-4 py-2 border rounded-lg">
-                <option value="all">Všetky série</option>
-                <option value="iphone-16">iPhone 16</option>
-                <option value="samsung-s24">iPhone 15</option>
-                <option value="xiaomi-15">iPhone 14</option>
-            </select>
-        </div>
-
-
-        <div>
-            <label for="storageFilter" class="text-lg font-semibold">Úložisko:</label>
-            <select id="storageFilter" class="px-4 py-2 border rounded-lg">
-                <option value="all">Všetky kapacity</option>
-                <option value="64">64 GB</option>
-                <option value="128">128 GB</option>
-                <option value="256">256 GB</option>
-                <option value="512">512 GB</option>
-                <option value="1tb">1 TB</option>
+                <option value="all">Všeky značky</option>
+                <option value="iphone-16">iPhone</option>
+                <option value="samsung-s24">Samsung</option>
+                <option value="xiaomi-15">Xiaomi</option>
             </select>
         </div>
 
         
         <div>
-            <label for="ramFilter" class="text-lg font-semibold">RAM:</label>
-            <select id="ramFilter" class="px-4 py-2 border rounded-lg">
-                <option value="all">Všetky veľkosti</option>
-                <option value="4">4 GB</option>
-                <option value="6">6 GB</option>
-                <option value="8">8 GB</option>
-                <option value="12">12 GB</option>
+            <label for="storageFilter" class="text-lg font-semibold">Cena:</label>
+            <select id="storageFilter" class="px-4 py-2 border rounded-lg">
+                <option value="all">Všetky ceny</option>
+                <option value="64">Najdrahšie</option>
+                <option value="64">Najlacnejšie</option>
+                <option value="64">do 400 €</option>
+                <option value="128">do 700 €</option>
+                <option value="256">nad 1000 €</option>
             </select>
         </div>
+        <div>
+            <button id="addProduct" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[150]"
+                    onclick="window.location.href='/pridajProdukt';">
+                Pridať produkt
+            </button>
+        </div>
+
+
     </div>
 
     <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow rounded-md">
-        <h4 class="text-2xl font-bold mb-10">Telefóny iPhone</h4>
         <div class="flex flex-wrap justify-center gap-10">
             <a href="{{ route('produktView') }}" class="w-full md:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center shadow-md w-full min-w-[300px] h-auto gap-4">
@@ -125,9 +106,12 @@
                             <span>Pamäť: 256GB</span>
                             <span class="ml-4">RAM: 8GB</span>
                         </div>
-                        <div class="w-full flex justify-center md:justify-end mt-4">
-                            <button id="buyButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
-                                Kúpiť
+                        <div class="w-full flex justify-center md:justify-end mt-4 gap-2">
+                            <button onclick="window.location.href='/upravProdukt';" id="editButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                                Upraviť
+                            </button>
+                            <button id="deleteButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                                Vymazať
                             </button>
                         </div>
                     </div>
@@ -147,11 +131,13 @@
                             <span>Pamäť: 256GB</span>
                             <span class="ml-4">RAM: 8GB</span>
                         </div>
-                        <div class="w-full flex justify-center md:justify-end mt-4">
-                            <button id="buyButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
-                                Kúpiť
+                        <div class="w-full flex justify-center md:justify-end mt-4 gap-2">
+                            <button onclick="window.location.href='/upravProdukt';" id="editButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                                Upraviť
                             </button>
-
+                            <button id="deleteButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                                Vymazať
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -170,9 +156,12 @@
                             <span>Pamäť: 256GB</span>
                             <span class="ml-4">RAM: 8GB</span>
                         </div>
-                        <div class="w-full flex justify-center md:justify-end mt-4">
-                            <button id="buyButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
-                                Kúpiť
+                        <div class="w-full flex justify-center md:justify-end mt-4 gap-2">
+                            <button onclick="window.location.href='/upravProdukt';" id="editButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                                Upraviť
+                            </button>
+                            <button id="deleteButton" class="bg-gray-400 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-500 flex justify-center w-[120px]">
+                                Vymazať
                             </button>
                         </div>
                     </div>
@@ -202,8 +191,8 @@
     <script>
         document.querySelectorAll("button").forEach(button => {
             button.addEventListener("click", function(event) {
-                event.stopPropagation();  // Zabráni prekliknutiu na <a>
-                event.preventDefault();   // Zabráni presmerovaniu odkazu
+                event.stopPropagation();
+                event.preventDefault();
             });
         });
     </script>

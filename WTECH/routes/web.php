@@ -17,7 +17,15 @@ Route::get('/loginForm', function () {
 Route::get('/registerForm', function () {
     return view('registerForm');
 })->name('registerForm');
-
 Route::get('/kosikView', function () {
     return view('kosikView');
 })->name('kosikView');
+Route::get('/adminObrazovka', function () {
+    return view('adminObrazovka');
+})->name('adminObrazovka');
+Route::get('/pridajProdukt', function () {
+    return view('pridajProdukt');
+})->name('pridajProdukt');
+Route::get('/upravProdukt', function () {
+    return view('upravProdukt');
+})->name('upravProdukt');
