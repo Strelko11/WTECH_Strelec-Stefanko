@@ -62,7 +62,7 @@
                 </a>
 
                 <!-- Potvrdiť -->
-                <button type="submit" class="w-3/5 bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg mt-4 transition mx-auto block">
+                <button type="submit" class="w-3/5 bg-gray-600 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg mt-4 transition mx-auto block">
                     Potvrdiť
                 </button>
 
