@@ -42,7 +42,7 @@
 
         <div class="w-full max-w-[80%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-center rounded-md bg-gray-100">
             <form class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
-                <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Prihlásiť sa</h2>
+                <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Zaregistrovať sa</h2>
 
                 <!-- Meno -->
                 <div class="mb-4">
