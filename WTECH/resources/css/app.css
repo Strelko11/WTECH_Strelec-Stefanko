@@ -100,3 +100,27 @@
 .noUi-handle:hover {
     background: #6b7280 !important; /* Tmavšia sivá */
 }
+
+input[name="sposob_dorucenia"]:not([value="balikobox"]) ~ #balikobox-location {
+    display: none;
+}
+input[name="sposob_dorucenia"][value="balikobox"]:checked ~ #balikobox-location {
+    display: block;
+}
+
+/* Applying custom shadow to the form container */
+.custom-shadow {
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1), 5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Fade and Slide animation */
+.fade-slide {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -33,7 +33,7 @@
     </div>
 
     <!-- Main div-->
-    <div class="w-full max-w-[90%] h-auto mx-auto py-10 flex gap-6 justify-between rounded-md relative">
+    <div class="w-full max-w-[90%] h-auto mx-auto py-10 flex flex-col gap-6 justify-between rounded-md relative">
         <!-- Kontaktne udaje -->
         <div class="w-full sm:max-w-[48%] h-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
             <form action="#" class="space-y-4">
@@ -71,26 +71,53 @@
             </form>
         </div>
 
-
-
-
         <!-- Vyber sposobu dorucenia -->
-        <div class="w-full sm:max-w-[48%] h-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow flex gap rounded-md relative">
-            <form action="#">
-                <div>
-                    <label for="meno" class="block text-sm font-medium ml-10">Meno
-                        <input type="text" id="meno" name="meno" class="rounded-md border border-color-grey h-10 p-2 mr-10">
+        <div class="w-full sm:max-w-[48%] h-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
+            <!-- Spôsob doručenia Section -->
+            <div class="ml-10">
+                <span class="block text-sm font-medium">Spôsob doručenia</span>
+                <div class="mt-2 space-y-2">
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_dorucenia" value="adresa" class="h-5 w-5 text-blue-600">
+                        Na adresu
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_dorucenia" value="balikobox" class="h-5 w-5 text-blue-600">
+                        Balikobox
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_dorucenia" value="posta" class="h-5 w-5 text-blue-600">
+                        Na poštu
                     </label>
                 </div>
-                <div>
-                    <label for="priezvisko" class="block text-sm font-medium">Priezvisko
-                        <input type="text" id="priezvisko" name="priezvisko" class="rounded-md border border-color-grey h-10 p-2">
-                    </label>
-                </div>
-            </form>
+            </div>
         </div>
 
+        <!-- Spôsob platby (Payment Method) Section -->
+        <div class="w-full sm:max-w-[48%] h-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
+            <!-- Spôsob platby Section -->
+            <div class="ml-10">
+                <span class="block text-sm font-medium">Spôsob platby</span>
+                <div class="mt-2 space-y-2">
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_platby" value="hotovost" class="h-5 w-5 text-blue-600">
+                        Platba v hotovosti
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_platby" value="prevod_ucet" class="h-5 w-5 text-blue-600">
+                        Prevod na účet
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_platby" value="apple_pay" class="h-5 w-5 text-blue-600">
+                        Apple Pay
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="sposob_platby" value="google_pay" class="h-5 w-5 text-blue-600">
+                        Google Pay
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
