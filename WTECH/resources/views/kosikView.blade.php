@@ -24,16 +24,49 @@
         </div>
     </nav>
 
-    <div class="w-full max-w-[90%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-start rounded-md relative">
-        <p class="absolute top-2 left-2">Produkt</p>
+    <!-- Product Section -->
+    <div class="mb-10 w-full max-w-[90%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-start rounded-md relative">
         <div id="Produkt" class="h-35 w-35 bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center"></div>
         <button class="quantity-btn" id="decrease">−</button>
         <input type="text" id="quantity" value="1" readonly>
         <button class="quantity-btn" id="increase">+</button>
     </div>
-    <div class="w-full max-w-[90%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-start rounded-md relative">
+
+    <!-- Contact Section -->
+    <div class="w-full max-w-[90%] h-auto mx-auto py-10 flex gap-6 justify-between rounded-md relative">
+        <!-- First Form Div -->
+        <div class="w-full sm:max-w-[48%] h-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow flex gap rounded-md relative">
+            <form action="#">
+                <div>
+                    <label for="meno" class="block text-sm font-medium ml-10">Meno
+                        <input type="text" id="meno" name="meno" class="rounded-md border border-color-grey h-10 p-2 mr-10">
+                    </label>
+                </div>
+                <div>
+                    <label for="priezvisko" class="block text-sm font-medium">Priezvisko
+                        <input type="text" id="priezvisko" name="priezvisko" class="rounded-md border border-color-grey h-10 p-2">
+                    </label>
+                </div>
+            </form>
+        </div>
+
+        <!-- Second Form Div -->
+        <div class="w-full sm:max-w-[48%] h-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow flex gap rounded-md relative">
+            <form action="#">
+                <div>
+                    <label for="meno" class="block text-sm font-medium ml-10">Meno
+                        <input type="text" id="meno" name="meno" class="rounded-md border border-color-grey h-10 p-2 mr-10">
+                    </label>
+                </div>
+                <div>
+                    <label for="priezvisko" class="block text-sm font-medium">Priezvisko
+                        <input type="text" id="priezvisko" name="priezvisko" class="rounded-md border border-color-grey h-10 p-2">
+                    </label>
+                </div>
+            </form>
+        </div>
 
     </div>
 
-
 </body>
+</html>
