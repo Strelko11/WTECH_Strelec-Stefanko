@@ -36,3 +36,4 @@ maxInput.addEventListener('input', function () {
  range.noUiSlider.set([null, this.value]);
 });
 }
+

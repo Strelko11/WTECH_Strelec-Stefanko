@@ -75,3 +75,7 @@ modal.addEventListener("click", (e) => {
 });
 
 closeGallery()
+
+
+
+
