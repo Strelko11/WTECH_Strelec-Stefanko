@@ -4,11 +4,25 @@ const images = [
     "https://image.alza.cz/products/RI051c4/RI051c4-02.jpg?width=1400&height=1400",
     "https://image.alza.cz/products/RI051c4/RI051c4-03.jpg?width=1400&height=1400"
 ];
+
+
 let currentIndex = 0;
 const modal = document.getElementById("gallery-modal");
 const modalImage = document.getElementById("gallery-image");
 const imageCounter = document.getElementById("image-counter"); // Element pre číslo obrázka
 const mainImage = document.getElementById("main-image");
+
+function openGallery() {
+    modalImage.src = images[currentIndex];
+    modal.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+    // Aktualizuj číslo obrázka pri otvorení
+    updateImageCounter();
+
+    setTimeout(() => {
+        modal.classList.add("active");
+    }, 10);
+}
 
 function updateImageCounter() {
     imageCounter.textContent = `${currentIndex + 1} / ${images.length}`;
@@ -24,17 +38,7 @@ function changeImage(index) {
     }, 100);
 }
 
-function openGallery() {
-    modalImage.src = images[currentIndex];
-    modal.classList.remove("hidden");
-    document.body.classList.add("overflow-hidden");
-    // Aktualizuj číslo obrázka pri otvorení
-    updateImageCounter();
 
-    setTimeout(() => {
-        modal.classList.add("active");
-    }, 10);
-}
 
 function closeGallery() {
     modal.classList.remove("active");
@@ -70,5 +74,4 @@ modal.addEventListener("click", (e) => {
     }
 });
 
-
-
+closeGallery()
