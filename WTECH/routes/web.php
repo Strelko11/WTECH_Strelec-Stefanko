@@ -29,3 +29,6 @@ Route::get('/pridajProdukt', function () {
 Route::get('/upravProdukt', function () {
     return view('upravProdukt');
 })->name('upravProdukt');
+Route::get('/dorucenie&platba', function () {
+    return view('dorucenie&platba');
+})->name('dorucenie&platba');

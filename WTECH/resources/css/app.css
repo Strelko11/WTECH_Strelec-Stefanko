@@ -1,39 +1,13 @@
 @import 'tailwindcss';
 
 .custom-shadow {
-    box-shadow: -5px 0  10px rgba(0, 0, 0, 0.1), 5px  0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-
-
-
-/* Animácia fade + slide pre obrázky */
+/* Animation for fade and slide effect */
 .fade-slide {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-slide.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-#gallery-modal {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#gallery-modal.active {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Animácia prechodu obrázkov */
-.fade-slide {
-    opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -72,55 +46,38 @@
     border-radius: 6px;
     padding: 4px;
     outline: none;
-}
-
-#hs-pass-values-to-inputs {
-    width: 100%;
-    max-width: 400px; /* Alebo podľa potreby */
-    height: 10px;
-    margin-top: 10px;
+    font-weight: bold;
+    background-color: #f9f9f9;
 }
 
 .noUi-connect {
-    background: #6b7280 !important; /* Tmavá sivá */
+    background: #6b7280 !important;
 }
 
-/* Farba základnej dráhy slidera */
 .noUi-base {
-    background: #d1d5db; /* Svetlo sivá */
+    background: #d1d5db;
 }
 
-/* Farba rukovätí (handle) */
 .noUi-handle {
-    background: #9ca3af !important; /* Stredne sivá */
-    border: 2px solid #6b7280 !important; /* Tmavý okraj */
+    background: #9ca3af !important;
+    border: 2px solid #6b7280 !important;
 }
 
-/* Pri hoveri na rukoväť */
 .noUi-handle:hover {
-    background: #6b7280 !important; /* Tmavšia sivá */
+    background: #6b7280 !important;
 }
 
-input[name="sposob_dorucenia"]:not([value="balikobox"]) ~ #balikobox-location {
-    display: none;
-}
-input[name="sposob_dorucenia"][value="balikobox"]:checked ~ #balikobox-location {
-    display: block;
-}
-
-/* Applying custom shadow to the form container */
-.custom-shadow {
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1), 5px 0 10px rgba(0, 0, 0, 0.1);
+/* Enhance the color of buttons and inputs */
+input:focus, button:focus, a:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
 }
 
-/* Fade and Slide animation */
-.fade-slide {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-slide.active {
-    opacity: 1;
-    transform: translateY(0);
+/* Add responsive typography for better mobile viewing */
+@media (max-width: 640px) {
+    .quantity-btn, #quantity {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
 }

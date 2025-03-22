@@ -11,7 +11,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
 
-
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
@@ -25,8 +24,10 @@
         </div>
     </nav>
 
+
     <!-- Main div -->
     <div class="w-full max-w-[90%] h-auto mx-auto py-10 flex flex-col gap-6 rounded-md relative">
+
         <!-- Screen 1: Spôsob Doručenia -->
         <div class="screen-section w-full sm:max-w-[48%] h-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
             <h3 class="text-xl font-medium">Spôsob doručenia</h3>
@@ -68,6 +69,7 @@
                 </div>
             </form>
         </div>
+
     </div>
 
     <!-- Odoslat Objednavku Button -->
