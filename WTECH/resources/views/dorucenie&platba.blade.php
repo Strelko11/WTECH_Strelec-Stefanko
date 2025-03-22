@@ -10,9 +10,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
+    <script src="{{ mix('resources/js/orderConfirmation.js') }}" defer></script>
 
 </head>
+
+
+    <div id="overlay" class="overlay hidden">
+        <div class="modal">
+         <p>Objednávka bola úspešne odoslaná</p>
+         <p>Budete presmerovany na hlavnu stranku</p>
+        </div>
+    </div>
+
+
 <body class="flex flex-col min-h-screen bg-gray-100">
+
+    <!-- Navbar -->
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
@@ -24,58 +37,61 @@
         </div>
     </nav>
 
-
-    <!-- Main div -->
-    <div class="w-full max-w-[90%] h-auto mx-auto py-10 flex flex-col gap-6 rounded-md relative">
-
-        <!-- Screen 1: Spôsob Doručenia -->
-        <div class="screen-section w-full sm:max-w-[48%] h-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
-            <h3 class="text-xl font-medium">Spôsob doručenia</h3>
-            <form class="space-y-4">
-                <div class="flex items-center">
-                    <label for="adresa" class="w-28 text-sm font-medium">Na adresu</label>
-                    <input type="radio" id="adresa" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="balikobox" class="w-28 text-sm font-medium">Balikobox</label>
-                    <input type="radio" id="balikobox" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="posta" class="w-28 text-sm font-medium">Na poštu</label>
-                    <input type="radio" id="posta" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                </div>
-            </form>
-        </div>
-
-        <!-- Screen 2: Spôsob Platby -->
-        <div class="screen-section w-full sm:max-w-[48%] h-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
-            <h3 class="text-xl font-medium">Spôsob platby</h3>
-            <form class="space-y-4">
-                <div class="flex items-center">
-                    <label for="hotovost" class="w-28 text-sm font-medium">Platba v hotovosti</label>
-                    <input type="radio" id="hotovost" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="prevod_ucet" class="w-28 text-sm font-medium">Prevod na účet</label>
-                    <input type="radio" id="prevod_ucet" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="apple_pay" class="w-28 text-sm font-medium">Apple Pay</label>
-                    <input type="radio" id="apple_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="google_pay" class="w-28 text-sm font-medium">Google Pay</label>
-                    <input type="radio" id="google_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-            </form>
-        </div>
-
+    <!-- Main Content -->
+    <!-- Container for main content -->
+<div class="w-full flex flex-col justify-center items-center mt-32 space-y-6 flex-grow">
+    <!-- Spôsob Doručenia -->
+    <div class="w-full max-w-[65%] px-6 py-8 border border-gray-100 shadow-lg flex flex-col gap-4 rounded-md bg-white">
+        <h3 class="text-xl font-medium text-center">Spôsob doručenia</h3>
+        <form class="space-y-4">
+            <div class="flex items-center">
+                <input type="radio" id="adresa" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
+                <label for="adresa" class="ml-2 text-sm font-medium">Na adresu</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" id="balikobox" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
+                <label for="balikobox" class="ml-2 text-sm font-medium">Balikobox</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" id="posta" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
+                <label for="posta" class="ml-2 text-sm font-medium">Na poštu</label>
+            </div>
+        </form>
     </div>
 
-    <!-- Odoslat Objednavku Button -->
+    <!-- Spôsob Platby -->
+    <div class="w-full max-w-[65%] px-6 py-8 border border-gray-100 shadow-lg flex flex-col gap-4 rounded-md bg-white">
+        <h3 class="text-xl font-medium text-center">Spôsob platby</h3>
+        <form class="space-y-4">
+            <div class="flex items-center">
+                <input type="radio" id="hotovost" name="sposob_platby" class="h-5 w-5 text-blue-600">
+                <label for="hotovost" class="ml-2 text-sm font-medium">Platba v hotovosti</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" id="prevod_ucet" name="sposob_platby" class="h-5 w-5 text-blue-600">
+                <label for="prevod_ucet" class="ml-2 text-sm font-medium">Prevod na účet</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" id="apple_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
+                <label for="apple_pay" class="ml-2 text-sm font-medium">Apple Pay</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" id="google_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
+                <label for="google_pay" class="ml-2 text-sm font-medium">Google Pay</label>
+            </div>
+        </form>
+    </div>
+
+    <!-- Odoslať Objednávku Button (Now placed below the second div) -->
+    <!-- Potvrdiť objednávku Button -->
     <div class="w-full fixed bottom-0 left-0 p-4 bg-white border-t border-gray-400 shadow-lg flex justify-center">
-        <button class="bg-blue-600 text-white px-10 py-3 rounded-md hover:bg-blue-700 transition">Odoslať objednávku</button>
+        <button id="potvrditButton" class="bg-blue-600 text-white px-10 py-3 rounded-md hover:bg-blue-700 transition">Potvrdiť objednávku</button>
     </div>
+
+</div>
 
 </body>
+<footer class="mt-auto text-center py-4 bg-gray-900 border-t text-white">
+    <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
+</footer>
 </html>

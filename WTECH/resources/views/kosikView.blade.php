@@ -11,69 +11,81 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
 
-
 </head>
-<body class="flex flex-col min-h-screen bg-gray-100">
+<body class="flex-grow">
+
+    <!-- Navigation Bar -->
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-        <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
+        <a href="{{ route('welcome') }}" class="text-xl font-semibold text-blue-600 flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
         </a>
-        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg" placeholder="Search...">
+        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search...">
         <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl"><i class="fas fa-shopping-cart"></i></a>
-            <a href="{{ route('loginForm') }}" class="text-gray-700 text-xl"><i class="fas fa-user"></i></a>
+            <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a>
+            <a href="{{ route('loginForm') }}" class="text-gray-700 text-xl hover:text-blue-600"><i class="fas fa-user"></i></a>
         </div>
     </nav>
 
-    <!-- Main div -->
-    <div class="w-full max-w-[90%] h-auto mx-auto py-10 flex flex-col gap-6 rounded-md relative">
-        <!-- Screen 1: Spôsob Doručenia -->
-        <div class="screen-section w-full sm:max-w-[48%] h-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
-            <h3 class="text-xl font-medium">Spôsob doručenia</h3>
-            <form class="space-y-4">
-                <div class="flex items-center">
-                    <label for="adresa" class="w-28 text-sm font-medium">Na adresu</label>
-                    <input type="radio" id="adresa" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="balikobox" class="w-28 text-sm font-medium">Balikobox</label>
-                    <input type="radio" id="balikobox" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="posta" class="w-28 text-sm font-medium">Na poštu</label>
-                    <input type="radio" id="posta" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                </div>
-            </form>
+    <!-- Product Section -->
+    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg shadow-lg flex items-center justify-start gap-6">
+        <div id="Produkt" class="h-36 w-36 bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center rounded-md"></div>
+        <div class="flex items-center space-x-4">
+            <button class="quantity-btn" id="decrease">−</button>
+            <input type="text" id="quantity" value="1" readonly class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
+            <button class="quantity-btn" id="increase">+</button>
         </div>
+        <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+            <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
+            <span>Séria: 16</span>
+            <span>Cena: 1449 €</span>
+            <div class="flex justify-center md:justify-start w-full">
+                <span>Pamäť: 256GB</span>
+                <span class="ml-4">RAM: 8GB</span>
+            </div>
 
-        <!-- Screen 2: Spôsob Platby -->
-        <div class="screen-section w-full sm:max-w-[48%] h-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow flex flex-col gap-4 rounded-md relative">
-            <h3 class="text-xl font-medium">Spôsob platby</h3>
-            <form class="space-y-4">
-                <div class="flex items-center">
-                    <label for="hotovost" class="w-28 text-sm font-medium">Platba v hotovosti</label>
-                    <input type="radio" id="hotovost" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="prevod_ucet" class="w-28 text-sm font-medium">Prevod na účet</label>
-                    <input type="radio" id="prevod_ucet" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="apple_pay" class="w-28 text-sm font-medium">Apple Pay</label>
-                    <input type="radio" id="apple_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-                <div class="flex items-center">
-                    <label for="google_pay" class="w-28 text-sm font-medium">Google Pay</label>
-                    <input type="radio" id="google_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                </div>
-            </form>
         </div>
-    </div>
+    </section>
 
-    <!-- Odoslat Objednavku Button -->
-    <div class="w-full fixed bottom-0 left-0 p-4 bg-white border-t border-gray-400 shadow-lg flex justify-center">
-        <button class="bg-blue-600 text-white px-10 py-3 rounded-md hover:bg-blue-700 transition">Odoslať objednávku</button>
+    <!-- Contact Form -->
+    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg shadow-lg mt-8">
+        <form action="#" class="space-y-6">
+            <div class="flex items-center">
+                <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
+                <input type="text" id="meno" name="meno" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <label for="priezvisko" class="w-32 text-sm font-medium text-gray-700">Priezvisko</label>
+                <input type="text" id="priezvisko" name="priezvisko" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <label for="email" class="w-32 text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" id="email" name="email" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Telefón</label>
+                <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <label for="cislo-domu" class="w-32 text-sm font-medium text-gray-700">Číslo domu</label>
+                <input type="text" id="cislo-domu" name="cislo-domu" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <label for="obec" class="w-32 text-sm font-medium text-gray-700">Obec</label>
+                <input type="text" id="obec" name="obec" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex items-center">
+                <label for="psc" class="w-32 text-sm font-medium text-gray-700">PSČ</label>
+                <input type="text" id="psc" name="psc" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex justify-end pt-6">
+                <a href="{{ route('dorucenie&platba') }}" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition text-center">
+                    Potvrdiť
+                </a>
+            </div>
+        </form>
     </div>
-
 </body>
+<footer class="mt-auto text-center py-4 bg-gray-900 border-t text-white">
+    <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
+</footer>
 </html>
