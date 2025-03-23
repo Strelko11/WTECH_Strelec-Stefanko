@@ -48,40 +48,39 @@
 
     <!-- Contact Form -->
     <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg shadow-lg mt-8">
-        <form action="#" class="space-y-6">
+        <form action="{{ route('dorucenie&platba') }}" method="GET" class="space-y-6">
             <div class="flex items-center">
                 <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
-                <input type="text" id="meno" name="meno" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="meno" name="meno" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
                 <label for="priezvisko" class="w-32 text-sm font-medium text-gray-700">Priezvisko</label>
-                <input type="text" id="priezvisko" name="priezvisko" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="priezvisko" name="priezvisko" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
                 <label for="email" class="w-32 text-sm font-medium text-gray-700">E-mail</label>
-                <input type="email" id="email" name="email" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="email" id="email" name="email" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
                 <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Telefón</label>
-                <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
                 <label for="cislo-domu" class="w-32 text-sm font-medium text-gray-700">Číslo domu</label>
-                <input type="text" id="cislo-domu" name="cislo-domu" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="cislo-domu" name="cislo-domu" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
                 <label for="obec" class="w-32 text-sm font-medium text-gray-700">Obec</label>
-                <input type="text" id="obec" name="obec" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="obec" name="obec" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
                 <label for="psc" class="w-32 text-sm font-medium text-gray-700">PSČ</label>
-                <input type="text" id="psc" name="psc" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="psc" name="psc" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
-            <div class="flex justify-end pt-6">
-                <a href="{{ route('dorucenie&platba') }}" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition text-center">
-                    Potvrdiť
-                </a>
-            </div>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition text-center">
+                Potvrdiť
+            </button>
+
         </form>
     </div>
 </body>
