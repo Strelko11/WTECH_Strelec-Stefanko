@@ -41,7 +41,7 @@
     </nav>
 
     <!-- Product Section -->
-    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg shadow-lg flex items-center justify-start gap-6">
+    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex items-center justify-start gap-6">
         <div id="Produkt" class="h-36 w-36 bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center rounded-md"></div>
         <div class="flex items-center space-x-4">
             <button class="quantity-btn" id="decrease">−</button>
@@ -61,7 +61,7 @@
     </section>
 
     <!-- Contact Form -->
-    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg shadow-lg mt-8">
+    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg custom-shadow mt-8">
         <form action="{{ route('dorucenie&platba') }}" method="GET" class="space-y-6">
             <div class="flex items-center">
                 <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
@@ -98,7 +98,7 @@
         </form>
     </div>
 </body>
-<footer class="mt-auto text-center py-4 bg-gray-900 border-t text-white">
+<footer class="text-center py-4 bg-gray-900 border-t text-white mt-5">
     <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
 </footer>
 </html>
