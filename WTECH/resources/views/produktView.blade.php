@@ -103,26 +103,27 @@
         </div>
     </div>
 
-    <div id="gallery-modal" class="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-80 flex items-center justify-center z-50 p-4">
-        <div class="relative flex flex-col items-center max-w-[90%] max-h-[90vh]  bg-white p-4 rounded-lg shadow-lg w-[700px] md:w-[800px] lg:w-[900px]">
-            <img id="gallery-image" src="" class="w-auto max-w-full max-h-[70vh] object-contain fade-slide active">
-            <div id="image-counter" class="mt-2 bg-black text-white px-4 py-1 rounded-lg text-sm">
-                1 / 4
-            </div>
-            <button onclick="prevImage()"
-                class="absolute left-4 md:left-[5%] top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-black p-3 rounded-full shadow-lg z-50">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-
-            <button onclick="nextImage()"
-                class="absolute right-4 md:right-[5%] top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-black p-3 rounded-full shadow-lg z-50">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <button onclick="closeGallery()"
-                class="absolute top-2 right-2 bg-red-600 hover:bg-red-500 text-white p-2 rounded-full shadow-lg">
-                <i class="fas fa-times"></i>
-            </button>
+    <div id="gallery-modal"
+     class="fixed inset-0 z-50 p-4 bg-gray-300 bg-opacity-80 items-center justify-center
+            opacity-0 scale-95 pointer-events-none transition-all duration-300 flex">
+    <div class="relative flex flex-col items-center max-w-[90%] max-h-[90vh] bg-white p-4 rounded-lg shadow-lg w-[700px] md:w-[800px] lg:w-[900px]">
+        <img id="gallery-image" src="" class="w-auto max-w-full max-h-[70vh] object-contain fade-slide active">
+        <div id="image-counter" class="mt-2 bg-black text-white px-4 py-1 rounded-lg text-sm">
+            1 / 4
         </div>
+        <button onclick="prevImage()"
+                class="absolute left-4 md:left-[5%] top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-black p-3 rounded-full shadow-lg z-50">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button onclick="nextImage()"
+                class="absolute right-4 md:right-[5%] top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-black p-3 rounded-full shadow-lg z-50">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <button onclick="closeGallery()"
+                class="absolute top-2 right-2 bg-red-600 hover:bg-red-500 text-white p-2 rounded-full shadow-lg">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
     </div>
 
     <div class="w-full max-w-[90%] mx-auto px-4 py-6 border-l border-r border-gray-400 custom-shadow mt-6 rounded-md">
