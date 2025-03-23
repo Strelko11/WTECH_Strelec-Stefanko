@@ -67,12 +67,6 @@
     background: #6b7280 !important;
 }
 
-/* Enhance the color of buttons and inputs */
-input:focus, button:focus, a:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
-}
-
 /* Add responsive typography for better mobile viewing */
 @media (max-width: 640px) {
     .quantity-btn, #quantity {
@@ -104,3 +98,4 @@ input:focus, button:focus, a:focus {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
   }
+
