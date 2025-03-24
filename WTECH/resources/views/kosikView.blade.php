@@ -15,19 +15,33 @@
 <body class="flex-grow">
 
     <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-        <a href="{{ route('welcome') }}" class="text-xl font-semibold text-blue-600 flex items-center">
+    <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
+        <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
         </a>
-        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search...">
+        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">
         <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-gray-700 text-xl hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a>
-            <a href="{{ route('loginForm') }}" class="text-gray-700 text-xl hover:text-blue-600"><i class="fas fa-user"></i></a>
+            <a href="{{ route('kosikView') }}" class="text-white text-xl"><i class="fas fa-shopping-cart"></i></a>
+
+            <div class="relative group">
+                <button class="text-white text-xl focus:outline-none">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-gray-300">
+                    <div class="px-4 py-3 text-sm text-black">
+                        <div>Meno používateľa</div>
+                        <div class="font-medium truncate">E-mail používateľa</div>
+                    </div>
+                    <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
+                    <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-b-lg">Sign out</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Product Section -->
-    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg shadow-lg flex items-center justify-start gap-6">
+    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex items-center justify-start gap-6">
         <div id="Produkt" class="h-36 w-36 bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center rounded-md"></div>
         <div class="flex items-center space-x-4">
             <button class="quantity-btn" id="decrease">−</button>
@@ -47,7 +61,7 @@
     </section>
 
     <!-- Contact Form -->
-    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg shadow-lg mt-8">
+    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg custom-shadow mt-8">
         <form action="{{ route('dorucenie&platba') }}" method="GET" class="space-y-6">
             <div class="flex items-center">
                 <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
@@ -84,7 +98,7 @@
         </form>
     </div>
 </body>
-<footer class="mt-auto text-center py-4 bg-gray-900 border-t text-white">
+<footer class="text-center py-4 bg-gray-900 border-t text-white mt-5">
     <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
 </footer>
 </html>
