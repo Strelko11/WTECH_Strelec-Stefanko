@@ -12,7 +12,7 @@
     <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
 
 </head>
-<body class="flex-grow">
+<body class="flex-grow bg-gray-50">
 
     <!-- Navigation Bar -->
     <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
@@ -41,7 +41,7 @@
     </nav>
 
     <!-- Product Section -->
-    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex items-center justify-start gap-6">
+    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex items-center justify-start gap-6  border-l border-r border-gray-500">
         <div id="Produkt" class="h-36 w-36 bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center rounded-md"></div>
         <div class="flex items-center space-x-4">
             <button class="quantity-btn" id="decrease">−</button>
@@ -61,7 +61,7 @@
     </section>
 
     <!-- Contact Form -->
-    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg custom-shadow mt-8">
+    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg custom-shadow mt-8 border-l border-r border-gray-500">
         <form action="{{ route('dorucenie&platba') }}" method="GET" class="space-y-6">
             <div class="flex items-center">
                 <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
@@ -77,6 +77,10 @@
             </div>
             <div class="flex items-center">
                 <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Telefón</label>
+                <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="flex items-center">
+                <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Ulica</label>
                 <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="flex items-center">
