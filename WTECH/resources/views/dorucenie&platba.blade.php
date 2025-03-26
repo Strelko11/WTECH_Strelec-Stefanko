@@ -23,7 +23,7 @@
     </div>
 
 </head>
-<body class="flex flex-col min-h-screen bg-gray-100">
+<body class="flex flex-col min-h-screen bg-gray-50">
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
@@ -53,7 +53,7 @@
     <!-- Main Content -->
     <div class="w-full flex flex-col justify-between items-center mt-32 space-y-6 flex-grow">
         <!-- Spôsob Doručenia -->
-        <div class="w-full max-w-[65%] px-6 py-8 border border-gray-100 shadow-lg flex flex-col gap-4 rounded-md bg-white">
+        <div class="w-full max-w-[65%] px-6 py-8 shadow-lg flex flex-col gap-4 rounded-md bg-white border-l border-r border-gray-500">
             <h3 class="text-xl font-medium text-center">Spôsob doručenia</h3>
             <form class="space-y-4">
                 <div class="flex items-center">
@@ -72,7 +72,7 @@
         </div>
 
         <!-- Spôsob Platby -->
-        <div class="w-full max-w-[65%] px-6 py-8 border border-gray-100 shadow-lg flex flex-col gap-4 rounded-md bg-white">
+        <div class="w-full max-w-[65%] px-6 py-8 custom-shadow flex flex-col gap-4 rounded-md bg-white border-l border-r border-gray-500">
             <h3 class="text-xl font-medium text-center">Spôsob platby</h3>
             <form class="space-y-4">
                 <div class="flex items-center">
@@ -96,7 +96,7 @@
 
         <!-- Odoslať Objednávku Button -->
         <div class="w-auto p-4 flex justify-center">
-            <button id="potvrditButton" class="bg-blue-600 text-white px-10 py-3 rounded-md hover:bg-blue-700 transition">Potvrdiť objednávku</button>
+            <button id="potvrditButton" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition">Potvrdiť objednávku</button>
         </div>
     </div>
 
