@@ -96,7 +96,7 @@
 
         <!-- Odoslať Objednávku Button -->
         <div class="w-auto p-4 flex justify-center">
-            <button id="potvrditButton" class="bg-blue-600 text-white px-10 py-3 rounded-md hover:bg-blue-700 transition">Potvrdiť objednávku</button>
+            <button id="potvrditButton" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition">Potvrdiť objednávku</button>
         </div>
     </div>
 

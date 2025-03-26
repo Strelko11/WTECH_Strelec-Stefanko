@@ -95,7 +95,7 @@
                 <label for="psc" class="w-32 text-sm font-medium text-gray-700">PSČ</label>
                 <input type="text" id="psc" name="psc" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition text-center">
+            <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition text-center">
                 Potvrdiť
             </button>
 
