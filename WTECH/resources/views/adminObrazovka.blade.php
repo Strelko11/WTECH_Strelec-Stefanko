@@ -18,7 +18,7 @@
     <div class="flex-grow">
     <!-- 🔹 Navigačný panel -->
     <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-            <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
+            <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
                 <i class="fas fa-globe mr-2"></i> TechSphere Admin
             </a>
             <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">

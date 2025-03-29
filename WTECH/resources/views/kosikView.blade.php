@@ -16,7 +16,7 @@
 
     <!-- Navigation Bar -->
     <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-        <a href="{{ route('welcome') }}" class="text-xl font-semibold flex items-center">
+        <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
         </a>
         <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">
@@ -51,13 +51,18 @@
         <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
             <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
             <span>Séria: 16</span>
-            <span>Cena: 1449 €</span>
             <div class="flex justify-center md:justify-start w-full">
                 <span>Pamäť: 256GB</span>
                 <span class="ml-4">RAM: 8GB</span>
             </div>
-
         </div>
+        <div class="flex items-center space-x-4">
+            <span class="font-semibold text-lg text-gray-700">Cena:</span>
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black p-3 rounded-lg shadow-md font-medium text-xl border border-gray-200">
+                1500€
+            </div>
+        </div>
+
     </section>
 
     <!-- Contact Form -->

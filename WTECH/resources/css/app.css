@@ -106,10 +106,14 @@ button:hover, .btn:hover {
 }
 
 /* Efekt na odkazy */
-a:hover {
-    text-decoration: underline;
+/*a:hover {
     color: #2D3748;
     transition: color 0.3s ease, text-decoration 0.3s ease;
+}*/
+
+#company:hover{
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }
 
 /* Efekt na obrázky pri hover */
@@ -119,11 +123,11 @@ img:hover {
 }
 
 /* Hover effect for input fields */
-input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="search"] {
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="search"], input[type="password"] {
     transition: all 0.3s ease; /* Smooth transition for all properties */
 }
 
-input[type="text"]:hover, input[type="email"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="search"]:hover {
+input[type="text"]:hover, input[type="email"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="search"]:hover, input[type="password"]:hover {
     border-color: #4A90E2; /* Change the border color on hover */
     box-shadow: 0 0 5px rgba(74, 144, 226, 0.6); /* Add a subtle shadow */
     outline: none; /* Remove the outline to focus on the border and shadow */
