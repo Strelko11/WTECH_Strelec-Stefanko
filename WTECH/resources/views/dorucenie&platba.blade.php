@@ -15,7 +15,7 @@
 </head>
 
 
-    <div id="overlay" class="overlay hidden">
+    <div id="overlay" class="overlay hidden p-10">
         <div class="modal">
          <p>Objednávka bola úspešne odoslaná</p>
          <p>Budete presmerovany na hlavnu stranku</p>
@@ -51,48 +51,50 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="w-full flex flex-col justify-between items-center mt-32 space-y-6 flex-grow">
+    <div class="w-full flex flex-col justify-between items-center mt-32 space-y-8 flex-grow px-4">
         <!-- Spôsob Doručenia -->
-        <div class="w-full max-w-[65%] px-6 py-8 shadow-lg flex flex-col gap-4 rounded-md bg-white border-l border-r border-gray-500">
-            <h3 class="text-xl font-medium text-center">Spôsob doručenia</h3>
-            <form class="space-y-4">
-                <div class="flex items-center">
-                    <input type="radio" id="adresa" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                    <label for="adresa" class="ml-2 text-sm font-medium">Na adresu</label>
+        <div class="w-full max-w-[65%] px-8 py-10 shadow-xl flex flex-col gap-6 rounded-lg bg-white border border-gray-300">
+            <h3 class="text-2xl font-semibold text-center text-gray-800">Spôsob doručenia</h3>
+            <form class="space-y-6">
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="adresa" name="sposob_dorucenia" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="adresa" class="text-lg font-medium text-gray-700">Na adresu</label>
                 </div>
-                <div class="flex items-center">
-                    <input type="radio" id="balikobox" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                    <label for="balikobox" class="ml-2 text-sm font-medium">Balikobox</label>
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="balikobox" name="sposob_dorucenia" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="balikobox" class="text-lg font-medium text-gray-700">Balikobox</label>
                 </div>
-                <div class="flex items-center">
-                    <input type="radio" id="posta" name="sposob_dorucenia" class="h-5 w-5 text-blue-600">
-                    <label for="posta" class="ml-2 text-sm font-medium">Na poštu</label>
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="posta" name="sposob_dorucenia" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="posta" class="text-lg font-medium text-gray-700">Na poštu</label>
                 </div>
             </form>
         </div>
 
         <!-- Spôsob Platby -->
-        <div class="w-full max-w-[65%] px-6 py-8 custom-shadow flex flex-col gap-4 rounded-md bg-white border-l border-r border-gray-500">
-            <h3 class="text-xl font-medium text-center">Spôsob platby</h3>
-            <form class="space-y-4">
-                <div class="flex items-center">
-                    <input type="radio" id="hotovost" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                    <label for="hotovost" class="ml-2 text-sm font-medium">Platba v hotovosti</label>
+        <div class="w-full max-w-[65%] px-8 py-10 shadow-xl flex flex-col gap-6 rounded-lg bg-white border border-gray-300">
+            <h3 class="text-2xl font-semibold text-center text-gray-800">Spôsob platby</h3>
+            <form class="space-y-6">
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="hotovost" name="sposob_platby" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="hotovost" class="text-lg font-medium text-gray-700">Platba v hotovosti</label>
                 </div>
-                <div class="flex items-center">
-                    <input type="radio" id="prevod_ucet" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                    <label for="prevod_ucet" class="ml-2 text-sm font-medium">Prevod na účet</label>
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="prevod_ucet" name="sposob_platby" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="prevod_ucet" class="text-lg font-medium text-gray-700">Prevod na účet</label>
                 </div>
-                <div class="flex items-center">
-                    <input type="radio" id="apple_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                    <label for="apple_pay" class="ml-2 text-sm font-medium">Apple Pay</label>
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="apple_pay" name="sposob_platby" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="apple_pay" class="text-lg font-medium text-gray-700">Apple Pay</label>
                 </div>
-                <div class="flex items-center">
-                    <input type="radio" id="google_pay" name="sposob_platby" class="h-5 w-5 text-blue-600">
-                    <label for="google_pay" class="ml-2 text-sm font-medium">Google Pay</label>
+                <div class="flex items-center space-x-3">
+                    <input type="radio" id="google_pay" name="sposob_platby" class="h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500">
+                    <label for="google_pay" class="text-lg font-medium text-gray-700">Google Pay</label>
                 </div>
             </form>
         </div>
+
+
 
         <!-- Odoslať Objednávku Button -->
         <div class="w-auto p-4 flex justify-center">
