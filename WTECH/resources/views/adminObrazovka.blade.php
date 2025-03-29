@@ -25,14 +25,16 @@
             <div class="flex space-x-4">
                 <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform"><i class="fas fa-shopping-cart"></i></a>
 
-                <div class="relative group">
-                    <button class="text-white text-xl focus:outline-none hover:scale-105 transition-transform">
+                <div class="relative group inline-block">
+                    <button class="text-white text-xl focus:outline-none">
                         <i class="fas fa-user"></i>
                     </button>
-                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-gray-300">
+                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg
+                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                    transition-all duration-200 border border-gray-300 z-50">
                         <div class="px-4 py-3 text-sm text-black">
                             <div>Meno používateľa</div>
-                            <div class="font-medium truncate">E-mail Admina</div>
+                            <div class="font-medium truncate">E-mail používateľa</div>
                         </div>
                         <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
                         <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
@@ -98,9 +100,13 @@
         <div class="flex flex-wrap justify-center gap-6">
             <a href="{{ route('produktView') }}" class="w-full sm:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center shadow-md w-full min-w-[280px] h-auto gap-4 border border-gray-400 hover:bg-gray-400 transition duration-300">
-                    <div class="flex space-x-2 sm:space-x-4">
-                        <div class="h-28 w-28 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center border border-gray-400 bg-white rounded"></div>
-                        <div class="h-28 w-28 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center border border-gray-400 bg-white rounded"></div>
+                    <div class="flex space-x-4">
+                        <div class="h-28 w-28 bg-white border border-gray-400 rounded overflow-hidden ">
+                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        </div>
+                        <div class="h-28 w-28 bg-white border border-gray-400 rounded">
+                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        </div>
                     </div>
                     <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
                         <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
@@ -123,9 +129,13 @@
             </a>
             <a href="{{ route('produktView') }}" class="w-full sm:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center shadow-md w-full min-w-[280px] h-auto gap-4 border border-gray-400 hover:bg-gray-400 transition duration-300">
-                    <div class="flex space-x-2 sm:space-x-4">
-                        <div class="h-28 w-28 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center border border-gray-400 bg-white rounded"></div>
-                        <div class="h-28 w-28 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center border border-gray-400 bg-white rounded"></div>
+                    <div class="flex space-x-4">
+                        <div class="h-28 w-28 bg-white border border-gray-400 rounded overflow-hidden ">
+                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        </div>
+                        <div class="h-28 w-28 bg-white border border-gray-400 rounded">
+                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        </div>
                     </div>
                     <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
                         <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
@@ -148,9 +158,13 @@
             </a>
             <a href="{{ route('produktView') }}" class="w-full sm:w-4/5">
                 <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center shadow-md w-full min-w-[280px] h-auto gap-4 border border-gray-400 hover:bg-gray-400 transition duration-300">
-                    <div class="flex space-x-2 sm:space-x-4">
-                        <div class="h-28 w-28 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center border border-gray-400 bg-white rounded"></div>
-                        <div class="h-28 w-28 bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center border border-gray-400 bg-white rounded"></div>
+                    <div class="flex space-x-4">
+                        <div class="h-28 w-28 bg-white border border-gray-400 rounded overflow-hidden ">
+                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        </div>
+                        <div class="h-28 w-28 bg-white border border-gray-400 rounded">
+                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        </div>
                     </div>
                     <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
                         <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
