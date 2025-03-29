@@ -117,10 +117,11 @@ button:hover, .btn:hover {
 }
 
 /* Efekt na obrázky pri hover */
-img:hover {
+/*img:hover {
+    overflow: hidden;
     transform: scale(1.1);
     transition: transform 0.3s ease;
-}
+}*/
 
 /* Hover effect for input fields */
 input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="search"], input[type="password"] {

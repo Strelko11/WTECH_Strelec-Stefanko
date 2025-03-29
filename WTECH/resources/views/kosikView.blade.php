@@ -21,10 +21,10 @@
         </a>
         <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">
         <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-white text-xl"><i class="fas fa-shopping-cart"></i></a>
+            <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform"><i class="fas fa-shopping-cart"></i></a>
 
             <div class="relative group">
-                <button class="text-white text-xl focus:outline-none">
+                <button class="text-white text-xl focus:outline-none hover:scale-105 transition-transform">
                     <i class="fas fa-user"></i>
                 </button>
                 <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-gray-300">

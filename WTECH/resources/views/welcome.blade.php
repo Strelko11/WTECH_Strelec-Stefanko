@@ -21,10 +21,10 @@
         </a>
         <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">
         <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-white text-xl"><i class="fas fa-shopping-cart"></i></a>
+            <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform"><i class="fas fa-shopping-cart"></i></a>
 
             <div class="relative group">
-                <button class="text-white text-xl focus:outline-none">
+                <button class="text-white text-xl focus:outline-none hover:scale-105 transition-transform">
                     <i class="fas fa-user"></i>
                 </button>
                 <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-gray-300">
@@ -58,19 +58,19 @@
         <h4 class="text-2xl font-bold mb-10 text-gray-900">Telefóny</h4>
         <div class="flex flex-wrap justify-center gap-10">
             <a href="{{ route('strankaProdukty') }}">
-                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400 hover:bg-gray-400 hover:text-white transition duration-300">
+                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400  hover:text-black hover:scale-105 transition-transform duration-300">
                     <div class="h-38 w-38 bg-white   rounded bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat   bg-center"></div>
                     <span class="text-2xl">iPhone</span>
                 </div>
             </a>
             <a href="{{ route('strankaProdukty') }}">
-                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400 hover:bg-gray-400 hover:text-white transition duration-300">
+                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400  hover:text-black hover:scale-105 transition-transform duration-300">
                     <div class="h-38 w-38 rounded bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-white  bg-contain bg-no-repeat bg-center"></div>
                     <span class="text-2xl">Samsung</span>
                 </div>
             </a>
             <a href="{{ route('strankaProdukty') }}">
-                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400 hover:bg-gray-400 hover:text-white transition duration-300">
+                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400  hover:text-black hover:scale-105 transition-transform duration-300">
                     <div class="h-38 w-38 rounded bg-[url('https://www.geekwills.com/media/catalog/product/cache/d368225e56c0af8fed569f12698f474d/x/i/xiaomi_15.png')]  bg-white bg-contain bg-no-repeat bg-center"></div>
                     <span class="text-2xl">Xiaomi</span>
                 </div>
@@ -81,19 +81,19 @@
         <h4 class="text-2xl font-bold mt-6 mb-10 text-gray-900">Tablety</h4>
         <div class="flex flex-wrap justify-center gap-10">
             <a href="{{ route('strankaProdukty') }}">
-                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400 hover:bg-gray-400 hover:text-white transition duration-300">
+                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400  hover:text-black hover:scale-105 transition-transform duration-300">
                     <div class="h-38 w-38 rounded bg-white bg-[url('https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-2022-hero-silver-wifi-select_FMT_WHH?wid=940&hei=1112&fmt=png-alpha&.v=1664387253605')] bg-contain bg-no-repeat bg-center"></div>
                     <span class="text-2xl">iPad</span>
                 </div>
             </a>
             <a href="{{ route('strankaProdukty') }}">
-                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400 hover:bg-gray-400 hover:text-white transition duration-300">
+                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400  hover:text-black hover:scale-105 transition-transform duration-300">
                     <div class="h-38 w-38 rounded bg-white  bg-[url('https://crdms.images.consumerreports.org/prod/products/cr/models/415678-9-inch-screen-and-larger-tablets-samsung-galaxy-tab-s10-ultra-256gb-wifi-10041162.png')] bg-contain bg-no-repeat bg-center"></div>
                     <span class="text-2xl">Galaxy Tab</span>
                 </div>
             </a>
             <a href="{{ route('strankaProdukty') }}">
-                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400 hover:bg-gray-400 hover:text-white transition duration-300">
+                <div class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-1/4 min-w-[400px] h-40 border border-gray-400  hover:text-black hover:scale-105 transition-transform duration-300">
                     <div class="h-38 w-38 rounded bg-white  bg-[url('https://i02.appmifile.com/73_operatorx_operatorx_opx/21/05/2024/9da572f0718c2baa9421143d9e848b48.png')] bg-contain bg-no-repeat bg-center"></div>
                     <span class="text-2xl">Xiaomi Pad</span>
                 </div>
