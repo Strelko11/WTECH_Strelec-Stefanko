@@ -22,14 +22,16 @@
             <div class="flex space-x-4">
                 <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform"><i class="fas fa-shopping-cart"></i></a>
 
-                <div class="relative group">
-                    <button class="text-white text-xl focus:outline-none hover:scale-105 transition-transform">
+                <div class="relative group inline-block">
+                    <button class="text-white text-xl focus:outline-none">
                         <i class="fas fa-user"></i>
                     </button>
-                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-gray-300">
+                    <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg
+                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                    transition-all duration-200 border border-gray-300 z-50">
                         <div class="px-4 py-3 text-sm text-black">
                             <div>Meno používateľa</div>
-                            <div class="font-medium truncate">E-mail Admina</div>
+                            <div class="font-medium truncate">E-mail používateľa</div>
                         </div>
                         <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
                         <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
