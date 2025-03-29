@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
 
-    <!-- Tailwind CSS -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/slider.js'])
@@ -19,7 +19,7 @@
 
 
     <div class="flex-grow">
-    <!-- 🔹 Navigačný panel -->
+
     <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
             <i class="fas fa-globe mr-2"></i> TechSphere
@@ -49,7 +49,7 @@
 
 
 
-    <!-- 🔹 Hlavná sekcia -->
+
     <div class="w-full mt-18 border-b border-gray-400 shadow-md px-15 pt-15 pb-5 bg-gray-100">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-8">
@@ -230,8 +230,8 @@
     <script>
         document.querySelectorAll("button").forEach(button => {
             button.addEventListener("click", function(event) {
-                event.stopPropagation();  // Zabráni prekliknutiu na <a>
-                event.preventDefault();   // Zabráni presmerovaniu odkazu
+                event.stopPropagation();  
+                event.preventDefault();
             });
         });
     </script>

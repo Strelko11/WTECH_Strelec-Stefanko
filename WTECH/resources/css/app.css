@@ -4,7 +4,6 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Animation for fade and slide effect */
 .fade-slide {
     opacity: 0;
     transform: translateY(10px);
@@ -67,7 +66,7 @@
     background: #6b7280 !important;
 }
 
-/* Add responsive typography for better mobile viewing */
+
 @media (max-width: 640px) {
     .quantity-btn, #quantity {
         width: 32px;
@@ -76,21 +75,21 @@
     }
 }
 
-/* Overlay that covers the whole screen */
+
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensures the modal is above other content */
+    z-index: 1000;
   }
 
-  /* The modal itself */
+
   .modal {
     background: white;
     padding: 20px;
@@ -99,37 +98,24 @@
     text-align: center;
   }
 
-/* Prechod pri hover na tlačidlách */
+
 button:hover, .btn:hover {
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
 
-/* Efekt na odkazy */
-/*a:hover {
-    color: #2D3748;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-}*/
 
 #company:hover{
     transform: scale(1.1);
     transition: transform 0.3s ease;
 }
 
-/* Efekt na obrázky pri hover */
-/*img:hover {
-    overflow: hidden;
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-}*/
-
-/* Hover effect for input fields */
 input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="search"], input[type="password"] {
-    transition: all 0.3s ease; /* Smooth transition for all properties */
+    transition: all 0.3s ease;
 }
 
 input[type="text"]:hover, input[type="email"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="search"]:hover, input[type="password"]:hover {
-    border-color: #4A90E2; /* Change the border color on hover */
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.6); /* Add a subtle shadow */
-    outline: none; /* Remove the outline to focus on the border and shadow */
+    border-color: #4A90E2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.6);
+    outline: none;
 }

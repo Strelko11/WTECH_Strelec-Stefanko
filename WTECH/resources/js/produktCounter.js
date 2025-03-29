@@ -3,7 +3,7 @@ const decreaseBtn = document.getElementById("decrease");
         const quantityInput = document.getElementById("quantity");
 
         decreaseBtn.addEventListener("click", (event) => {
-            event.preventDefault(); // Zabráni nežiaducemu dvojitému kliknutiu
+            event.preventDefault(); 
             let currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
@@ -11,7 +11,7 @@ const decreaseBtn = document.getElementById("decrease");
         });
 
         increaseBtn.addEventListener("click", (event) => {
-            event.preventDefault(); // Zabráni nežiaducemu dvojitému kliknutiu
+            event.preventDefault();
             let currentValue = parseInt(quantityInput.value);
             quantityInput.value = currentValue + 1;
         });

@@ -16,7 +16,7 @@
 
 
     <div class="flex-grow">
-    <!-- 🔹 Navigačný panel -->
+
     <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
             <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
                 <i class="fas fa-globe mr-2"></i> TechSphere Admin
@@ -49,7 +49,7 @@
 
     <div class="flex flex-wrap justify-center gap-6 pt-28 pb-8 bg-gray-100 p-6 rounded-lg shadow-none">
 
-        <!-- Typ zariadenia -->
+
         <div class="flex flex-col items-center">
             <label for="priceFilter" class="text-lg font-semibold text-gray-900 mb-2">Typ zariadenia</label>
             <select id="priceFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
@@ -59,7 +59,7 @@
             </select>
         </div>
 
-        <!-- Značka -->
+
         <div class="flex flex-col items-center">
             <label for="seriesFilter" class="text-lg font-semibold text-gray-900 mb-2">Značka</label>
             <select id="seriesFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
@@ -70,7 +70,7 @@
             </select>
         </div>
 
-        <!-- Cena -->
+
         <div class="flex flex-col items-center">
             <label for="storageFilter" class="text-lg font-semibold text-gray-900 mb-2">Cena</label>
             <select id="storageFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
@@ -83,7 +83,7 @@
             </select>
         </div>
 
-        <!-- Pridať produkt tlačidlo -->
+
         <div>
             <button id="addProduct" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center  w-[150px]"
                     onclick="window.location.href='/pridajProdukt';">
@@ -186,7 +186,7 @@
                 </div>
             </a>
 
-            <!-- Opakujúce sa produkty -->
+          
 
         </div>
     </div>

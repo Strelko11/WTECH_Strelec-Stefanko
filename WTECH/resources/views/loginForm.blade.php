@@ -46,29 +46,29 @@
             <form class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
                 <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Prihlásiť sa</h2>
 
-                <!-- E-mail -->
+                
                 <div class="mb-4">
                     <label for="email" class="block text-gray-900 font-medium">E-mail</label>
                     <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
                 </div>
 
-                <!-- Heslo -->
+
                 <div class="mb-4">
                     <label for="password" class="block text-gray-900 font-medium">Heslo</label>
                     <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
                 </div>
 
-                <!-- Zabudnuté heslo -->
+
                 <a href="#" class="block w-full text-center mt-4 mb-4 text-blue-500 hover:text-blue-600 hover:underline">
                     Zabudnuté heslo?
                 </a>
 
-                <!-- Potvrdiť -->
+
                 <button type="submit" class="w-3/5 bg-gray-600 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg mt-4 transition mx-auto block">
                     Potvrdiť
                 </button>
 
-                <!-- Nová registrácia -->
+
                 <a href="{{ route('registerForm') }}" class="block w-full text-center mt-10 text-blue-500 hover:text-blue-600 hover:underline">
                     Nová registrácia
                 </a>
