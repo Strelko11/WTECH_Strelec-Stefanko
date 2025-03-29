@@ -1,12 +1,135 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* Animation for fade and slide effect */
+.fade-slide {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.quantity-btn:hover {
+    background: #f1f1f1;
+}
+
+#quantity {
+    width: 50px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 4px;
+    outline: none;
+    font-weight: bold;
+    background-color: #f9f9f9;
+}
+
+.noUi-connect {
+    background: #6b7280 !important;
+}
+
+.noUi-base {
+    background: #d1d5db;
+}
+
+.noUi-handle {
+    background: #9ca3af !important;
+    border: 2px solid #6b7280 !important;
+}
+
+.noUi-handle:hover {
+    background: #6b7280 !important;
+}
+
+/* Add responsive typography for better mobile viewing */
+@media (max-width: 640px) {
+    .quantity-btn, #quantity {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
+
+/* Overlay that covers the whole screen */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensures the modal is above other content */
+  }
+
+  /* The modal itself */
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+
+/* Prechod pri hover na tlačidlách */
+button:hover, .btn:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/* Efekt na odkazy */
+/*a:hover {
+    color: #2D3748;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}*/
+
+#company:hover{
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Efekt na obrázky pri hover */
+/*img:hover {
+    overflow: hidden;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}*/
+
+/* Hover effect for input fields */
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="search"], input[type="password"] {
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+input[type="text"]:hover, input[type="email"]:hover, input[type="tel"]:hover, input[type="number"]:hover, input[type="search"]:hover, input[type="password"]:hover {
+    border-color: #4A90E2; /* Change the border color on hover */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.6); /* Add a subtle shadow */
+    outline: none; /* Remove the outline to focus on the border and shadow */
 }
