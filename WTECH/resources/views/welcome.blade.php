@@ -43,17 +43,17 @@
     </nav>
 
     <!-- 🔹 Hlavná sekcia -->
-    <div class="w-full mt-18 border-b border-gray-400 shadow-md px-15 pt-15 pb-5 bg-gray-100">
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-8">
-                <h1 class="text-4xl font-bold text-gray-900">Prinášame budúcnosť technológií do vašich rúk.</h1>
-                <p class="mt-2 text-gray-700 text-xl">Najnovšie smartfóny a tablety za skvelé ceny. Rýchle doručenie, spoľahlivosť a odborné poradenstvo. Vyberte si to najlepšie ešte dnes.</p>
-            </div>
-            <div class="col-span-4 flex justify-center bg-white h-40 w-40 rounded-lg border border-gray-400">
-                <img src="https://static.vecteezy.com/system/resources/previews/022/722/945/non_2x/samsung-galaxy-s23-ultra-transparent-image-free-png.png" alt="">
-            </div>
+    <div class="w-full mt-[100px] border-b border-gray-400 shadow-md px-4 sm:px-10 py-6 bg-gray-100">
+        <div class="grid sm:grid-cols-12 grid-cols-1 gap-4 items-center">
+          <div class="sm:col-span-8">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Prinášame budúcnosť technológií do vašich rúk.</h1>
+            <p class="mt-2 text-gray-700 text-base sm:text-lg md:text-xl">Najnovšie smartfóny a tablety za skvelé ceny. Rýchle doručenie, spoľahlivosť a odborné poradenstvo. Vyberte si to najlepšie ešte dnes.</p>
+          </div>
+          <div class="sm:col-span-4 flex justify-center">
+            <img src="https://static.vecteezy.com/system/resources/previews/022/722/945/non_2x/samsung-galaxy-s23-ultra-transparent-image-free-png.png" alt="Samsung S23" class="w-32 sm:w-40 object-contain rounded-lg border border-gray-400 bg-white" />
+          </div>
         </div>
-    </div>
+      </div>
 
     <!-- 🔹 Telefóny -->
     <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-500 custom-shadow mt-4 rounded-md bg-gray-100">
