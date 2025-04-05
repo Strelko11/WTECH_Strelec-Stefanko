@@ -173,7 +173,6 @@
 
                     </div>
                 </a>
-                <!-- Repeat product card as needed -->
             </div>
         </div>
     </div>

@@ -59,24 +59,31 @@
                 <div class="bg-gray-200 rounded-lg p-4 border border-gray-400 text-lg w-full">
                     <p>Mobilný telefón – 6,3" Super Retina XDR OLED 2622 × 1206 (120 Hz), operačná pamäť 8 GB, vnútorná pamäť 256 GB, single SIM + eSIM, procesor Apple A18 Pro, fotoaparát: 48 Mpx (f/1,78) hlavný + 48 Mpx širokouhlý + 12 Mpx teleobjektív, predná kamera 12 Mpx, GPS, NFC, LTE, 5G, USB-C, vodoodolný podľa IP68, rýchle nabíjanie, bezdrôtové nabíjanie 25 W, batéria 3582 mAh, model 2024, iOS</p>
                 </div>
-                <div class="flex gap-4 w-full">
-                    <div class="bg-gray-200 rounded-lg p-4 text-lg border  border-gray-400 font-semibold w-1/3 md:w-1/4 text-center">
+
+                <div class="flex flex-wrap gap-4 w-full justify-center md:justify-start">
+                    <!-- Price -->
+                    <div class="bg-gray-200 rounded-lg p-4 text-lg border border-gray-400 font-semibold w-full sm:w-[350px] md:w-[300px] lg:w-[200px] text-center">
                         1 299 €
                     </div>
-                    <div class="quantity-container ml-auto">
-                        <button class="quantity-btn bg-gray-200 border-gray-400" id="decrease">−</button>
-                        <input type="text" id="quantity" value="1" readonly>
-                        <button class="quantity-btn  bg-gray-200 border-gray-400" id="increase">+</button>
+                    <!-- Quantity Container -->
+                    <div class="quantity-container flex items-center gap-4 w-full sm:w-[350px] md:w-[300px] lg:w-[200px]">
+                        <button class="quantity-btn bg-gray-200 border-gray-400 p-2 rounded-full w-12 h-12 text-xl" id="decrease">−</button>
+                        <input type="text" id="quantity" value="1" readonly class="text-center w-[50px] sm:w-[60px] bg-white border border-gray-400 rounded-lg text-lg font-semibold">
+                        <button class="quantity-btn bg-gray-200 border-gray-400 p-2 rounded-full w-12 h-12 text-xl" id="increase">+</button>
                     </div>
-                    <button class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg ml-auto w-2/3 md:w-1/4">
+
+                    <!-- Add to Cart Button -->
+                    <button class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px]">
                         Do košíka
                     </button>
 
-                </div>
-                <div class="bg-gray-200 rounded-lg p-4 border border-gray-400 text-lg w-full">
-                    <p>Na sklade > 5 ks</p>
+                    <!-- Stock Info -->
+                    <div class="bg-gray-200 rounded-lg p-4 border border-gray-400 text-lg w-full text-center">
+                        <p>Na sklade > 5 ks</p>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 
