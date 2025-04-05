@@ -14,7 +14,7 @@
 <body class="flex flex-col min-h-screen bg-gray-100">
 
     <div class="flex-grow">
-       @include('footer')
+       @include('navbar')
 
         <div class="w-full max-w-[80%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-center rounded-md bg-gray-100">
             <form class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">

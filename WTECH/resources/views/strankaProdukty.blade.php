@@ -106,7 +106,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full">
+
                             <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
                             <span>Séria: 16</span>
                             <span>Cena: 1449 €</span>
@@ -131,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+                        <div class=" flex flex-col items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full">
                             <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
                             <span>Séria: 16</span>
                             <span>Cena: 1449 €</span>
@@ -156,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+                        <div class="flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
                             <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
                             <span>Séria: 16</span>
                             <span>Cena: 1449 €</span>

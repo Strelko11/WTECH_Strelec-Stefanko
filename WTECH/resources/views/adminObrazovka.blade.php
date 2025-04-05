@@ -73,87 +73,90 @@
 
     <div class="w-full max-w-[90%] mx-auto px-4 py-8 border-l border-r border-gray-400 custom-shadow rounded-md bg-gray-100">
         <div class="flex flex-wrap justify-center gap-6">
-            <a href="{{ route('produktView') }}" class="w-full sm:w-4/5">
-                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center shadow-md w-full min-w-[280px] h-auto gap-4 border border-gray-400 hover:bg-gray-400 transition duration-300">
-                    <div class="flex space-x-4">
-                        <div class="h-28 w-28 bg-white border border-gray-400 rounded overflow-hidden ">
-                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
-                        </div>
-                        <div class="h-28 w-28 bg-white border border-gray-400 rounded">
+            <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
+                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
+
+                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
+                        <div class="h-28 w-28 max-w-full bg-white border border-gray-400 rounded overflow-hidden">
                             <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
                         </div>
                     </div>
-                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
+
+                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col items-center sm:items-start text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
                         <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
                         <span>Séria: 16</span>
                         <span>Cena: 1449 €</span>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full">
+                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full mt-1">
                             <span>Pamäť: 256GB</span>
                             <span class="ml-2 sm:ml-4">RAM: 8GB</span>
                         </div>
+
                         <div class="w-full flex flex-wrap justify-center sm:justify-end mt-4 gap-2">
-                            <button onclick="window.location.href='/upravProdukt';" class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
+                            <button onclick="window.location.href='/upravProdukt';"
+                                    class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
                                 Upraviť
                             </button>
-                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
+                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-28">
                                 Vymazať
                             </button>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="{{ route('produktView') }}" class="w-full sm:w-4/5">
-                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center shadow-md w-full min-w-[280px] h-auto gap-4 border border-gray-400 hover:bg-gray-400 transition duration-300">
-                    <div class="flex space-x-4">
-                        <div class="h-28 w-28 bg-white border border-gray-400 rounded overflow-hidden ">
-                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
-                        </div>
-                        <div class="h-28 w-28 bg-white border border-gray-400 rounded">
+            <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
+                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
+
+                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
+                        <div class="h-28 w-28 max-w-full bg-white border border-gray-400 rounded overflow-hidden">
                             <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
                         </div>
                     </div>
-                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
+
+                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col items-center sm:items-start text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
                         <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
                         <span>Séria: 16</span>
                         <span>Cena: 1449 €</span>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full">
+                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full mt-1">
                             <span>Pamäť: 256GB</span>
                             <span class="ml-2 sm:ml-4">RAM: 8GB</span>
                         </div>
+
                         <div class="w-full flex flex-wrap justify-center sm:justify-end mt-4 gap-2">
-                            <button onclick="window.location.href='/upravProdukt';" class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
+                            <button onclick="window.location.href='/upravProdukt';"
+                                    class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
                                 Upraviť
                             </button>
-                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
+                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-28">
                                 Vymazať
                             </button>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="{{ route('produktView') }}" class="w-full sm:w-4/5">
-                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center shadow-md w-full min-w-[280px] h-auto gap-4 border border-gray-400 hover:bg-gray-400 transition duration-300">
-                    <div class="flex space-x-4">
-                        <div class="h-28 w-28 bg-white border border-gray-400 rounded overflow-hidden ">
-                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
-                        </div>
-                        <div class="h-28 w-28 bg-white border border-gray-400 rounded">
+            <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
+                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
+
+                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
+                        <div class="h-28 w-28 max-w-full bg-white border border-gray-400 rounded overflow-hidden">
                             <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
                         </div>
                     </div>
-                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
+
+                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col items-center sm:items-start text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
                         <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
                         <span>Séria: 16</span>
                         <span>Cena: 1449 €</span>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full">
+                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full mt-1">
                             <span>Pamäť: 256GB</span>
                             <span class="ml-2 sm:ml-4">RAM: 8GB</span>
                         </div>
+
                         <div class="w-full flex flex-wrap justify-center sm:justify-end mt-4 gap-2">
-                            <button onclick="window.location.href='/upravProdukt';" class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
+                            <button onclick="window.location.href='/upravProdukt';"
+                                    class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
                                 Upraviť
                             </button>
-                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
+                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-28">
                                 Vymazať
                             </button>
                         </div>
