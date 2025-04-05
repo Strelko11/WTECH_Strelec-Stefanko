@@ -25,32 +25,7 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-        <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
-            <i class="fas fa-globe mr-2"></i> TechSphere
-        </a>
-        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg text-white" placeholder="Search...">
-        <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform"><i class="fas fa-shopping-cart"></i></a>
-
-            <div class="relative group inline-block">
-                <button class="text-white text-xl focus:outline-none">
-                    <i class="fas fa-user"></i>
-                </button>
-                <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg
-                opacity-0 invisible group-hover:visible group-hover:opacity-100
-                transition-all duration-200 border border-gray-300 z-50">
-                    <div class="px-4 py-3 text-sm text-black">
-                        <div>Meno používateľa</div>
-                        <div class="font-medium truncate">E-mail používateľa</div>
-                    </div>
-                    <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
-                    <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-b-lg">Sign out</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    @include('navbar')
 
     <!-- Main Content -->
     <div class="w-full flex flex-col justify-between items-center mt-32 space-y-8 flex-grow px-4">
@@ -105,9 +80,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="mt-8 text-center py-4 bg-gray-900 border-t text-white">
-        <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
-    </footer>
+    @include('footer')
 
 </body>
 
