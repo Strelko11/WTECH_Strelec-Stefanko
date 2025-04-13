@@ -32,3 +32,8 @@ Route::get('/upravProdukt', function () {
 Route::get('/dorucenie&platba', function () {
     return view('dorucenie&platba');
 })->name('dorucenie&platba');
+
+use App\Http\Controllers\ProductController;
+Route::get('/produkty/{category}', [ProductController::class, 'showByCategory'])->name('zKategorie');
+
+Route::get('/produktView', [ProductController::class, 'showProduct'])->name('produktView');

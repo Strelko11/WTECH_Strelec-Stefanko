@@ -43,16 +43,16 @@
             <h4 class="text-2xl font-bold mb-10 text-gray-900">Telefóny</h4>
             <div class="flex flex-wrap justify-center gap-10 max-w-[100%] mx-auto">
                 <!-- Iphone -->
-                <a href="{{ route('strankaProdukty') }}"
+                <a href="{{ route('zKategorie', ['category' => 'iPhone']) }}"
                     class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-full max-w-[380px] h-40 border border-gray-400 hover:text-black hover:scale-105 transition-all duration-300 ease-in-out">
                     <div
                         class="h-38 w-38 rounded bg-white bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center">
                     </div>
-                    <span class="text-2xl text-center">Iphone</span>
+                    <span class="text-2xl text-center">iPhone</span>
                 </a>
 
                 <!-- Samsung -->
-                <a href="{{ route('strankaProdukty') }}"
+                <a href="{{ route('zKategorie', ['category' => 'Samsung']) }}"
                     class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-full max-w-[380px] h-40 border border-gray-400 hover:text-black hover:scale-105 transition-all duration-300 ease-in-out">
                     <div
                         class="h-38 w-38 rounded bg-white bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center">
@@ -61,7 +61,7 @@
                 </a>
 
                 <!-- Xiaomi -->
-                <a href="{{ route('strankaProdukty') }}"
+                <a href="{{ route('zKategorie', ['category' => 'Xiaomi']) }}"
                     class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-full max-w-[380px] h-40 border border-gray-400 hover:text-black hover:scale-105 transition-all duration-300 ease-in-out">
                     <div
                         class="h-38 w-38 rounded bg-white bg-[url('https://www.geekwills.com/media/catalog/product/cache/d368225e56c0af8fed569f12698f474d/x/i/xiaomi_15.png')] bg-contain bg-no-repeat bg-center">
@@ -73,7 +73,7 @@
             <h4 class="text-2xl font-bold mt-6 mb-10 text-gray-900">Tablety</h4>
             <div class="flex flex-wrap justify-center gap-10 max-w-[100%] mx-auto">
                 <!-- iPad -->
-                <a href="{{ route('strankaProdukty') }}"
+                <a href="{{ route('zKategorie', ['category' => 'iPad']) }}"
                     class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-full max-w-[380px] h-40 border border-gray-400 hover:text-black hover:scale-105 transition-all duration-300 ease-in-out">
                     <div
                         class="h-38 w-38 rounded bg-white bg-[url('https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-2022-hero-silver-wifi-select_FMT_WHH?wid=940&hei=1112&fmt=png-alpha&.v=1664387253605')] bg-contain bg-no-repeat bg-center">
@@ -82,7 +82,7 @@
                 </a>
 
                 <!-- Galaxy Tab -->
-                <a href="{{ route('strankaProdukty') }}"
+                <a href="{{ route('zKategorie', ['category' => 'GalaxyTab']) }}"
                     class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-full max-w-[380px] h-40 border border-gray-400 hover:text-black hover:scale-105 transition-all duration-300 ease-in-out">
                     <div
                         class="h-38 w-38 rounded bg-white bg-[url('https://crdms.images.consumerreports.org/prod/products/cr/models/415678-9-inch-screen-and-larger-tablets-samsung-galaxy-tab-s10-ultra-256gb-wifi-10041162.png')] bg-contain bg-no-repeat bg-center">
@@ -91,7 +91,7 @@
                 </a>
 
                 <!-- Xiaomi Pad -->
-                <a href="{{ route('strankaProdukty') }}"
+                <a href="{{ route('zKategorie', ['category' => 'XiaomiPad']) }}"
                     class="bg-white p-4 rounded-lg flex items-center space-x-2 shadow-md w-full max-w-[380px] h-40 border border-gray-400 hover:text-black hover:scale-105 transition-all duration-300 ease-in-out">
                     <div
                         class="h-38 w-38 rounded bg-white bg-[url('https://i02.appmifile.com/73_operatorx_operatorx_opx/21/05/2024/9da572f0718c2baa9421143d9e848b48.png')] bg-contain bg-no-repeat bg-center">

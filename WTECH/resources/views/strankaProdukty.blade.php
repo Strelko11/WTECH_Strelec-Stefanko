@@ -21,16 +21,19 @@
 
         @include('navbar')
 
-        <div class="w-full mt-18 border-b border-gray-400 shadow-md px-4 pt-15 pb-5 bg-gray-100">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
-                <div class="col-span-1 sm:col-span-2 lg:col-span-8">
-                    <h1 class="text-4xl font-bold text-gray-900">Prinášame budúcnosť technológií do vašich rúk.</h1>
-                    <p class="mt-2 text-gray-700 text-lg sm:text-xl">Najnovšie smartfóny a tablety za skvelé ceny. Rýchle
-                        doručenie, spoľahlivosť a odborné poradenstvo. Vyberte si to najlepšie ešte dnes.</p>
+        <div class="w-full mt-[100px] border-b border-gray-400 shadow-md px-4 sm:px-10 py-6 bg-gray-100">
+            <div class="grid sm:grid-cols-12 grid-cols-1 gap-4 items-center">
+                <div class="sm:col-span-8">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Prinášame budúcnosť technológií
+                        do vašich rúk.</h1>
+                    <p class="mt-2 text-gray-700 text-base sm:text-lg md:text-xl">Najnovšie smartfóny a tablety za
+                        skvelé ceny. Rýchle doručenie, spoľahlivosť a odborné poradenstvo. Vyberte si to najlepšie ešte
+                        dnes.</p>
                 </div>
-                <div class="col-span-1 sm:col-span-2 lg:col-span-4 flex justify-center bg-white h-40 w-40 rounded-lg border border-gray-400">
+                <div class="sm:col-span-4 flex justify-center">
                     <img src="https://static.vecteezy.com/system/resources/previews/022/722/945/non_2x/samsung-galaxy-s23-ultra-transparent-image-free-png.png"
-                        alt="">
+                        alt="Samsung S23"
+                        class="w-32 sm:w-40 object-contain rounded-lg border border-gray-400 bg-white" />
                 </div>
             </div>
         </div>
@@ -95,85 +98,35 @@
         </div>
 
         <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow rounded-md bg-gray-100">
-            <h4 class="text-2xl font-bold mb-10 text-gray-900">Telefóny iPhone</h4>
+            <h4 class="text-xl font-bold mb-10 text-gray-900">Produkty kategórie {{ ucfirst($category) }}</h4>
             <div class="flex flex-wrap justify-center gap-10">
                 <!-- Product Card -->
-                <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
+                @foreach ($products as $product)
+                <a href="{{ route('produktView', ['id' => $product->id]) }}" class="w-full sm:w-1/2 md:w-4/5">
                     <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
                         <div class="flex space-x-4">
-                            <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden">
-                                <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110">
+                            <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden p-2">
+                                <div class="h-full w-full bg-[url('{{ $product->images->first()->image_url ?? 'https://via.placeholder.com/150' }}')] bg-contain bg-no-repeat bg-center transition-transform duration-300">
                                 </div>
                             </div>
                         </div>
                         <div class="flex flex-col items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full">
-
-                            <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-                            <span>Séria: 16</span>
-                            <span>Cena: 1449 €</span>
+                            <span class="font-bold">{{ $product->name }}</span>
+                            <span>Séria: {{ $product->series }}</span>
+                            <span>Cena: {{ $product->price }} €</span>
                             <div class="flex justify-center md:justify-start w-full">
-                                <span>Pamäť: 256GB</span>
-                                <span class="ml-4">RAM: 8GB</span>
+                                <span>Pamäť: {{ $product->storage }}GB</span>
+                                <span class="ml-4">RAM: {{ $product->ram }}GB</span>
                             </div>
                             <div class="w-full flex justify-center md:justify-end mt-4">
-                                <button id="buyButton" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-full sm:w-[120px]">
+                                <button class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-full sm:w-[120px]">
                                     Kúpiť
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </a>
-                <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
-                    <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center border border-gray-400 shadow-md w-full  h-auto gap-4 hover:bg-gray-400 transition duration-300">
-                        <div class="flex space-x-4">
-                            <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden">
-                                <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110">
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" flex flex-col items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full">
-                            <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-                            <span>Séria: 16</span>
-                            <span>Cena: 1449 €</span>
-                            <div class="flex justify-center md:justify-start w-full">
-                                <span>Pamäť: 256GB</span>
-                                <span class="ml-4">RAM: 8GB</span>
-                            </div>
-                            <div class="w-full flex justify-center md:justify-end mt-4">
-                                <button id="buyButton" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-full sm:w-[120px]">
-                                    Kúpiť
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </a>
-                <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
-                    <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
-                        <div class="flex space-x-4">
-                            <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden">
-                                <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
-                            <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-                            <span>Séria: 16</span>
-                            <span>Cena: 1449 €</span>
-                            <div class="flex justify-center md:justify-start w-full">
-                                <span>Pamäť: 256GB</span>
-                                <span class="ml-4">RAM: 8GB</span>
-                            </div>
-                            <div class="w-full flex justify-center md:justify-end mt-4">
-                                <button id="buyButton" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-full sm:w-[120px]">
-                                    Kúpiť
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </div>
