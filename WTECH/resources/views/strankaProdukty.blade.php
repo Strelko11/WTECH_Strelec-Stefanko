@@ -39,62 +39,92 @@
         </div>
 
         <div class="flex flex-col items-center justify-center gap-6 my-6 bg-gray-100 p-6 border-0 rounded-lg shadow-none">
-            <div class="flex flex-col items-center w-full max-w-md">
-                <label class="text-lg font-semibold mb-2 text-gray-900">Cena:</label>
+            <form method="GET" action="{{ route('zKategorie', ['category' => $category]) }}" class="w-full flex flex-col items-center gap-6 my-6 bg-gray-100 p-6 rounded-lg shadow-none">
 
-                <div id="hs-pass-values-to-inputs" class="w-full --prevent-on-load-init" data-hs-range-slider='{
-                    "start": [250, 750],
-                    "range": { "min": 0, "max": 2000 },
-                    "connect": true,
-                    "tooltips": true,
-                    "formatter": "integer"
-                }'></div>
-                <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-4 mt-5">
-                    <div class="w-full sm:w-40">
-                        <label for="hs-pass-values-to-inputs-min-target" class="block text-sm font-medium mb-2 text-center text-gray-900">Min. cena:</label>
-                        <input id="hs-pass-values-to-inputs-min-target" type="number" value="250" class="w-full border border-gray-400 rounded-lg px-4 py-2 text-center bg-white text-gray-900">
-                    </div>
-                    <div class="w-full sm:w-40">
-                        <label for="hs-pass-values-to-inputs-max-target" class="block text-sm font-medium mb-2 text-center text-gray-900">Max. cena:</label>
-                        <input id="hs-pass-values-to-inputs-max-target" type="number" value="750" class="w-full border border-gray-400 rounded-lg px-4 py-2 text-center bg-white text-gray-900">
+                <div class="flex flex-col items-center w-full max-w-md">
+                    <label class="text-lg font-semibold mb-2 text-gray-900">Cena:</label>
+
+                    <div id="hs-pass-values-to-inputs" class="w-full" data-hs-range-slider='{
+                        "start": [{{ request('min', default: 0) }}, {{ request('max', 1500) }}],
+                        "range": { "min": 0, "max": 2000 },
+                        "connect": true,
+                        "tooltips": true,
+                        "formatter": "integer"
+                    }'></div>
+                    <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-4 mt-5 w-full">
+                        <div class="w-full sm:w-40">
+                            <label for="hs-pass-values-to-inputs-min-target" class="block text-sm font-medium mb-2 text-center text-gray-900">Min. cena:</label>
+                            <input
+                                name="min"
+                                id="hs-pass-values-to-inputs-min-target"
+                                type="number"
+                                value="{{ request('min', 0) }}"
+                                class="w-full border border-gray-400 rounded-lg px-4 py-2 text-center bg-white text-gray-900">
+                        </div>
+                        <div class="w-full sm:w-40">
+                            <label for="hs-pass-values-to-inputs-max-target" class="block text-sm font-medium mb-2 text-center text-gray-900">Max. cena:</label>
+                            <input
+                                name="max"
+                                id="hs-pass-values-to-inputs-max-target"
+                                type="number"
+                                value="{{ request('max', 1500) }}"
+                                class="w-full border border-gray-400 rounded-lg px-4 py-2 text-center bg-white text-gray-900">
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <button type="submit" class="bg-gray-600 hover:bg-gray-800 text-white px-6 py-2 rounded shadow mt-4">
+                    Filtrovať
+                </button>
+
+
 
             <div class="flex flex-wrap justify-center gap-6">
                 <div class="flex flex-col items-center">
+                    <label for="sort" class="text-lg font-semibold mb-2 text-gray-900">Podľa ceny:</label>
+                    <select name="sort" id="sort" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
+                        <option value="">Všetky ceny</option>
+                        <option value="asc" {{ request('sort') === 'asc' ? 'selected' : '' }}>Ceny vzostupne</option>
+                        <option value="desc" {{ request('sort') === 'desc' ? 'selected' : '' }}>Ceny zostupne</option>
+                    </select>
+                </div>
+                <div class="flex flex-col items-center">
                     <label for="seriesFilter" class="text-lg font-semibold mb-2 text-gray-900">Séria:</label>
-                    <select id="seriesFilter" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
-                        <option value="all">Všetky série</option>
-                        <option value="iphone-16">iPhone 16</option>
-                        <option value="samsung-s24">iPhone 15</option>
-                        <option value="xiaomi-15">iPhone 14</option>
+                    <select name="series" id="seriesFilter" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
+                        <option value="">Všetky série</option>
+                        @foreach ($seriesList as $series)
+                            <option value="{{ $series }}" {{ request('series') == $series ? 'selected' : '' }}>
+                                {{ $series }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="flex flex-col items-center">
                     <label for="storageFilter" class="text-lg font-semibold mb-2 text-gray-900">Úložisko:</label>
-                    <select id="storageFilter" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
-                        <option value="all">Všetky kapacity</option>
-                        <option value="64">64 GB</option>
-                        <option value="128">128 GB</option>
-                        <option value="256">256 GB</option>
-                        <option value="512">512 GB</option>
-                        <option value="1tb">1 TB</option>
+                    <select name="storage" id="storageFilter" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
+                        <option value="">Všetky kapacity</option>
+                        @foreach ($storageList as $storage)
+                            <option value="{{ $storage }}" {{ request('storage') == $storage ? 'selected' : '' }}>
+                                {{ $storage }} GB
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="flex flex-col items-center">
                     <label for="ramFilter" class="text-lg font-semibold mb-2 text-gray-900">RAM:</label>
-                    <select id="ramFilter" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
-                        <option value="all">Všetky veľkosti</option>
-                        <option value="4">4 GB</option>
-                        <option value="6">6 GB</option>
-                        <option value="8">8 GB</option>
-                        <option value="12">12 GB</option>
+                    <select name="ram" id="ramFilter" class="px-4 py-2 border border-gray-400 rounded-lg text-center bg-white text-gray-900 hover:bg-gray-300">
+                        <option value="">Všetky veľkosti</option>
+                        @foreach ($ramList as $ram)
+                            <option value="{{ $ram }}" {{ request('ram') == $ram ? 'selected' : '' }}>
+                                {{ $ram }} GB
+                            </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
+        </form>
         </div>
 
         <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow rounded-md bg-gray-100">
@@ -129,20 +159,16 @@
                 @endforeach
             </div>
         </div>
+        <div class="mt-10 flex justify-center">
+            {{ $products->links() }}
+        </div>
     </div>
 
     @include('footer')
 
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script>
-        document.querySelectorAll("button").forEach(button => {
-            button.addEventListener("click", function (event) {
-                event.stopPropagation();
-                event.preventDefault();
-            });
-        });
-    </script>
+
 </body>
 
 </html>
