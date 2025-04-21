@@ -51,5 +51,56 @@ class ProductController extends Controller
 
         return view('produktView', compact('product'));
     }
+    public function search(Request $request)
+{
+    $queryBuilder = Product::with('images');
+
+    if ($request->filled('query')) {
+        $search = $request->input('query');
+        $queryBuilder->where(function ($q) use ($search) {
+            $q->where('name', 'ILIKE', "%{$search}%")
+              ->orWhere('description', 'ILIKE', "%{$search}%");
+        });
+    }
+    if ($request->filled('min')) {
+        $queryBuilder->where('price', '>=', $request->min);
+    }
+
+    if ($request->filled('max')) {
+        $queryBuilder->where('price', '<=', $request->max);
+    }
+
+    if ($request->filled('series')) {
+        $queryBuilder->where('series', $request->series);
+    }
+
+    if ($request->filled('storage')) {
+        $queryBuilder->where('storage', $request->storage);
+    }
+
+    if ($request->filled('ram')) {
+        $queryBuilder->where('ram', $request->ram);
+    }
+
+    if ($request->filled('sort')) {
+        $sortOrder = $request->get('sort') === 'desc' ? 'desc' : 'asc';
+        $queryBuilder->orderBy('price', $sortOrder);
+    }
+
+    $products = $queryBuilder->paginate(3)->withQueryString();
+
+    $seriesList = Product::distinct()->pluck('series');
+    $ramList = Product::distinct()->pluck('ram');
+    $storageList = Product::distinct()->pluck('storage');
+
+    return view('strankaProdukty', [
+        'products' => $products,
+        'category' => 'Vyhľadávanie',
+        'seriesList' => $seriesList,
+        'ramList' => $ramList,
+        'storageList' => $storageList,
+        'query' => $request->query('query')
+    ]);
+}
 
 }

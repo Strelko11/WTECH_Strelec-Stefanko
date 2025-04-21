@@ -4,19 +4,25 @@
     </a>
 
     <!-- Search Input on larger screens -->
-    <form action="{{ route('vyhladavanie') }}" method="GET" class="w-1/2 hidden sm:flex items-center">
-        <input type="text" name="query"
-            value="{{ request('query') }}"
-            placeholder="Vyhľadať produkt..."
-            class="w-full px-4 py-2 border border-gray-400 rounded-lg text-white focus:outline-none"
+    <form action="{{ route('adminObrazovka') }}" method="GET" class="w-1/2 hidden sm:flex items-center">
+        <input type="text" name="search"
+               value="{{ request('search') }}"
+               placeholder="Vyhľadať produkt..."
+               class="w-full px-4 py-2 border border-gray-400 rounded-lg text-white bg-gray-800 placeholder-gray-400 focus:outline-none"
         >
+
+        <!-- Hidden fields to keep filters when searching -->
+        <input type="hidden" name="type" value="{{ request('type') }}">
+        <input type="hidden" name="category" value="{{ request('category') }}">
+        <input type="hidden" name="price" value="{{ request('price') }}">
+
         <button type="submit" class="ml-2 bg-gray-600 hover:bg-gray-800 text-white px-4 py-2 rounded-lg">
             <i class="fas fa-search"></i>
         </button>
     </form>
 
     <div class="flex space-x-4">
-        <!-- Magnifying Glass Icon on smaller screens (next to the cart) -->
+        <!-- Magnifying Glass Icon on smaller screens (optional toggle) -->
         <button class="sm:hidden text-white text-xl">
             <i class="fas fa-search"></i>
         </button>
@@ -38,7 +44,7 @@
                 </div>
                 <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
                 <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-b-lg">Sign out</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-b-lg">Odhlásiť sa</a>
             </div>
         </div>
     </div>

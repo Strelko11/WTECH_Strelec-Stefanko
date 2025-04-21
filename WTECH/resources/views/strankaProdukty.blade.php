@@ -39,8 +39,10 @@
         </div>
 
         <div class="flex flex-col items-center justify-center gap-6 my-6 bg-gray-100 p-6 border-0 rounded-lg shadow-none">
-            <form method="GET" action="{{ route('zKategorie', ['category' => $category]) }}" class="w-full flex flex-col items-center gap-6 my-6 bg-gray-100 p-6 rounded-lg shadow-none">
-
+            <form method="GET" action="{{ isset($query) ? route('vyhladavanie') : route('zKategorie', ['category' => $category]) }}" class="w-full flex flex-col items-center gap-6 my-6 bg-gray-100 p-6 rounded-lg shadow-none">
+                    @if(isset($query))
+                    <input type="hidden" name="query" value="{{ $query }}">
+                    @endif
                 <div class="flex flex-col items-center w-full max-w-md">
                     <label class="text-lg font-semibold mb-2 text-gray-900">Cena:</label>
 
@@ -73,7 +75,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="bg-gray-600 hover:bg-gray-800 text-white px-6 py-2 rounded shadow mt-4">
+                <button type="submit" class="bg-gray-600 hover:bg-gray-800 text-white px-6 py-2 rounded-lg shadow mt-4">
                     Filtrovať
                 </button>
 

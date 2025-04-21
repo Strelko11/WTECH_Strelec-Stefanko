@@ -35,5 +35,10 @@ Route::get('/dorucenie&platba', function () {
 
 use App\Http\Controllers\ProductController;
 Route::get('/produkty/{category}', [ProductController::class, 'showByCategory'])->name('zKategorie');
-
 Route::get('/produktView', [ProductController::class, 'showProduct'])->name('produktView');
+Route::get('/vyhladavanie', [ProductController::class, 'search'])->name('vyhladavanie');
+
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin', [AdminController::class, 'index'])->name('adminObrazovka');
+

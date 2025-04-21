@@ -17,7 +17,7 @@
 
     <div class="flex-grow">
 
-   @include('navbar')
+   @include('navbaradmin')
 
 
 
@@ -25,42 +25,50 @@
     <div class="flex flex-wrap justify-center gap-6 pt-28 pb-8 bg-gray-100 p-6 rounded-lg shadow-none">
 
 
-        <div class="flex flex-col items-center">
-            <label for="priceFilter" class="text-lg font-semibold text-gray-900 mb-2">Typ zariadenia</label>
-            <select id="priceFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
-                <option value="all">Všetky typy</option>
-                <option value="low">Telefón</option>
-                <option value="mid">Tablet</option>
-            </select>
-        </div>
+        <form method="GET" action="{{ route('adminObrazovka') }}" class="flex flex-wrap justify-center gap-6 pt-28 pb-8 bg-gray-100 p-6 rounded-lg shadow-none">
+            <div class="flex flex-col items-center">
+                <label for="priceRange" class="text-lg font-semibold text-gray-900 mb-2">Cena</label>
+                <select name="price" id="priceRange"
+                        class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300 text-center">
+                    <option value="">Všetky ceny</option>
+                    <option value="low" {{ request('price') == 'low' ? 'selected' : '' }}>Najlacnejšie</option>
+                    <option value="high" {{ request('price') == 'high' ? 'selected' : '' }}>Najdrahšie</option>
+                    <option value="400" {{ request('price') == '400' ? 'selected' : '' }}>do 400 €</option>
+                    <option value="700" {{ request('price') == '700' ? 'selected' : '' }}>do 700 €</option>
+                    <option value="1000" {{ request('price') == '1000' ? 'selected' : '' }}>nad 1000 €</option>
+                </select>
+            </div>
+            <div class="flex flex-col items-center">
+                <label for="typeFilter" class="text-lg font-semibold text-gray-900 mb-2">Typ zariadenia</label>
+                <select name="type" id="typeFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
+                    <option value="all">Všetky typy</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type }}" {{ request('type') == $type ? 'selected' : '' }}>{{ ucfirst($type) }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <label for="categoryFilter" class="text-lg font-semibold text-gray-900 mb-2">Značka</label>
+                <select name="category" id="categoryFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
+                    <option value="all">Všetky značky</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category }}" {{ request('category') == $category ? 'selected' : '' }}>{{ $category }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex items-end">
+                <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800">
+                    Filtrovať
+                </button>
+            </div>
+        </form>
 
 
-        <div class="flex flex-col items-center">
-            <label for="seriesFilter" class="text-lg font-semibold text-gray-900 mb-2">Značka</label>
-            <select id="seriesFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
-                <option value="all">Všetky značky</option>
-                <option value="iphone-16">iPhone</option>
-                <option value="samsung-s24">Samsung</option>
-                <option value="xiaomi-15">Xiaomi</option>
-            </select>
-        </div>
-
-
-        <div class="flex flex-col items-center">
-            <label for="storageFilter" class="text-lg font-semibold text-gray-900 mb-2">Cena</label>
-            <select id="storageFilter" class="px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 hover:bg-gray-300">
-                <option value="all">Všetky ceny</option>
-                <option value="high">Najdrahšie</option>
-                <option value="low">Najlacnejšie</option>
-                <option value="400">do 400 €</option>
-                <option value="700">do 700 €</option>
-                <option value="1000">nad 1000 €</option>
-            </select>
-        </div>
-
-
-        <div>
-            <button id="addProduct" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center  w-[150px]"
+        <div class="w-full flex justify-center mt-4">
+            <button id="addProduct"
+                    class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 w-[150px]"
                     onclick="window.location.href='/pridajProdukt';">
                 Pridať produkt
             </button>
@@ -71,103 +79,53 @@
 
     </div>
 
-    <div class="w-full max-w-[90%] mx-auto px-4 py-8 border-l border-r border-gray-400 custom-shadow rounded-md bg-gray-100">
-        <div class="flex flex-wrap justify-center gap-6">
-            <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
-                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
+    <div class="w-full max-w-[90%] mx-auto px-6 py-10 border-l border-r border-gray-400 custom-shadow rounded-md bg-gray-100">
+        <h4 class="text-xl font-bold mb-10 text-gray-900">Zoznam produktov</h4>
+        <div class="flex flex-wrap justify-center gap-10">
+            @foreach ($products as $product)
+            <div onclick="window.location='{{ route('produktView', ['id' => $product->id]) }}'"
+                 class="cursor-pointer bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center border border-gray-400 shadow-md gap-4 hover:bg-gray-400 transition duration-300 w-full sm:w-1/2 md:w-4/5 relative">
 
-                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
-                        <div class="h-28 w-28 max-w-full bg-white border border-gray-400 rounded overflow-hidden">
-                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col items-center sm:items-start text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
-                        <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-                        <span>Séria: 16</span>
-                        <span>Cena: 1449 €</span>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full mt-1">
-                            <span>Pamäť: 256GB</span>
-                            <span class="ml-2 sm:ml-4">RAM: 8GB</span>
-                        </div>
-
-                        <div class="w-full flex flex-wrap justify-center sm:justify-end mt-4 gap-2">
-                            <button onclick="window.location.href='/upravProdukt';"
-                                    class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
-                                Upraviť
-                            </button>
-                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-28">
-                                Vymazať
-                            </button>
-                        </div>
+                <div class="flex space-x-4">
+                    <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden p-2">
+                        <div class="h-full w-full bg-[url('{{ $product->images->first()->image_url ?? 'https://via.placeholder.com/150' }}')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
                     </div>
                 </div>
-            </a>
-            <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
-                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
 
-                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
-                        <div class="h-28 w-28 max-w-full bg-white border border-gray-400 rounded overflow-hidden">
-                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
-                        </div>
+                <div class="flex flex-col items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full">
+                    <span class="font-bold">{{ $product->name }}</span>
+                    <span>Séria: {{ $product->series }}</span>
+                    <span>Cena: {{ $product->price }} €</span>
+                    <div class="flex justify-center md:justify-start w-full">
+                        <span>Pamäť: {{ $product->storage }}GB</span>
+                        <span class="ml-4">RAM: {{ $product->ram }}GB</span>
                     </div>
 
-                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col items-center sm:items-start text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
-                        <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-                        <span>Séria: 16</span>
-                        <span>Cena: 1449 €</span>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full mt-1">
-                            <span>Pamäť: 256GB</span>
-                            <span class="ml-2 sm:ml-4">RAM: 8GB</span>
-                        </div>
+                    <div class="w-full flex justify-center md:justify-end mt-4 gap-2">
+                        <a href="{{ route('upravProdukt', ['id' => $product->id]) }}"
+                           onclick="event.stopPropagation();"
+                           class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 text-center w-[120px]">
+                            Upraviť
+                        </a>
 
-                        <div class="w-full flex flex-wrap justify-center sm:justify-end mt-4 gap-2">
-                            <button onclick="window.location.href='/upravProdukt';"
-                                    class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
-                                Upraviť
-                            </button>
-                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-28">
+
+                            <button type="submit"
+                                    class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 text-center w-[120px]">
                                 Vymazať
                             </button>
-                        </div>
+
                     </div>
                 </div>
-            </a>
-            <a href="{{ route('produktView') }}" class="w-full sm:w-1/2 md:w-4/5">
-                <div class="bg-gray-300 p-4 rounded-lg flex flex-col sm:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
+            </div>
+            @endforeach
+        </div>
 
-                    <div class="flex justify-center sm:justify-start w-full sm:w-auto">
-                        <div class="h-28 w-28 max-w-full bg-white border border-gray-400 rounded overflow-hidden">
-                            <div class="h-full w-full bg-[url('https://pngimg.com/d/iphone16_PNG38.png')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 sm:mt-0 sm:ml-6 flex flex-col items-center sm:items-start text-center sm:text-left text-gray-900 text-base sm:text-lg w-full">
-                        <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-                        <span>Séria: 16</span>
-                        <span>Cena: 1449 €</span>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 w-full mt-1">
-                            <span>Pamäť: 256GB</span>
-                            <span class="ml-2 sm:ml-4">RAM: 8GB</span>
-                        </div>
-
-                        <div class="w-full flex flex-wrap justify-center sm:justify-end mt-4 gap-2">
-                            <button onclick="window.location.href='/upravProdukt';"
-                                    class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 w-28">
-                                Upraviť
-                            </button>
-                            <button class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-28">
-                                Vymazať
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-
-
+        <div class="mt-10 flex justify-center">
+            {{ $products->links() }}
         </div>
     </div>
+
+
 
 
 
@@ -181,13 +139,6 @@
     @include('footer')
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script>
-        document.querySelectorAll("button").forEach(button => {
-            button.addEventListener("click", function(event) {
-                event.stopPropagation();
-                event.preventDefault();
-            });
-        });
-    </script>
+
 </body>
 </html>
