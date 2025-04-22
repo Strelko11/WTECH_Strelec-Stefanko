@@ -18,7 +18,8 @@
         @include('navbar')
 
         <div class="w-full max-w-[80%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-center rounded-md bg-gray-100">
-            <form class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
+            <form method="POST" action="{{ route('login') }}" class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
+                @csrf
                 <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Prihlásiť sa</h2>
 
 
@@ -47,6 +48,15 @@
                 <a href="{{ route('registerForm') }}" class="block w-full text-center mt-10 text-blue-500 hover:text-blue-600 hover:underline">
                     Nová registrácia
                 </a>
+                @if ($errors->any())
+    <div class="mt-4 text-red-600 text-sm">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             </form>
         </div>
 

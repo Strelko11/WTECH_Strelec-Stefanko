@@ -47,3 +47,5 @@ Route::get('/admin', [AdminController::class, 'index'])->name('adminObrazovka');
 
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
