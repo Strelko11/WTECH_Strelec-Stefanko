@@ -18,19 +18,20 @@
         @include('navbar')
 
         <div class="w-full max-w-[80%] h-auto mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 flex items-center justify-center rounded-md bg-gray-100">
-            <form class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
+            <form method="POST" action="/register" class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
+                @csrf
                 <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Zaregistrovať sa</h2>
 
 
                 <div class="mb-4">
                     <label for="name" class="block text-gray-900 font-medium">Meno</label>
-                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
+                    <input type="text" id="name" name="first_name" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
                 </div>
 
 
                 <div class="mb-4">
                     <label for="surname" class="block text-gray-900 font-medium">Priezvisko</label>
-                    <input type="text" id="surname" name="surname" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
+                    <input type="text" id="surname" name="last_name" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
                 </div>
 
 
@@ -53,15 +54,26 @@
 
 
                 <div class="mb-4">
-                    <label for="password_confirm" class="block text-gray-900 font-medium">Potvrď heslo</label>
-                    <input type="password" id="password_confirm" name="password_confirm" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
+                    <label for="password_confirmation" class="block text-gray-900 font-medium">Potvrď heslo</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" required>
                 </div>
+
 
 
                 <button type="submit" class="w-3/5 bg-gray-600 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg mt-6 transition mx-auto block">
                     Potvrdiť
                 </button>
             </form>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
         </div>
 
 

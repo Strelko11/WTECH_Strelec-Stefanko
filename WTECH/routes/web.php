@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,4 +42,8 @@ Route::get('/vyhladavanie', [ProductController::class, 'search'])->name('vyhlada
 use App\Http\Controllers\AdminController;
 
 Route::get('/admin', [AdminController::class, 'index'])->name('adminObrazovka');
+
+
+
+Route::post('/register', [AuthController::class, 'register']);
 
