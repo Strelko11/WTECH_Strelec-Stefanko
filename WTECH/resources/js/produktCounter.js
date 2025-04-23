@@ -1,17 +1,14 @@
-const decreaseBtn = document.getElementById("decrease");
-        const increaseBtn = document.getElementById("increase");
-        const quantityInput = document.getElementById("quantity");
-
-        decreaseBtn.addEventListener("click", (event) => {
-            event.preventDefault(); 
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        increaseBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            let currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('quantity');
+    const formQuantity = document.getElementById('form-quantity');
+    document.getElementById('increase').addEventListener('click', () => {
+        input.value = parseInt(input.value) + 1;
+        formQuantity.value = input.value;
+    });
+    document.getElementById('decrease').addEventListener('click', () => {
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+            formQuantity.value = input.value;
+        }
+    });
+});

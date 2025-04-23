@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="flex flex-wrap gap-4 w-full justify-center md:justify-start">
-                 
+
                     <div class="bg-gray-200 rounded-lg p-4 text-lg border border-gray-400 font-semibold w-full sm:w-[350px] md:w-[300px] lg:w-[200px] text-center">
                          {{ number_format($product->price, 2, ',', ' ') }} €
                     </div>
@@ -54,9 +54,14 @@
                     </div>
 
 
-                    <button class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px]">
-                        Do košíka
-                    </button>
+                    <form method="POST" action="{{ route('cart.add', $product->id) }}">
+                        @csrf
+                        
+                        <button type="submit" class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px]">
+                            Do košíka
+                        </button>
+                    </form>
+
 
                     <div class="bg-gray-200 rounded-lg p-4 border border-gray-400 text-lg w-full text-center">
                         <p>Na sklade > 5 ks</p>

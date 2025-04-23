@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,3 +50,10 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/kosik', [CartController::class, 'showCart'])->name('cart.show');
+Route::get('/clear-cart', function () {
+    session()->forget('cart');
+    return 'Cart cleared!';
+});
