@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Controllers\Controller; // <- this is the key fix
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
@@ -57,6 +58,9 @@ class CartController extends Controller
         // Save the updated cart back to the session
         session()->put('cart', $cart);
 
+        // Also store cart in a cookie (serialized JSON, expires in 1 week)
+        Cookie::queue('cart', json_encode($cart), 60 * 24 * 7); // 7 days
+
         return redirect()->route('cart.show')->with('success', 'Produkt pridaný do košíka!');
     }
 
@@ -65,19 +69,50 @@ class CartController extends Controller
 
 
     public function showCart()
-{
-    // Get the cart and sanitize it
-    $cart = array_filter(session('cart', []), function ($item) {
-        return isset($item['name'], $item['price'], $item['quantity']) &&
-               !is_null($item['name']) && !is_null($item['price']) && !is_null($item['quantity']);
-    });
+    {
+        if (!session()->has('cart') && Cookie::has('cart')) {
+            session()->put('cart', json_decode(Cookie::get('cart'), true));
+        }
+        // Get the cart and sanitize it
+        $cart = array_filter(session('cart', []), function ($item) {
+            return isset($item['name'], $item['price'], $item['quantity']) &&
+                !is_null($item['name']) && !is_null($item['price']) && !is_null($item['quantity']);
+        });
 
-    // Optional: re-save the cleaned cart back to session
-    session()->put('cart', $cart);
+        // Optional: re-save the cleaned cart back to session
+        session()->put('cart', $cart);
 
-    $successMessage = session('success') ? session('success') : null;
+        $successMessage = session('success') ? session('success') : null;
 
-    return view('kosikView', compact('cart', 'successMessage'));
-}
+        return view('kosikView', compact('cart', 'successMessage'));
+    }
+    public function remove($id)
+    {
+        $cart = session()->get('cart', []);
 
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+
+        Cookie::queue('cart', json_encode($cart), 60 * 24 * 7);
+
+        return redirect()->back()->with('successMessage', 'Produkt bol odstránený z košíka.');
+    }
+    public function updateCart(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $productId = $request->input('id');
+        $quantity = $request->input('quantity');
+
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] = $quantity;
+        }
+
+        session()->put('cart', $cart);
+
+        Cookie::queue('cart', json_encode($cart), 60 * 24 * 7);
+
+        return back()->with('successMessage', 'Cart updated successfully!');
+    }
 }

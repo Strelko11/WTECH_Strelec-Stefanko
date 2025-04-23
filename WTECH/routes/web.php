@@ -53,6 +53,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/kosik', [CartController::class, 'showCart'])->name('cart.show');
+Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+// routes/web.php (Laravel)
+Route::post('/update-cart', [CartController::class, 'updateCart']);
+
+
 Route::get('/clear-cart', function () {
     session()->forget('cart');
     return 'Cart cleared!';
