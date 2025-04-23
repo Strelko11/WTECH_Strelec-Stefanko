@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
-    <script src="{{ mix('resources/js/orderConfirmation.js') }}" defer></script>
+
 
 </head>
 
@@ -66,6 +66,7 @@
         <div class="w-full flex justify-center p-4">
             <button id="potvrditButton" class="w-full md:w-[120px] bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 transition">Potvrdiť objednávku</button>
         </div>
+        <p>test</p>
     </div>
 
     <!-- Footer -->
