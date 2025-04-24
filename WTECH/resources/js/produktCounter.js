@@ -3,34 +3,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return value.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     };
 
-    document.querySelectorAll('section').forEach(section => {
-        const increaseBtn = section.querySelector('button[id^="increase-"]');
-        const decreaseBtn = section.querySelector('button[id^="decrease-"]');
-        const quantityInput = section.querySelector('input[name^="quantity"]');
-        const priceDisplay = section.querySelector('.bg-gradient-to-r');
+    const increaseBtn = document.querySelector('#increase');
+    const decreaseBtn = document.querySelector('#decrease');
+    const quantityInput = document.querySelector('#quantity');
+    const quantityHiddenInput = document.querySelector('#quantity-input'); // Hidden input for quantity
+    const priceDisplay = document.querySelector('.bg-gray-200'); // Price display element
 
-        if (!increaseBtn || !decreaseBtn || !quantityInput || !priceDisplay) return;
+    const unitPrice = parseFloat(priceDisplay.dataset.unitPrice); // Get the unit price from Blade via data attribute
 
-        const itemId = increaseBtn.id.split('-')[1];
+    const updatePrice = () => {
+        const quantity = parseInt(quantityInput.value);
+        const totalPrice = unitPrice * quantity;
+        priceDisplay.textContent = `${formatPrice(totalPrice)} €`;
+    };
 
-        // Grab the original price from Blade via data attribute (you'll need to add it in the Blade file)
-        const unitPrice = parseFloat(section.dataset.unitPrice);
+    increaseBtn.addEventListener('click', () => {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        quantityHiddenInput.value = quantityInput.value; // Update hidden input for the quantity
+        updatePrice();
+    });
 
-        const updatePrice = () => {
-            const quantity = parseInt(quantityInput.value);
-            const totalPrice = unitPrice * quantity;
-            priceDisplay.textContent = `${formatPrice(totalPrice)} €`;
-        };
-
-        increaseBtn.addEventListener('click', () => {
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            updatePrice();
-        });
-
-        decreaseBtn.addEventListener('click', () => {
-            const newQuantity = Math.max(1, parseInt(quantityInput.value) - 1);
-            quantityInput.value = newQuantity;
-            updatePrice();
-        });
+    decreaseBtn.addEventListener('click', () => {
+        const newQuantity = Math.max(1, parseInt(quantityInput.value) - 1);
+        quantityInput.value = newQuantity;
+        quantityHiddenInput.value = quantityInput.value; // Update hidden input for the quantity
+        updatePrice();
     });
 });

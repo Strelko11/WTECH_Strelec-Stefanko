@@ -56,19 +56,19 @@
         @endphp
         <p>{{ $item->product->name }} - {{ $item->quantity }} x {{ $item->product->price }} €</p>
         @endforeach--}}
-        @if(auth()->check())
-                    @php
-                        \Log::info('USER IS SIGNED IN');
-                        \Log::info('User ID:', ['user_id' => auth()->id()]); // Log user ID
-                        \Log::info('User Cart:', ['user_id' => auth()->id(), 'cart' => $cart]);
-                        \Log::info('Cart:', ['cart' => $cart]);
+        {{--@if(auth()->check())
+        @php
+        \Log::info('USER IS SIGNED IN');
+        \Log::info('User ID:', ['user_id' => auth()->id()]); // Log user ID
+        \Log::info('User Cart:', ['user_id' => auth()->id(), 'cart' => $cart]);
+        \Log::info('Cart:', ['cart' => $cart]);
 
-                        // Iterate over cart items and log product IDs
-                        foreach ($cart as $item) {
-                            \Log::info('Product ID in cart:', ['product_id' => $item->product_id]);
-                        }
-                    @endphp
-        @endif
+        // Iterate over cart items and log product IDs
+        foreach ($cart as $item) {
+        \Log::info('Product ID in cart:', ['product_id' => $item->product_id]);
+        }
+        @endphp
+        @endif--}}
 
 
 
@@ -78,64 +78,94 @@
             $grandTotal = 0;
         @endphp
 
-@foreach($cart as $id => $item)
-@php
-    $price = $item['price'] ?? $item->product->price;
-    $quantity = $item['quantity'] ?? $item->quantity;
-    $product_id = $item->product_id; // Use product_id directly here
-    $grandTotal += $price * $quantity;
-@endphp
+        @foreach($cart as $id => $item)
+                    @php
+                        // Price and quantity extraction
+                        $price = is_array($item) ? ($item['price'] ?? 0) : ($item->product->price ?? 0);
+                        $quantity = is_array($item) ? ($item['quantity'] ?? 0) : ($item->quantity ?? 0);
 
-<section data-id="{{ $product_id }}" data-unit-price="{{ $price }}"
-         class="mt-8 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex flex-col md:flex-row items-center justify-start gap-6 border-l border-r border-gray-500">
+                        // Product ID extraction
+                        $product_id = is_array($item) ? ($item['product_id'] ?? null) : ($item->product_id ?? null);
 
-    {{-- Product Image --}}
-    <div class="h-36 w-36 bg-[url('{{ asset('storage/' . ($item['image'] ?? $item->product->images->first()->image_url)) }}')] bg-contain bg-no-repeat bg-center rounded-md">
-    </div>
+                        $grandTotal += $price * $quantity;
+                    @endphp
 
-    {{-- Quantity Controls --}}
-    <div class="flex items-center space-x-4">
-        <button class="quantity-btn" id="decrease-{{ $product_id }}">−</button>
-        <input type="text" name="quantity[{{ $product_id }}]" value="{{ $quantity }}" readonly
-               class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
-        <button class="quantity-btn" id="increase-{{ $product_id }}">+</button>
-    </div>
+                    @php
+                        // Log based on whether the item is an array or object
+                        if (is_object($item)) {
+                            // If it's an object, log product_id along with other details
+                            \Log::info('Cart Item Object:', [
+                                'product_id' => $item->product_id,
+                                'price' => $price,
+                                'quantity' => $quantity
+                            ]);
+                        } elseif (is_array($item)) {
+                            // If it's an array, log product_id and the whole item array
+                            \Log::info('Cart Item Array:', [
+                                'product_id' => $product_id,
+                                'item' => $item
+                            ]);
+                        }
+                    @endphp
 
-    {{-- Product Details --}}
-    <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
-        <span class="font-bold">{{ $item['name'] ?? $item->product->name }}</span>
-        @if(!empty($item['series']))
-            <span>Séria: {{ $item['series'] }}</span>
-        @endif
-        <div class="flex justify-center md:justify-start w-full">
-            @if(!empty($item['memory']))
-                <span>Pamäť: {{ $item['memory'] }}</span>
-            @endif
-            @if(!empty($item['ram']))
-                <span class="ml-4">RAM: {{ $item['ram'] }}</span>
-            @endif
-        </div>
-    </div>
 
-    {{-- Total Price & Delete --}}
-    <div class="flex items-center space-x-4">
-        <span class="font-semibold text-lg text-gray-700">Spolu:</span>
-        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black p-3 rounded-lg shadow-md font-medium text-xl border border-gray-200 total-price">
-            {{ number_format($price * $quantity, 2, ',', ' ') }} €
-        </div>
 
-        {{-- Delete button --}}
-        <form action="{{ route('cart.remove', ['id' => $product_id]) }}" method="POST"
-              onsubmit="return confirm('Naozaj chcete odstrániť tento produkt z košíka?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="text-red-600 hover:text-red-800">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        </form>
-    </div>
-</section>
-@endforeach
+
+                    <section data-id="{{ $product_id }}" data-unit-price="{{ $price }}"
+                        class="mt-8 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex flex-col md:flex-row items-center justify-start gap-6 border-l border-r border-gray-500">
+
+                        {{-- Product Image --}}
+                        <div
+                            class="h-36 w-60 bg-[url('{{ $item['image'] ?? $item->product->images->first()->image_url }}')] bg-contain bg-center rounded-md bg-no-repeat">
+                        </div>
+
+                        {{-- Quantity Controls & Product Details --}}
+                        <div class="ml-6 flex flex-col md:flex-row items-center space-x-6">
+                            {{-- Quantity Controls --}}
+                            <div class="flex items-center space-x-4">
+                                <button class="quantity-btn" id="decrease-{{ $product_id }}">−</button>
+                                <input type="text" name="quantity[{{ $product_id }}]" value="{{ $quantity }}" readonly
+                                    class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
+                                <button class="quantity-btn" id="increase-{{ $product_id }}">+</button>
+                            </div>
+
+                            {{-- Product Details --}}
+                            <div class="flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+                                <span class="font-bold">{{ $item['name'] ?? $item->product->name }}</span>
+                                @if(!empty($item['series']))
+                                    <span>Séria: {{ $item['series'] }}</span>
+                                @endif
+                                <div class="flex justify-center md:justify-start w-full">
+                                    @if(!empty($item['memory']))
+                                        <span>Pamäť: {{ $item['memory'] }}</span>
+                                    @endif
+                                    @if(!empty($item['ram']))
+                                        <span class="ml-4">RAM: {{ $item['ram'] }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Total Price & Delete --}}
+                        <div class="flex items-center space-x-4">
+                            <span class="font-semibold text-lg text-gray-700">Spolu:</span>
+                            <div
+                                class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black p-3 rounded-lg shadow-md font-medium text-xl border border-gray-200 total-price">
+                                {{ number_format($price * $quantity, 2, ',', ' ') }} €
+                            </div>
+
+                            {{-- Delete button --}}
+                            <form action="{{ route('cart.remove', ['id' => $product_id]) }}" method="POST"
+                                onsubmit="return confirm('Naozaj chcete odstrániť tento produkt z košíka?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+        @endforeach
 
 
 
