@@ -191,20 +191,29 @@ class CartController extends Controller
         return back()->with('successMessage', 'Cart updated successfully!');
     }
     public function clearCart(Request $request)
-    {
-        // Ensure that we don't call remove() method by checking if user is logged in
-        $user = Auth::user();
-        if ($user) {
-            // Delete all cart items for the user
-            CartItem::where('user_id', $user->id)->delete();
-        } else {
-            // If the user is not logged in, clear session-based cart
-            $cart = session()->get('cart', []);
-            session()->forget('cart');
-            Cookie::queue('cart', json_encode($cart), 60 * 24 * 7);
-        }
+{
+    $userId = $request->user_id;
+    Log::debug('clearCart method triggered', ['user_id' => $userId]);
 
-        return response()->json(['message' => 'Cart cleared successfully.']);
+    if ($userId) {
+        // If the user is logged in, clear cart items from the database
+        CartItem::where('user_id', $userId)->delete();
+        Log::info('User cart cleared from database.', ['user_id' => $userId]);
+    } else {
+        // If the user is not logged in, clear the session cart
+        session()->forget('cart');  // Clears the session cart data
+        Cookie::queue('cart', json_encode([]), 60 * 24 * 7);  // Optionally clear cart cookie
+
+        // Log the session cart after clearing it
+        $cart = session()->get('cart', []);  // Get the current (empty) cart from the session
+        Log::info('Session cart cleared.', ['cart' => $cart]);
     }
+
+    // Redirect the user back to the homepage or the desired page
+    return redirect('/')->with('message', 'Cart cleared successfully.');
+}
+
+
+
 
 }

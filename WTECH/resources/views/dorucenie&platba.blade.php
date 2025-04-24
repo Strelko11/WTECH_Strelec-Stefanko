@@ -87,36 +87,20 @@
 
 
 
+        <form action="{{ route('cart.clear') }}" method="POST">
+            @csrf
+            @method('DELETE') <!-- This makes the form send a DELETE request -->
 
-        <div class="w-auto p-4 flex justify-center">
-            <button id="potvrditButton"
-                class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition">Potvrdiť
-                objednávku</button>
-        </div>
-
-
-        <script>
-            document.getElementById("potvrditButton").addEventListener("click", function () {
-                // Send an AJAX request to the backend to clear the cart
-                // Trigger clear cart request
-                fetch('/clear-cart', {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        user_id: {{ Auth::user()->id }} // Pass the correct user ID
-    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Cart cleared:', data);
-                    })
-                    .catch(error => console.error('Error clearing cart:', error));
-
-            });
+            <div class="w-auto p-4 flex justify-center">
+                <button id="potvrditButton"
+                    class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition">Potvrdiť
+                    objednávku</button>
+            </div>
+        </form>
+       
         </script>
+
+
 
 
     </div>

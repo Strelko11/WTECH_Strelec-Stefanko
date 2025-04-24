@@ -79,7 +79,7 @@ Route::get('/check-user-login', function () {
 });
 
 // routes/web.php
-Route::delete('/clear-cart', [CartController::class, 'clearCart'])->name('clear.cart');
+Route::delete('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear');
 
 
 
