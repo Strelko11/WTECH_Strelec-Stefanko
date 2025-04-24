@@ -43,7 +43,7 @@
 
                 <div class="flex flex-wrap gap-4 w-full justify-center md:justify-start">
 
-                    <div class="bg-gray-200 rounded-lg p-4 text-lg border border-gray-400 font-semibold w-full sm:w-[350px] md:w-[300px] lg:w-[200px] text-center" data-unit-price="{{ $product->price }}">
+                    <div id="total-price"  class="bg-gray-200 rounded-lg p-4 text-lg border border-gray-400 font-semibold w-full sm:w-[350px] md:w-[300px] lg:w-[200px] text-center" data-unit-price="{{ $product->price }}">
                         {{ number_format($product->price, 2, ',', ' ') }} €
                     </div>
 
@@ -135,8 +135,7 @@
             <div class="bg-gray-100 p-4 rounded-lg">
                 <h3 class="text-lg font-semibold mb-2">Odolnosť a konštrukcia</h3>
                 <p><strong>Vodoodolnosť:</strong> {{ $product->waterproof_rating ?? 'Neuvedené' }}</p>
-                <p><strong>Farba:</strong> Bronzová</p> {{-- Prípadne z databázy ak budeš mať --}}
-                <p><strong>Hmotnosť:</strong> 199 g</p> {{-- Statické, ak nemáš v DB --}}
+                <p><strong>Hmotnosť:</strong> 200 g</p>
             </div>
 
             <div class="bg-gray-100 p-4 rounded-lg">
@@ -151,6 +150,7 @@
 
             <div class="bg-gray-100 p-4 rounded-lg">
                 <h3 class="text-lg font-semibold mb-2">Softvér a funkcie</h3>
+
                 <p><strong>Operačný systém:</strong> {{ $product->os }}</p>
                 <p><strong>Rok vydania:</strong> {{ $product->release_year }}</p>
             </div>

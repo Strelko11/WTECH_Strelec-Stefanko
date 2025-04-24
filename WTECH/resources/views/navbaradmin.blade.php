@@ -1,17 +1,17 @@
 <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 md:py-6 md:px-8 lg:py-8 lg:px-12 flex justify-between items-center z-50">
     <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
-        <i class="fas fa-globe mr-2"></i> TechSphere
+        <i class="fas fa-globe mr-2"></i> <span class="hidden sm:inline">TechSphere</span>
     </a>
 
-    <!-- Search Input on larger screens -->
-    <form action="{{ route('adminObrazovka') }}" method="GET" class="w-1/2 hidden sm:flex items-center">
+
+    <form action="{{ route('adminObrazovka') }}" method="GET" class="flex w-full items-center sm:w-1/2">
         <input type="text" name="search"
                value="{{ request('search') }}"
-               placeholder="Vyhľadať produkt..."
+               placeholder="Vyhľadať"
                class="w-full px-4 py-2 border border-gray-400 rounded-lg text-white bg-gray-800 placeholder-gray-400 focus:outline-none"
         >
 
-        <!-- Hidden fields to keep filters when searching -->
+
         <input type="hidden" name="type" value="{{ request('type') }}">
         <input type="hidden" name="category" value="{{ request('category') }}">
         <input type="hidden" name="price" value="{{ request('price') }}">
@@ -22,15 +22,12 @@
     </form>
 
     <div class="flex space-x-4">
-        <!-- Magnifying Glass Icon on smaller screens (optional toggle) -->
+     
         <button class="sm:hidden text-white text-xl">
             <i class="fas fa-search"></i>
         </button>
 
-        <!-- Shopping Cart -->
-        <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform">
-            <i class="fas fa-shopping-cart"></i>
-        </a>
+
 
         <!-- User Dropdown -->
         <div class="relative group inline-block">

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const decreaseBtn = document.querySelector('#decrease');
     const quantityInput = document.querySelector('#quantity');
     const quantityHiddenInput = document.querySelector('#quantity-input'); // Hidden input for quantity
-    const priceDisplay = document.querySelector('.bg-gray-200'); // Price display element
+    const priceDisplay = document.getElementById('total-price'); // Price display element
 
     const unitPrice = parseFloat(priceDisplay.dataset.unitPrice); // Get the unit price from Blade via data attribute
 
