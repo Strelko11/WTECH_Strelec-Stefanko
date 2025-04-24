@@ -78,67 +78,65 @@
             $grandTotal = 0;
         @endphp
 
-        @forelse($cart as $id => $item)
-                @php
-                    $price = $item['price'] ?? $item->product->price;
-                    $quantity = $item['quantity'] ?? $item->quantity;
-                    $grandTotal += $price * $quantity;
-                @endphp
+@foreach($cart as $id => $item)
+@php
+    $price = $item['price'] ?? $item->product->price;
+    $quantity = $item['quantity'] ?? $item->quantity;
+    $product_id = $item->product_id; // Use product_id directly here
+    $grandTotal += $price * $quantity;
+@endphp
 
-                <section data-id="{{ $id }}" data-unit-price="{{ $price }}"
-                    class="mt-8 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex flex-col md:flex-row items-center justify-start gap-6 border-l border-r border-gray-500">
+<section data-id="{{ $product_id }}" data-unit-price="{{ $price }}"
+         class="mt-8 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex flex-col md:flex-row items-center justify-start gap-6 border-l border-r border-gray-500">
 
-                    {{-- Product Image --}}
-                    <div
-                        class="h-36 w-36 bg-[url('{{ asset('storage/' . ($item['image'] ?? $item->product->images->first()->image_url)) }}')] bg-contain bg-no-repeat bg-center rounded-md">
-                    </div>
+    {{-- Product Image --}}
+    <div class="h-36 w-36 bg-[url('{{ asset('storage/' . ($item['image'] ?? $item->product->images->first()->image_url)) }}')] bg-contain bg-no-repeat bg-center rounded-md">
+    </div>
 
-                    {{-- Quantity Controls --}}
-                    <div class="flex items-center space-x-4">
-                        <button class="quantity-btn" id="decrease-{{ $id }}">−</button>
-                        <input type="text" name="quantity[{{ $id }}]" value="{{ $quantity }}" readonly
-                            class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
-                        <button class="quantity-btn" id="increase-{{ $id }}">+</button>
-                    </div>
+    {{-- Quantity Controls --}}
+    <div class="flex items-center space-x-4">
+        <button class="quantity-btn" id="decrease-{{ $product_id }}">−</button>
+        <input type="text" name="quantity[{{ $product_id }}]" value="{{ $quantity }}" readonly
+               class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
+        <button class="quantity-btn" id="increase-{{ $product_id }}">+</button>
+    </div>
 
-                    {{-- Product Details --}}
-                    <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
-                        <span class="font-bold">{{ $item['name'] ?? $item->product->name }}</span>
-                        @if(!empty($item['series']))
-                            <span>Séria: {{ $item['series'] }}</span>
-                        @endif
-                        <div class="flex justify-center md:justify-start w-full">
-                            @if(!empty($item['memory']))
-                                <span>Pamäť: {{ $item['memory'] }}</span>
-                            @endif
-                            @if(!empty($item['ram']))
-                                <span class="ml-4">RAM: {{ $item['ram'] }}</span>
-                            @endif
-                        </div>
-                    </div>
+    {{-- Product Details --}}
+    <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+        <span class="font-bold">{{ $item['name'] ?? $item->product->name }}</span>
+        @if(!empty($item['series']))
+            <span>Séria: {{ $item['series'] }}</span>
+        @endif
+        <div class="flex justify-center md:justify-start w-full">
+            @if(!empty($item['memory']))
+                <span>Pamäť: {{ $item['memory'] }}</span>
+            @endif
+            @if(!empty($item['ram']))
+                <span class="ml-4">RAM: {{ $item['ram'] }}</span>
+            @endif
+        </div>
+    </div>
 
-                    {{-- Total Price & Delete --}}
-                    <div class="flex items-center space-x-4">
-                        <span class="font-semibold text-lg text-gray-700">Spolu:</span>
-                        <div
-                            class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black p-3 rounded-lg shadow-md font-medium text-xl border border-gray-200 total-price">
-                            {{ number_format($price * $quantity, 2, ',', ' ') }} €
-                        </div>
+    {{-- Total Price & Delete --}}
+    <div class="flex items-center space-x-4">
+        <span class="font-semibold text-lg text-gray-700">Spolu:</span>
+        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black p-3 rounded-lg shadow-md font-medium text-xl border border-gray-200 total-price">
+            {{ number_format($price * $quantity, 2, ',', ' ') }} €
+        </div>
 
-                        {{-- Delete button --}}
-                        <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST"
-                            onsubmit="return confirm('Naozaj chcete odstrániť tento produkt z košíka?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    </div>
-                </section>
-        @empty
-            <p class="text-center text-gray-600 mt-16">Košík je prázdny.</p>
-        @endforelse
+        {{-- Delete button --}}
+        <form action="{{ route('cart.remove', ['id' => $product_id]) }}" method="POST"
+              onsubmit="return confirm('Naozaj chcete odstrániť tento produkt z košíka?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-red-600 hover:text-red-800">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </form>
+    </div>
+</section>
+@endforeach
+
 
 
 

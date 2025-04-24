@@ -57,73 +57,88 @@ class CartController extends Controller
 
 
     public function showCart()
-{
-    $user = Auth::user();
-    Log::info('showCart method accessed');  // Add this line to check if it's being called
+    {
+        $user = Auth::user();
+        Log::info('showCart method accessed');  // Add this line to check if it's being called
 
 
-    if ($user) {
-        // Clear the session cart and cookie if any
-        if (session()->has('cart')) {
-            session()->forget('cart');
-            Cookie::queue(Cookie::forget('cart'));
+        if ($user) {
+            // Clear the session cart and cookie if any
+            if (session()->has('cart')) {
+                session()->forget('cart');
+                Cookie::queue(Cookie::forget('cart'));
+            }
+
+            // Fetch cart items from the database for the logged-in user
+            $cart = CartItem::with('product')
+                ->where('user_id', $user->id)
+                ->get();
+
+            // If cart is found in the database, store it in the session
+            if ($cart->isNotEmpty()) {
+                session(['cart' => $cart]);
+            }
+
+            Log::info('User cart items fetched from database', ['cart' => $cart]);
+        } else {
+            // If the user is not logged in, load the cart from session or cookie
+            // First check if the session has a cart, then check cookie
+            if (!session()->has('cart') && Cookie::has('cart')) {
+                session()->put('cart', json_decode(Cookie::get('cart'), true));
+            }
+
+            // Filter and clean the session cart items
+            $cart = array_filter(session('cart', []), function ($item) {
+                return isset($item['name'], $item['price'], $item['quantity']);
+            });
+
+            Log::info('Guest user');
+            Log::info('Guest cart items', ['cart' => $cart]);
         }
 
-        // Fetch cart items from the database for the logged-in user
-        $cart = CartItem::with('product')
-                        ->where('user_id', $user->id)
-                        ->get();
+        // Optional: show success flash message
+        $successMessage = session('success') ?? null;
+        Log::info('Current Cart:', ['cart' => session('cart')]);
 
-        // If cart is found in the database, store it in the session
-        if ($cart->isNotEmpty()) {
-            session(['cart' => $cart]);
-        }
-
-        Log::info('User cart items fetched from database', ['cart' => $cart]);
-
-    } else {
-        // If the user is not logged in, load the cart from session or cookie
-        // First check if the session has a cart, then check cookie
-        if (!session()->has('cart') && Cookie::has('cart')) {
-            session()->put('cart', json_decode(Cookie::get('cart'), true));
-        }
-
-        // Filter and clean the session cart items
-        $cart = array_filter(session('cart', []), function ($item) {
-            return isset($item['name'], $item['price'], $item['quantity']);
-        });
-
-        Log::info('Guest user');
-        Log::info('Guest cart items', ['cart' => $cart]);
+        return view('kosikView', compact('cart', 'successMessage'));
     }
-
-    // Optional: show success flash message
-    $successMessage = session('success') ?? null;
-    Log::info('Current Cart:', ['cart' => session('cart')]);
-
-    return view('kosikView', compact('cart', 'successMessage'));
-}
 
 
 
 
     public function remove($id)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
+    Log::info('Product ID to remove:', ['id' => $id]);
 
-        if ($user) {
-            // User is logged in, delete the cart item from the database
-            $user->cartItems()->where('product_id', $id)->delete();
+    if ($user) {
+        // User is logged in, delete the cart item from the database
+        $cartItem = $user->cartItems()->where('product_id', $id)->first();
+
+        if ($cartItem) {
+            Log::info('Deleting cart item', ['user_id' => $user->id, 'product_id' => $id]);
+            $cartItem->delete();
         } else {
-            // User is not logged in, remove from session
-            $cart = session()->get('cart', []);
+            Log::warning('Cart item not found for deletion.', ['user_id' => $user->id, 'product_id' => $id]);
+        }
+    } else {
+        // User is not logged in, remove from session
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
             Cookie::queue('cart', json_encode($cart), 60 * 24 * 7);
+        } else {
+            Log::warning('Cart item not found in session.', ['product_id' => $id]);
         }
-
-        return redirect()->back()->with('successMessage', 'Produkt bol odstránený z košíka.');
     }
+
+    return redirect()->back()->with('successMessage', 'Produkt bol odstránený z košíka.');
+}
+
+
+
 
     public function updateCart(Request $request)
     {
