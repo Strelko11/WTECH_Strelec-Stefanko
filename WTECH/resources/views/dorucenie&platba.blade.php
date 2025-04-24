@@ -90,16 +90,46 @@
         <form action="{{ route('cart.clear') }}" method="POST">
             @csrf
             @method('DELETE') <!-- This makes the form send a DELETE request -->
-
             <div class="w-auto p-4 flex justify-center">
                 <button id="potvrditButton"
                     class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition">Potvrdiť
                     objednávku</button>
             </div>
         </form>
-       
-        </script>
 
+
+        <script>
+            document.getElementById("potvrditButton").addEventListener("click", function () {
+                // Check if the user is logged in using a server-side check
+                const userId = {{ auth()->check() ? Auth::user()->id : 'null' }}; // Set user_id as null if not logged in
+
+                if (userId !== null) {
+                    // User is logged in, send AJAX request to clear the cart
+                    fetch('/clear-cart', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        },
+                        body: JSON.stringify({
+                            user_id: userId // Pass the authenticated user ID
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Cart cleared:', data);
+                            // Optionally handle the response, e.g., show success message or redirect
+                        })
+                        .catch(error => console.error('Error clearing cart:', error));
+                } else {
+                    // User is not logged in, you can either show a message or handle it differently
+                    console.log('User is not logged in, cart will not be cleared.');
+                    // Optionally, you can redirect or show a message for the user
+                }
+            });
+
+
+        </script>
 
 
 
