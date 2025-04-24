@@ -39,7 +39,7 @@ class ProductController extends Controller
     $storageList = Product::where('category', $category)->distinct()->pluck('storage');
     $seriesList = Product::where('category', $category)->distinct()->pluck('series');
 
-    $products = $query->paginate(3)->withQueryString();
+    $products = $query->paginate(2)->withQueryString();
 
     return view('strankaProdukty', compact('products', 'category', 'seriesList', 'ramList', 'storageList'));
         }
@@ -87,7 +87,7 @@ class ProductController extends Controller
         $queryBuilder->orderBy('price', $sortOrder);
     }
 
-    $products = $queryBuilder->paginate(3)->withQueryString();
+    $products = $queryBuilder->paginate(2)->withQueryString();
 
     $seriesList = Product::distinct()->pluck('series');
     $ramList = Product::distinct()->pluck('ram');
