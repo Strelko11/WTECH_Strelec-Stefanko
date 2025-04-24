@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
@@ -62,3 +64,22 @@ Route::get('/clear-cart', function () {
     session()->forget('cart');
     return 'Cart cleared!';
 });
+
+Route::get('/check-user-login', function () {
+    if (Auth::check()) {
+        return response()->json([
+            'loggedIn' => true,
+            'user_id' => Auth::id()  // Return the user ID if the user is logged in
+        ]);
+    }
+
+    return response()->json([
+        'loggedIn' => false
+    ]);
+});
+
+// routes/web.php
+Route::delete('/clear-cart', [CartController::class, 'clearCart'])->name('clear.cart');
+
+
+
