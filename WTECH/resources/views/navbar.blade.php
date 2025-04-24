@@ -22,7 +22,7 @@
         </button>
 
         <!-- Shopping Cart -->
-        <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform">
+        <a href="{{ route('cart.show') }}" class="text-white text-xl hover:scale-105 transition-transform">
             <i class="fas fa-shopping-cart"></i>
         </a>
 
