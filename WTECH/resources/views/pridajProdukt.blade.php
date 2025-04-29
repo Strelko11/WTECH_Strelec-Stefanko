@@ -175,7 +175,7 @@
             <label for="display_size" class="block text-gray-900 font-medium">Display Size (inches)</label>
             <input
               type="number"
-              step="0.1"
+              step="0.2"
               id="display_size"
               name="display_size"
               value="{{ old('display_size') }}"
