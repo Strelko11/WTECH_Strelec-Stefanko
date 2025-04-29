@@ -44,8 +44,12 @@ public function login(Request $request)
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return redirect('/')->with('success', 'Úspešne prihlásený!');
 
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('adminObrazovka')->with('success', 'Vitaj späť, admin!');
+        } else {
+            return redirect('/')->with('success', 'Úspešne prihlásený!');
+        }
     }
 
     return back()->withErrors([

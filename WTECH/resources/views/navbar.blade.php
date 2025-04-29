@@ -1,5 +1,5 @@
 <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 md:py-6 md:px-8 lg:py-8 lg:px-12 flex justify-between items-center z-50">
-   
+
     <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
       <i class="fas fa-globe mr-2"></i>
       <span class="hidden sm:inline">TechSphere</span>
@@ -44,7 +44,9 @@
             <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300">Prihlásiť sa</a>
             <a href="{{ route('registerForm') }}" class="block px-4 py-2 hover:bg-gray-300">Registrácia</a>
           @endif
+          @if(Auth::check() && Auth::user()->role === 'admin')
           <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
+        @endif
         </div>
       </div>
     </div>

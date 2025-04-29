@@ -55,14 +55,29 @@
                     </div>
 
 
-                    <form method="POST" action="{{ route('cart.add', $product->id) }}">
-                        @csrf
-                        <input type="hidden" name="quantity" id="quantity-input" value="1"> <!-- Hidden input for quantity -->
-
-                        <button type="submit" class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px]">
-                            Do košíka
-                        </button>
+                @auth
+                        @if (Auth::user()->role === 'admin')
+                        <div class="bg-gray-400 border border-gray-500 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px] text-center cursor-not-allowed">
+                        Administrátor nemôže pridávať do košíka
+                        </div>
+                    @else
+                <form method="POST" action="{{ route('cart.add', $product->id) }}">
+                    @csrf
+                    <input type="hidden" name="quantity" id="quantity-input" value="1">
+                    <button type="submit" class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px]">
+                    Do košíka
+                    </button>
                     </form>
+                    @endif
+                @else
+            <form method="POST" action="{{ route('cart.add', $product->id) }}">
+        @csrf
+        <input type="hidden" name="quantity" id="quantity-input" value="1">
+        <button type="submit" class="bg-gray-600 hover:bg-gray-800 border border-gray-400 text-white text-lg font-semibold px-6 py-3 rounded-lg w-full sm:w-[250px] md:w-[300px] lg:w-[210px]">
+            Do košíka
+        </button>
+        </form>
+        @endauth
 
 
 
