@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
 class ProductController extends Controller
 {
     public function showByCategory(Request $request, $category)
@@ -102,5 +104,88 @@ class ProductController extends Controller
         'query' => $request->query('query')
     ]);
 }
+
+public function create()
+    {
+        return view('products.form');
+    }
+
+    // Uloženie nového produktu
+    public function store(Request $request)
+    {
+        // 1) Validácia
+        $data = $request->validate([
+            'name'        => 'required|string|max:255',
+            'description' => 'required|string',
+            'price'       => 'required|numeric|min:0',
+            'category'    => 'required|string|in:iPhone,Samsung,Xiaomi,XiaomiPad,GalaxyTab,iPad',
+            'series'      => 'required|string|max:255',
+            'type'        => 'required|string|in:phone,tablet',
+            'images'      => 'required|array|min:2|max:4',
+            'images.*'    => 'image|max:2048',
+            'ram'                  => 'integer',
+            'storage'              => 'integer',
+
+            'display_type'         => 'nullable|string|max:100',
+            'display_size'         => 'nullable|numeric',
+            'display_resolution'   => 'nullable|string|max:50',
+            'refresh_rate'         => 'nullable|integer',
+
+            'sim_type'             => 'nullable|string|max:100',
+            'processor'            => 'nullable|string|max:100',
+            'camera_main_mp'       => 'nullable|integer',
+            'camera_ultrawide_mp'  => 'nullable|integer',
+            'camera_telephoto_mp'  => 'nullable|integer',
+            'camera_front_mp'      => 'nullable|integer',
+            'gps'               => 'required|boolean',
+            'nfc'               => 'required|boolean',
+            'lte'               => 'required|boolean',
+            '_5g'               => 'required|boolean',
+            'usb_c'             => 'required|boolean',
+            'wireless_charging' => 'required|boolean',
+            'waterproof_rating'    => 'nullable|string|max:10',
+
+            'charging_power_watts' => 'nullable|integer',
+            'battery_mah'          => 'nullable|integer',
+            'release_year'         => 'nullable|integer',
+            'os'                   => 'nullable|string|max:50',
+
+        ]);
+
+
+        $product = Product::create($data);
+
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+
+                $path = $file->store("products/{$product->id}", 'public');
+
+                $product->images()->create([
+                    'image_url' => $path,
+                ]);
+            }
+        }
+
+        return redirect()
+            ->route('adminObrazovka', $product)
+            ->with('success', 'Produkt bol úspešne vytvorený.');
+    }
+    public function destroy(Product $product): RedirectResponse
+    {
+
+        Storage::disk('public')->deleteDirectory("products/{$product->id}");
+
+
+        $product->images()->delete();
+
+
+        $product->delete();
+
+       
+        return redirect()
+            ->route('adminObrazovka')
+            ->with('success', 'Produkt bol úspešne vymazaný.');
+    }
 
 }

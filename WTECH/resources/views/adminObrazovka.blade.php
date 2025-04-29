@@ -88,7 +88,9 @@
 
                 <div class="flex space-x-4">
                     <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden p-2">
-                        <div class="h-full w-full bg-[url('{{ $product->images->first()->image_url ?? 'https://via.placeholder.com/150' }}')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
+                        <div class="h-full w-full bg-[url('{{ $product->images->first()
+                    ? Storage::url($product->images->first()->image_url)
+                : asset('default.jpg') }}')] bg-contain bg-no-repeat bg-center transition-transform duration-300 hover:scale-110"></div>
                     </div>
                 </div>
 
@@ -109,10 +111,21 @@
                         </a>
 
 
-                            <button type="submit"
-                                    class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 text-center w-[120px]">
-                                Vymazať
-                            </button>
+                        <form
+                        action="{{ route('products.destroy', $product->id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Naozaj vymazať tento produkt?');"
+                        class="inline"
+                      >
+                        @csrf
+                        @method('DELETE')
+                        <button
+                          type="submit"
+                          class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 w-[120px]"
+                        >
+                          Vymazať
+                        </button>
+                      </form>
 
                     </div>
                 </div>

@@ -83,3 +83,14 @@ Route::delete('/clear-cart', [CartController::class, 'clearCart'])->name('cart.c
 
 
 
+Route::get('/admin/products/create', [ProductController::class, 'create'])
+     ->name('products.create');
+
+// Uloženie nového produktu
+Route::post('/admin/products', [ProductController::class, 'store'])
+     ->name('products.store');
+
+     Route::delete(
+        '/admin/products/{product}',
+        [ProductController::class, 'destroy']
+    )->name('products.destroy');

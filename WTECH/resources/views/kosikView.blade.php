@@ -116,7 +116,7 @@
 
                         {{-- Product Image --}}
                         <div
-                            class="h-36 w-60 bg-[url('{{ $item['image'] ?? $item->product->images->first()->image_url }}')] bg-contain bg-center rounded-md bg-no-repeat">
+                            class="h-36 w-60 bg-[url('{{ Storage::url($item['image'] ?? $item->product->images->first()->image_url) }}')] bg-contain bg-center rounded-md bg-no-repeat">
                         </div>
 
                         {{-- Quantity Controls & Product Details --}}

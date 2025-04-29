@@ -22,12 +22,15 @@
         <div class="flex flex-col md:flex-row gap-6 items-start">
             <div class="w-full md:w-1/2 flex flex-col items-center">
                 <div class="cursor-pointer relative h-80 md:h-96 bg-white flex items-center justify-center rounded-lg  overflow-hidden w-full border border-gray-400" >
-                    <img id="main-image" src="{{ $product->images->first()->image_url ?? 'default.jpg' }}" alt="Fotka produktu" class="w-full h-full object-contain cursor-pointer fade-slide active" onclick="openGallery()">
+                    <img id="main-image" src="{{ $product->images->first()
+                    ? Storage::url($product->images->first()->image_url)
+                    : asset('default.jpg') }}"
+                     alt="Fotka produktu" class="w-full h-full object-contain cursor-pointer fade-slide active" onclick="openGallery()">
                 </div>
                 <div class="flex gap-2 md:gap-4 mt-4 justify-center">
                     @foreach($product->images as $index => $image)
                     <div class="w-16 md:w-20 h-12 md:h-16 bg-white rounded-lg flex items-center justify-center border border-gray-400">
-                        <img src="{{ $image->image_url }}" class="max-w-full max-h-full cursor-pointer object-contain" onclick="changeImage({{ $index }})">
+                        <img  src="{{ Storage::url($image->image_url) }}" class="max-w-full max-h-full cursor-pointer object-contain" onclick="changeImage({{ $index }})">
                     </div>
                 @endforeach
                 </div>
@@ -187,7 +190,9 @@
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
-        window.galleryImages = @json($product->images->pluck('image_url'));
+        window.galleryImages = @json($product->images
+          ->pluck('image_url')
+          ->map(fn($path) => Storage::url($path)));
     </script>
 
 

@@ -138,7 +138,9 @@
                     <div class="bg-gray-300 p-4 rounded-lg flex flex-col md:flex-row items-center border border-gray-400 shadow-md w-full h-auto gap-4 hover:bg-gray-400 transition duration-300">
                         <div class="flex space-x-4">
                             <div class="h-38 w-38 bg-white border border-gray-400 rounded overflow-hidden p-2">
-                                <div class="h-full w-full bg-[url('{{ $product->images->first()->image_url ?? 'https://via.placeholder.com/150' }}')] bg-contain bg-no-repeat bg-center transition-transform duration-300">
+                                <div class="h-full w-full bg-[url('{{ $product->images->first()
+          ? Storage::url($product->images->first()->image_url)
+          : asset('default.jpg') }}')] bg-contain bg-no-repeat bg-center transition-transform duration-300">
                                 </div>
                             </div>
                         </div>
