@@ -53,7 +53,7 @@
 
                     <div class="quantity-container flex items-center gap-4 w-full sm:w-[350px] md:w-[300px] lg:w-[200px]">
                         <button class="quantity-btn bg-gray-200 border-gray-400 p-2 rounded-full w-12 h-12 text-xl" id="decrease">−</button>
-                        <input type="text" id="quantity" value="1" readonly class="text-center w-[50px] sm:w-[60px] bg-white border border-gray-400 rounded-lg text-lg font-semibold">
+                        <input type="text" id="quantity" value="1" class="text-center w-[50px] sm:w-[60px] bg-white border border-gray-400 rounded-lg text-lg font-semibold">
                         <button class="quantity-btn bg-gray-200 border-gray-400 p-2 rounded-full w-12 h-12 text-xl" id="increase">+</button>
                     </div>
 
@@ -187,6 +187,50 @@
 
     @include('footer')
 
+
+    <script>document.addEventListener("DOMContentLoaded", function () {
+        const unitPrice = parseFloat(document.getElementById("total-price").getAttribute("data-unit-price"));
+        const quantityInput = document.getElementById("quantity");
+        const totalPriceElement = document.getElementById("total-price");
+
+        // Function to update the price
+        function updatePrice() {
+            let quantity = parseInt(quantityInput.value);
+            if (isNaN(quantity) || quantity <= 0) {
+                quantity = 1; // default to 1 if the input is not a valid number
+                quantityInput.value = 1;
+            }
+            totalPriceElement.innerHTML = `${(unitPrice * quantity).toFixed(2).replace('.', ',')} €`;
+        }
+
+        // Update price when the quantity is changed using buttons
+        document.getElementById("increase").addEventListener("click", function () {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updatePrice();
+        });
+
+        document.getElementById("decrease").addEventListener("click", function () {
+            let newValue = parseInt(quantityInput.value) - 1;
+            if (newValue > 0) {
+                quantityInput.value = newValue;
+                updatePrice();
+            }
+        });
+
+        // Update price when user presses enter
+        quantityInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                updatePrice();
+            }
+        });
+
+        // Update price when user clicks away (on blur)
+        quantityInput.addEventListener("blur", function () {
+            updatePrice();
+        });
+    });
+    </script>
+
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
@@ -194,6 +238,7 @@
           ->pluck('image_url')
           ->map(fn($path) => Storage::url($path)));
     </script>
+
 
 
 
