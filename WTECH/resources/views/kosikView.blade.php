@@ -144,9 +144,11 @@
                 <div class="flex items-center">
                     <label for="email" class="w-32 text-sm font-medium text-gray-700">E-mail</label>
                     <input type="email" id="email" name="email"
+                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                         class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required>
                 </div>
+
                 <div class="flex items-center">
                     <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Telefón</label>
                     <input type="tel" id="telefon" name="telefon"
