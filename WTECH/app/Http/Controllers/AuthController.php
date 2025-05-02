@@ -44,8 +44,32 @@ public function login(Request $request)
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
+        $user = Auth::user();
 
-        if (Auth::user()->role === 'admin') {
+        // Merge guest cart into user's cart
+        $guestCart = session()->get('cart', []);
+
+        foreach ($guestCart as $productId => $item) {
+            $cartItem = $user->cartItems()->where('product_id', $productId)->first();
+
+            if ($cartItem) {
+                // Update quantity if product already exists in user's cart
+                $cartItem->quantity += $item['quantity'];
+                $cartItem->save();
+            } else {
+                // Add new product to user's cart
+                $user->cartItems()->create([
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                ]);
+            }
+        }
+
+        // Clear guest cart after merging
+        session()->forget('cart');
+        \Cookie::queue(\Cookie::forget('cart'));
+
+        if ($user->role === 'admin') {
             return redirect()->route('adminObrazovka')->with('success', 'Vitaj späť, admin!');
         } else {
             return redirect('/')->with('success', 'Úspešne prihlásený!');
@@ -56,6 +80,7 @@ public function login(Request $request)
         'email' => 'Neplatné prihlasovacie údaje.',
     ])->onlyInput('email');
 }
+
 public function logout(Request $request)
 {
     Auth::logout();
