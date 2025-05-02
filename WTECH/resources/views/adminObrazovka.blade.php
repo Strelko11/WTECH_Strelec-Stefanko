@@ -105,10 +105,11 @@
 
                     <div class="w-full flex justify-center md:justify-end mt-4 gap-2">
                         <a href="{{ route('upravProdukt', ['id' => $product->id]) }}"
-                           onclick="event.stopPropagation();"
-                           class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 text-center w-[120px]">
-                            Upraviť
-                        </a>
+                            onclick="event.stopPropagation();"
+                            class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 text-center w-[120px]">
+                             Upraviť
+                         </a>
+
 
 
                         <form

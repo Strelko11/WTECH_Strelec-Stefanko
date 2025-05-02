@@ -182,10 +182,86 @@ public function create()
 
         $product->delete();
 
-       
+
         return redirect()
             ->route('adminObrazovka')
             ->with('success', 'Produkt bol úspešne vymazaný.');
     }
+
+    // In your controller (e.g., ProductController.php)
+public function edit($id)
+{
+    // Pass the product ID to the view
+    return view('upravProdukt')->with('id', $id); // Another way of passing the ID
+}
+
+public function update(Request $request, $id)
+{
+    // Validate input
+    $data = $request->validate([
+        'name'                => 'required|string|max:255',
+        'description'         => 'required|string',
+        'price'               => 'required|numeric|min:0',
+        'category'            => 'required|string|in:iPhone,Samsung,Xiaomi,XiaomiPad,GalaxyTab,iPad',
+        'series'              => 'required|string|max:255',
+        'type'                => 'required|string|in:phone,tablet',
+        'images'              => 'nullable|array|min:2|max:4',
+        'images.*'            => 'image|max:2048',
+        'ram'                 => 'nullable|integer',
+        'storage'             => 'nullable|integer',
+        'display_type'        => 'nullable|string|max:100',
+        'display_size'        => 'nullable|numeric',
+        'display_resolution'  => 'nullable|string|max:50',
+        'refresh_rate'        => 'nullable|integer',
+        'sim_type'            => 'nullable|string|max:100',
+        'processor'           => 'nullable|string|max:100',
+        'camera_main_mp'      => 'nullable|integer',
+        'camera_ultrawide_mp' => 'nullable|integer',
+        'camera_telephoto_mp' => 'nullable|integer',
+        'camera_front_mp'     => 'nullable|integer',
+        'gps'                 => 'required|boolean',
+        'nfc'                 => 'required|boolean',
+        'lte'                 => 'required|boolean',
+        '_5g'                 => 'required|boolean',
+        'usb_c'               => 'required|boolean',
+        'wireless_charging'   => 'required|boolean',
+        'waterproof_rating'   => 'nullable|string|max:10',
+        'charging_power_watts'=> 'nullable|integer',
+        'battery_mah'         => 'nullable|integer',
+        'release_year'        => 'nullable|integer',
+        'os'                  => 'nullable|string|max:50',
+    ]);
+
+    // Find the product by ID
+    $product = Product::findOrFail($id);
+
+    // Update product data
+    $product->update($data);
+
+    // Handle image upload if any new images are uploaded
+    if ($request->hasFile('images')) {
+        // Delete old images if necessary
+        foreach ($product->images as $image) {
+            Storage::delete($image->image_url);
+            $image->delete();
+        }
+
+        // Process new images and save them
+        foreach ($request->file('images') as $file) {
+            $path = $file->store("products/{$product->id}", 'public');
+
+            // Save the new image
+            $product->images()->create([
+                'image_url' => $path,
+            ]);
+        }
+    }
+
+    // Redirect to the admin page after update
+    return redirect()->route('adminObrazovka')->with('success', 'Product updated successfully!');
+}
+
+
+
 
 }

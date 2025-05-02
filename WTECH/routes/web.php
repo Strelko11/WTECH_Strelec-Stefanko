@@ -94,3 +94,12 @@ Route::post('/admin/products', [ProductController::class, 'store'])
         '/admin/products/{product}',
         [ProductController::class, 'destroy']
     )->name('products.destroy');
+
+    // In web.php (routes file)
+Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('upravProdukt');
+// In routes/web.php
+Route::resource('product', ProductController::class);
+
+// Or explicitly define the update route:
+Route::put('product/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::get('product/{product}', [ProductController::class, 'showProduct'])->name('product.show');
