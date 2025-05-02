@@ -144,20 +144,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full">
-                            <span class="font-bold">{{ $product->name }}</span>
-                            <span>Séria: {{ $product->series }}</span>
-                            <span>Cena: {{ $product->price }} €</span>
-                            <div class="flex justify-center md:justify-start w-full">
-                                <span>Pamäť: {{ $product->storage }}GB</span>
-                                <span class="ml-4">RAM: {{ $product->ram }}GB</span>
+                        <div class="relative flex flex-col justify-between items-center md:items-start text-center md:text-left text-gray-900 text-lg w-full h-full">
+                            <div>
+                                <div class="font-bold">{{ $product->name }}</div>
+                                <div>Séria: {{ $product->series }}</div>
+                                <div>Cena: {{ $product->price }} €</div>
+                                <div class="flex flex-col md:flex-row justify-center md:justify-start w-full gap-1 md:gap-4 mt-2">
+                                    <span>Pamäť: {{ $product->storage }}GB</span>
+                                    <span>RAM: {{ $product->ram }}GB</span>
+                                </div>
                             </div>
-                            <div class="w-full flex justify-center md:justify-end mt-4">
-                                <button class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-full sm:w-[120px]">
+
+                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="absolute bottom-0 right-0">
+                                @csrf
+                                <input type="hidden" name="quantity" id="quantity-input" value="1">
+                                <button class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 w-full sm:w-[120px]">
                                     Kúpiť
                                 </button>
-                            </div>
+                            </form>
                         </div>
+
                     </div>
                 </a>
                 @endforeach
