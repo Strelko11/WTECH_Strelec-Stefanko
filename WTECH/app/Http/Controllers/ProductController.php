@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductController extends Controller
 {
@@ -198,13 +200,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
 {
-    // First, find the product
-    $product = Product::findOrFail($id);
-
-    // Count how many images are already associated with the product
-    $existingImageCount = $product->images()->count();
-
-    // Validate the basic input (skip image count rules here)
+    // Validate input
     $data = $request->validate([
         'name'                => 'required|string|max:255',
         'description'         => 'required|string',
@@ -212,7 +208,7 @@ class ProductController extends Controller
         'category'            => 'required|string|in:iPhone,Samsung,Xiaomi,XiaomiPad,GalaxyTab,iPad',
         'series'              => 'required|string|max:255',
         'type'                => 'required|string|in:phone,tablet',
-        'images'              => 'nullable|array',
+        'images'              => 'nullable|array|min:2|max:4',
         'images.*'            => 'image|max:2048',
         'ram'                 => 'nullable|integer',
         'storage'             => 'nullable|integer',
@@ -239,30 +235,51 @@ class ProductController extends Controller
         'os'                  => 'nullable|string|max:50',
     ]);
 
-    // Count newly uploaded images
-    $newImages = $request->file('images', []);
-    $newImageCount = is_array($newImages) ? count($newImages) : 0;
-
-    // Total image count
-    $totalImageCount = $existingImageCount + $newImageCount;
-
-    if ($totalImageCount < 2 || $totalImageCount > 4) {
-        return back()->withInput()->withErrors(['images' => 'Total number of images (existing + new) must be between 2 and 4.']);
-    }
+    // Find the product by ID
+    $product = Product::findOrFail($id);
 
     // Update product data
     $product->update($data);
 
-    // Save new images
-    foreach ($newImages as $file) {
-        $path = $file->store("products/{$product->id}", 'public');
+    // Handle image upload if any new images are uploaded
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $file) {
+            $path = $file->store("products/{$product->id}", 'public');
 
-        $product->images()->create([
-            'image_url' => $path,
-        ]);
+            // Save the new image
+            $product->images()->create([
+                'image_url' => $path,
+            ]);
+        }
     }
 
+    // Handle image deletion if any images are deleted
+    // Handle image deletion if any images are deleted
+// Handle image deletion if any images are deleted
+if ($request->has('images_to_delete')) {
+    foreach ($request->images_to_delete as $imagePath) {
+        // Ensure the image path is relative and matches your storage setup
+        $imagePath = 'products/' . $product->id . '/' . basename($imagePath);
+
+        // Check if the file exists before attempting to delete
+        if (Storage::disk('public')->exists($imagePath)) {
+            // Delete the image from storage
+            Storage::disk('public')->delete($imagePath);
+        } else {
+            // Log a warning if the file is not found
+            Log::warning("File not found: " . $imagePath);
+        }
+
+        // Delete image record from the database
+        $product->images()->where('image_url', $imagePath)->delete();
+    }
+}
+
+
+
+    // Redirect to the admin page after update
     return redirect()->route('adminObrazovka')->with('success', 'Product updated successfully!');
 }
+
 
 }

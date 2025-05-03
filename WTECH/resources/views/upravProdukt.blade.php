@@ -284,7 +284,7 @@ $product = Product::find($id);
                     type="number"
                     id="camera_front_mp"
                     name="camera_front_mp"
-                    value="{{ old('camera_front_mp',$product->camera_front_mp) }}"
+                    value="{{ old('camera_front_mp', $product->camera_front_mp) }}"
                     class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500"
                   >
                 </div>
@@ -428,32 +428,28 @@ $product = Product::find($id);
                   </div>
 
               {{-- Obrázky (po jednom) --}}
-              <div class="mb-4">
+            <div class="mb-4">
                 <label class="block text-gray-900 font-medium mb-1">Obrázky (2–4)</label>
                 <div id="previews" class="grid grid-cols-4 gap-2 mb-2">
                     @php
-                        $imageFiles = $product->images; // Get images related to the product
+$imageFiles = $product->images; // Get images related to the product
                     @endphp
 
                     @foreach ($imageFiles as $index => $image)
-                        <div class="relative">
+                        <div class="relative" data-image="{{ $image->image_url }}" id="imageWrapper{{ $index }}">
                             <label for="fileInput{{ $index }}" class="block cursor-pointer">
-                                <img
-                                    id="preview{{ $index }}"
-                                    src="{{ asset('storage/' . $image->image_url) }}"
-                                    alt="Náhľad {{ $index + 1 }}"
-                                    class="w-full h-24 object-cover border border-gray-400 rounded"
-                                >
+                                <img id="preview{{ $index }}" src="{{ asset('storage/' . $image->image_url) }}"
+                                    alt="Náhľad {{ $index + 1 }}" class="w-full h-24 object-cover border border-gray-400 rounded">
                             </label>
-                            <input
-                                type="file"
-                                id="fileInput{{ $index }}"
-                                name="images[]"
-                                accept="image/*"
-                                class="hidden"
-                            >
-                            <!-- Hidden input for existing image -->
+                            <input type="file" id="fileInput{{ $index }}" name="images[]" accept="image/*" class="hidden">
                             <input type="hidden" name="existing_images[]" value="{{ $image->image_url }}">
+
+                            <!-- Delete button -->
+                            <button type="button"
+                                class="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 text-white rounded-full w-6 h-6 text-xs flex items-center justify-center delete-image"
+                                title="Odstrániť obrázok">
+                                &times;
+                            </button>
                         </div>
                     @endforeach
 
@@ -461,12 +457,8 @@ $product = Product::find($id);
                     @for ($i = count($imageFiles); $i < 4; $i++)
                         <div class="relative">
                             <label for="fileInput{{ $i }}" class="block cursor-pointer">
-                                <img
-                                    id="preview{{ $i }}"
-                                    src="https://via.placeholder.com/100?text=+"
-                                    alt="Náhľad {{ $i + 1 }}"
-                                    class="w-full h-24 object-cover border border-gray-400 rounded"
-                                >
+                                <img id="preview{{ $i }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Náhľad {{ $i + 1 }}"
+                                    class="w-full h-24 object-cover border border-gray-400 rounded" />
                             </label>
                             <input
                                 type="file"
@@ -494,6 +486,9 @@ $product = Product::find($id);
                 class="w-3/5 bg-gray-600 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg mx-auto block transition">
                 Update product
             </button>
+
+            <div id="deletedImagesContainer"></div>  <!-- To hold the deleted images URLs -->
+
             </form>
             </div>
 
@@ -503,55 +498,92 @@ $product = Product::find($id);
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 
-         <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const inputs = [...document.querySelectorAll('[id^="fileInput"]')];
-        const previews = inputs.map((_, i) => document.getElementById(`preview${i}`));
-        const form = document.getElementById('productForm');
-        const errorP = document.getElementById('imageError');
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const inputs = [...document.querySelectorAll('[id^="fileInput"]')];
+                const previews = inputs.map((_, i) => document.getElementById(`preview${i}`));
+                const form = document.getElementById('productForm');
+                const errorP = document.getElementById('imageError');
 
-        // Get the count of preloaded images from the backend using json_encode() to ensure it's passed as a number
-        const preloadedCount = @json(count($imageFiles));
-        console.log("Preloaded images count:", preloadedCount);
+                // Get the count of preloaded images from the backend using json_encode() to ensure it's passed as a number
+                let preloadedCount = @json(count($imageFiles));  // Let this variable be mutable
 
+                // Previews for image input changes
+                inputs.forEach((input, idx) => {
+                    input.addEventListener('change', () => {
+                        const file = input.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = e => previews[idx].src = e.target.result;
+                            reader.readAsDataURL(file);
+                        } else {
+                            previews[idx].src = 'https://via.placeholder.com/100?text=+';
+                        }
+                    });
+                });
 
-        // Previews for image input changes
-        inputs.forEach((input, idx) => {
-            input.addEventListener('change', () => {
-                const file = input.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = e => previews[idx].src = e.target.result;
-                    reader.readAsDataURL(file);
-                } else {
-                    previews[idx].src = 'https://via.placeholder.com/100?text=+';
-                }
-            });
-        });
+                // Validation before form submission
+                form.addEventListener('submit', function (e) {
+                    // Count how many files are selected by the user
+                    const selectedCount = inputs.filter(i => i.files.length > 0).length;
 
-        // Validation before form submission
-        form.addEventListener('submit', function (e) {
-    // Count how many files are selected by the user
-    const selectedCount = inputs.filter(i => i.files.length > 0).length;
+                    // Total count = selected files + preloaded images
+                    const totalCount = selectedCount + preloadedCount;
 
-    // Total count = selected files + preloaded images
-    const totalCount = selectedCount + preloadedCount;
-    console.log("Selected count:", selectedCount);
-    console.log("Preloaded count:", preloadedCount);
-    console.log("Total count:", totalCount);
+                    // Check if the selected count (user selected + preloaded) is valid (1 to 4 files)
+                    if (totalCount < 2 || totalCount > 4) {
+                        e.preventDefault(); // Prevent form submission
+                        errorP.classList.remove('hidden'); // Show error message
+                    } else {
+                        errorP.classList.add('hidden'); // Hide error message if valid
+                    }
+                });
 
+                // Delete image handler
+                document.querySelectorAll('.delete-image').forEach(button => {
+    button.addEventListener('click', function () {
+        const wrapper = this.closest('[data-image]');
+        const imageUrl = wrapper.getAttribute('data-image');
+        const index = wrapper.id.replace('imageWrapper', '');
 
-    // Check if the selected count (user selected + preloaded) is valid (1 to 4 files)
-    if (totalCount < 2 || totalCount > 4) {
-        e.preventDefault(); // Prevent form submission
-        errorP.classList.remove('hidden'); // Show error message
-    } else {
-        errorP.classList.add('hidden'); // Hide error message if valid
-    }
+        // Remove the delete button
+        this.remove();
+
+        // Replace image with placeholder
+        const previewImage = wrapper.querySelector(`#preview${index}`);
+        if (previewImage) {
+            previewImage.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+        }
+
+        // Reset the input file element
+        const fileInput = wrapper.querySelector(`#fileInput${index}`);
+        if (fileInput) {
+            fileInput.value = ''; // Clear selected file
+        }
+
+        // Remove the hidden input that stores the original image reference
+        const hiddenExisting = wrapper.querySelector('input[name="existing_images[]"]');
+        if (hiddenExisting) {
+            hiddenExisting.remove();
+        }
+
+        // Add hidden input to mark this image as deleted
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'images_to_delete[]';
+        hiddenInput.value = imageUrl;
+
+        document.getElementById('deletedImagesContainer').appendChild(hiddenInput);
+
+        // Decrease preloaded count
+        preloadedCount--;
+
+        console.log('Updated preloadedCount:', preloadedCount);
+    });
 });
 
-    });
-</script>
+            });
+            </script>
 
 
 
