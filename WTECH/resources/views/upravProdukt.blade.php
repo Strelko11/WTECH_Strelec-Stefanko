@@ -66,7 +66,7 @@
                   type="number"
                   id="price"
                   name="price"
-                  step="0.01"
+                  step="1"
                   value="{{ old('price', $product->price) }}"
                   required
                   class="w-full px-4 py-2 border border-gray-400 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500"
