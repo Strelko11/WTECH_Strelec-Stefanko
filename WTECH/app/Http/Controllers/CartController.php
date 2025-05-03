@@ -208,12 +208,14 @@ class CartController extends Controller
         $cart = session()->get('cart', []);  // Get the current (empty) cart from the session
         Log::info('Session cart cleared.', ['cart' => $cart]);
     }
-
+    if ($request->expectsJson()) {
+        return response()->json([
+            'message' => 'Košík bol úspešne vymazaný'
+        ], 200);
+    }
     // Redirect the user back to the homepage or the desired page
     return redirect('/')->with('message', 'Cart cleared successfully.');
 }
-
-
 
 
 }

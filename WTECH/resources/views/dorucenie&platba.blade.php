@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
-    <script src="{{ mix('resources/js/orderConfirmation.js') }}" defer></script>
+
 </head>
 
 <body class="min-h-screen flex flex-col bg-gray-100">
@@ -102,48 +102,61 @@
 
     <!-- JavaScript -->
     <script>
-        document.getElementById("orderForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+        document.addEventListener("DOMContentLoaded", function () {
+          const form    = document.getElementById("orderForm");
+          const overlay = document.getElementById("overlay");
+          if (!form || !overlay) return;
 
-            const deliveryChecked = document.querySelector('input[name="sposob_dorucenia"]:checked');
-            const paymentChecked = document.querySelector('input[name="sposob_platby"]:checked');
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-            if (!deliveryChecked || !paymentChecked) {
-                alert("Prosím vyplňte všetky povinné polia (doručenie a platba).");
-                return;
+            const delivery = document.querySelector('input[name="sposob_dorucenia"]:checked');
+            const payment  = document.querySelector('input[name="sposob_platby"]:checked');
+            if (!delivery || !payment) {
+              alert("Prosím vyplňte všetky povinné polia (doručenie a platba).");
+              return;
             }
 
-            const userId = {{ auth()->check() ? Auth::user()->id : 'null' }};
+            const userId = @json(Auth::check() ? Auth::id() : null);
+
+
+            const showOverlay = () => {
+              overlay.classList.remove("hidden");
+              setTimeout(() => {
+                overlay.classList.add("hidden");
+                window.location.href = "/";
+              }, 3000);
+              event.target.submit();
+            };
 
             if (userId !== null) {
-                fetch('/clear-cart', {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    },
-                    body: JSON.stringify({ user_id: userId })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Cart cleared:', data);
-                        document.getElementById("overlay").classList.remove("hidden");
+              fetch("{{ route('cart.clear') }}", {
+                method: "DELETE",
+                credentials: "same-origin",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json",
+                  "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content")
+                },
+                body: JSON.stringify({ user_id: userId })
+              })
+              .then(response => {
+                if (!response.ok) throw new Error("Serverová chyba");
+                return response.json();
+              })
+              .then(() => {
+                showOverlay();
+              })
 
-                        // Optional: Redirect after delay
-                        setTimeout(() => {
-                            window.location.href = "/";
-                        }, 3000); // 3-second delay
-
-                    })
-                    .catch(error => {
-                        console.error('Error clearing cart:', error);
-                        alert("Došlo k chybe pri odosielaní objednávky.");
-                    });
             } else {
-                event.target.submit();
+              showOverlay();
             }
+
+          });
         });
-    </script>
+        </script>
 
 </body>
 
