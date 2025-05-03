@@ -210,7 +210,6 @@ class ProductController extends Controller
             'type'                => 'required|string|in:phone,tablet',
             'images'              => 'nullable|array',
             'images.*'            => 'image|max:2048',
-            'images.*' => 'image|max:2048',
             'ram'                 => 'nullable|integer',
             'storage'             => 'nullable|integer',
             'display_type'        => 'nullable|string|max:100',

@@ -19,25 +19,14 @@
         @include('navbaradmin')
         <!-- upravProdukt.blade.php -->
         <!-- upravProdukt.blade.php -->
-        <h1>Úprava produktu</h1>
 
-        <!-- Display the selected product ID -->
-        <p>Selected Product ID: {{ $id }}</p>
         @php
-use App\Models\Product;
-$product = Product::find($id);
+        use App\Models\Product;
+        $product = Product::find($id);
         @endphp
 
-        @if($product)
-            <p>Selected Product ID: {{ $product->id }}</p>
-            <p>Product Name: {{ $product->name }}</p>
-        @else
-            <p>Product not found.</p>
-        @endif
-
-
         <div class="w-full max-w-[80%] mx-auto px-4 py-10 border-l border-r border-gray-400 custom-shadow mt-22 rounded-md bg-gray-100 flex justify-center">
-            <form id="productForm" action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+            <form id="productForm" action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-md border border-gray-400">
                 @csrf
                 @method('PUT')
               <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Upraviť produkt</h2>
