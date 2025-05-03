@@ -8,6 +8,8 @@ use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 
 class CartController extends Controller
@@ -192,30 +194,59 @@ class CartController extends Controller
     }
     public function clearCart(Request $request)
 {
-    $userId = $request->user_id;
-    Log::debug('clearCart method triggered', ['user_id' => $userId]);
+    $user = Auth::user();
+    $userId = $user ? $user->id : null;
 
-    if ($userId) {
-        // If the user is logged in, clear cart items from the database
+    Log::debug('submitOrderAndClearCart method triggered', ['user_id' => $userId]);
+
+    // Get the cart from session
+    $cart = session()->get('cart', []);
+
+    if (empty($cart)) {
+        return redirect()->back()->with('error', 'Košík je prázdny.');
+    }
+
+    // ✅ If user is logged in, submit the order and store it in the database
+    if ($user) {
+        // Submit the order
+        $order = Order::create([
+            'user_id' => $userId,  // Make sure the user_id is set correctly
+        ]);
+
+        foreach ($cart as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
+        }
+
+        // Log order creation
+        Log::info('Order created and items added.', ['order_id' => $order->id]);
+
+        // Clear the cart from the database (if the user is logged in)
         CartItem::where('user_id', $userId)->delete();
         Log::info('User cart cleared from database.', ['user_id' => $userId]);
     } else {
-        // If the user is not logged in, clear the session cart
-        session()->forget('cart');  // Clears the session cart data
-        Cookie::queue('cart', json_encode([]), 60 * 24 * 7);  // Optionally clear cart cookie
+        // If the user is not logged in, just clear the session cart
+        session()->forget('cart');
+        Cookie::queue('cart', json_encode([]), 60 * 24 * 7);
 
-        // Log the session cart after clearing it
-        $cart = session()->get('cart', []);  // Get the current (empty) cart from the session
-        Log::info('Session cart cleared.', ['cart' => $cart]);
+        $cart = session()->get('cart', []);
+        Log::info('Session cart cleared without submitting the order.', ['cart' => $cart]);
     }
-    if ($request->expectsJson()) {
-        return response()->json([
-            'message' => 'Košík bol úspešne vymazaný'
-        ], 200);
-    }
-    // Redirect the user back to the homepage or the desired page
-    return redirect('/')->with('message', 'Cart cleared successfully.');
+
+    // ✅ Clear the session cart (after submission, whether logged in or not)
+    session()->forget('cart');
+    Cookie::queue('cart', json_encode([]), 60 * 24 * 7);
+
+    // Redirect to the homepage after clearing the cart
+    return redirect('/');
 }
+
+
+
 
 
 }
