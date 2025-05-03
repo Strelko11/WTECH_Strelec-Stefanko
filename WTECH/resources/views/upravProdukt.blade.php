@@ -536,6 +536,10 @@ $product = Product::find($id);
 
     // Total count = selected files + preloaded images
     const totalCount = selectedCount + preloadedCount;
+    console.log("Selected count:", selectedCount);
+    console.log("Preloaded count:", preloadedCount);
+    console.log("Total count:", totalCount);
+
 
     // Check if the selected count (user selected + preloaded) is valid (1 to 4 files)
     if (totalCount < 2 || totalCount > 4) {
