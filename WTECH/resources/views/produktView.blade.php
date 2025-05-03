@@ -210,6 +210,8 @@
             const unitPrice = parseFloat(document.getElementById("total-price").getAttribute("data-unit-price"));
             const quantityInput = document.getElementById("quantity");
             const totalPriceElement = document.getElementById("total-price");
+            console.log("produktCounter.js loaded");
+
 
             // Function to update the price
             function updatePrice() {
@@ -221,19 +223,7 @@
                 totalPriceElement.innerHTML = `${(unitPrice * quantity).toFixed(2).replace('.', ',')} €`;
             }
 
-            // Update price when the quantity is changed using buttons
-            document.getElementById("increase").addEventListener("click", function () {
-                quantityInput.value = parseInt(quantityInput.value) + 1;
-                updatePrice();
-            });
-
-            document.getElementById("decrease").addEventListener("click", function () {
-                let newValue = parseInt(quantityInput.value) - 1;
-                if (newValue > 0) {
-                    quantityInput.value = newValue;
-                    updatePrice();
-                }
-            });
+           
 
             // Update price when user presses enter
             quantityInput.addEventListener("keydown", function (event) {
@@ -256,9 +246,6 @@
             ->pluck('image_url')
         ->map(fn($path) => Storage::url($path)));
     </script>
-
-
-
 
 </body>
 
