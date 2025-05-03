@@ -454,7 +454,8 @@ $imageFiles = $product->images; // Get images related to the product
                     @endforeach
 
                     <!-- Fallback to placeholder images if less than 4 images -->
-                    @for ($i = count($imageFiles); $i < 4; $i++)
+@php $startIndex = count($imageFiles); @endphp
+@for ($i = $startIndex; $i < 4; $i++)
                         <div class="relative">
                             <label for="fileInput{{ $i }}" class="block cursor-pointer">
                                 <img id="preview{{ $i }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Náhľad {{ $i + 1 }}"
@@ -529,13 +530,17 @@ $imageFiles = $product->images; // Get images related to the product
 
                     // Total count = selected files + preloaded images
                     const totalCount = selectedCount + preloadedCount;
-
+                    console.log("Selected count:", selectedCount);
+                    console.log("Preloaded count:", preloadedCount);
+                    console.log("Total count:", totalCount);
                     // Check if the selected count (user selected + preloaded) is valid (1 to 4 files)
                     if (totalCount < 2 || totalCount > 4) {
                         e.preventDefault(); // Prevent form submission
                         errorP.classList.remove('hidden'); // Show error message
+                        console.log(1);
                     } else {
                         errorP.classList.add('hidden'); // Hide error message if valid
+                        console.log(2);
                     }
                 });
 
