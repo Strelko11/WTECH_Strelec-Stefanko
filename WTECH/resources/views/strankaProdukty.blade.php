@@ -155,13 +155,13 @@
                                 </div>
                             </div>
 
-                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="absolute bottom-0 right-0">
+                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="mt-4 w-full lg:w-auto lg:absolute lg:bottom-4 lg:right-4">
                                 @csrf
-                                <input type="hidden" name="quantity" id="quantity-input" value="1">
-                                <button class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 w-full sm:w-[120px]">
+                                <input type="hidden" name="quantity" value="1">
+                                <button class="block w-full lg:inline-block px-4 py-2 lg:px-6 lg:py-2 text-sm lg:text-base bg-gray-600 text-white rounded-lg shadow hover:bg-gray-800 transition">
                                     Kúpiť
                                 </button>
-                            </form>
+                                </form>
                         </div>
 
                     </div>
