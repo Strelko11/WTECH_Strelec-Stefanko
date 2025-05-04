@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     public $timestamps = false;
+    protected $table = 'orders'; // Specify the correct table name
 
-    protected $fillable = [
-        'user_id',
-        // Add other fields if needed, e.g. 'total', 'status', etc.
-    ];
+
+    protected $fillable = ['user_id', 'shipping_method_id','payment_method_id'];
+
     public function items()
 {
     return $this->hasMany(OrderItem::class);

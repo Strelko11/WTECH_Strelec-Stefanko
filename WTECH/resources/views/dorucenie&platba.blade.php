@@ -35,65 +35,65 @@
 
             <!-- Delivery Method -->
             <div
-                class="w-full md:max-w-[65%] px-4 md:px-8 py-6 md:py-10 shadow-xl flex flex-col gap-6 rounded-lg bg-white border border-gray-300">
-                <h3 class="text-xl md:text-2xl font-semibold text-center text-gray-800">Spôsob doručenia</h3>
-                <div class="space-y-4 md:space-y-6">
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="adresa" name="sposob_dorucenia"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="adresa" class="text-base md:text-lg font-medium text-gray-700">Na adresu</label>
-                    </div>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="balikobox" name="sposob_dorucenia"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="balikobox" class="text-base md:text-lg font-medium text-gray-700">Balikobox</label>
-                    </div>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="posta" name="sposob_dorucenia"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="posta" class="text-base md:text-lg font-medium text-gray-700">Na poštu</label>
-                    </div>
-                </div>
+        class="w-full md:max-w-[65%] px-4 md:px-8 py-6 md:py-10 shadow-xl flex flex-col gap-6 rounded-lg bg-white border border-gray-300">
+        <h3 class="text-xl md:text-2xl font-semibold text-center text-gray-800">Spôsob doručenia</h3>
+        <div class="space-y-4 md:space-y-6">
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="adresa" name="shipping_method" value=1
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="adresa" class="text-base md:text-lg font-medium text-gray-700">Na adresu</label>
             </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="balikobox" name="shipping_method" value="2"
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="balikobox" class="text-base md:text-lg font-medium text-gray-700">Balikobox</label>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="posta" name="shipping_method" value="3"
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="posta" class="text-base md:text-lg font-medium text-gray-700">Na poštu</label>
+            </div>
+        </div>
+    </div>
 
-            <!-- Payment Method -->
-            <div
-                class="w-full md:max-w-[65%] px-4 md:px-8 py-6 md:py-10 mt-6 shadow-xl flex flex-col gap-6 rounded-lg bg-white border border-gray-300">
-                <h3 class="text-xl md:text-2xl font-semibold text-center text-gray-800">Spôsob platby</h3>
-                <div class="space-y-4 md:space-y-6">
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="hotovost" name="sposob_platby"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="hotovost" class="text-base md:text-lg font-medium text-gray-700">Platba v
-                            hotovosti</label>
-                    </div>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="prevod_ucet" name="sposob_platby"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="prevod_ucet" class="text-base md:text-lg font-medium text-gray-700">Prevod na
-                            účet</label>
-                    </div>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="apple_pay" name="sposob_platby"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="apple_pay" class="text-base md:text-lg font-medium text-gray-700">Apple Pay</label>
-                    </div>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <input type="radio" id="google_pay" name="sposob_platby"
-                            class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                        <label for="google_pay" class="text-base md:text-lg font-medium text-gray-700">Google
-                            Pay</label>
-                    </div>
-                </div>
+    <!-- Payment Method -->
+    <div
+        class="w-full md:max-w-[65%] px-4 md:px-8 py-6 md:py-10 mt-6 shadow-xl flex flex-col gap-6 rounded-lg bg-white border border-gray-300">
+        <h3 class="text-xl md:text-2xl font-semibold text-center text-gray-800">Spôsob platby</h3>
+        <div class="space-y-4 md:space-y-6">
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="hotovost" name="payment_method" value="1"
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="hotovost" class="text-base md:text-lg font-medium text-gray-700">Platba v
+                    hotovosti</label>
             </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="prevod_ucet" name="payment_method" value="2"
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="prevod_ucet" class="text-base md:text-lg font-medium text-gray-700">Prevod na
+                    účet</label>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="apple_pay" name="payment_method" value="3"
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="apple_pay" class="text-base md:text-lg font-medium text-gray-700">Apple Pay</label>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <input type="radio" id="google_pay" name="payment_method" value="4"
+                    class="h-4 w-4 md:h-5 md:w-5 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                <label for="google_pay" class="text-base md:text-lg font-medium text-gray-700">Google
+                    Pay</label>
+            </div>
+        </div>
+    </div>
 
-            <!-- Submit Button -->
-            <div class="w-auto p-4 flex justify-center">
-                <button type="submit" id="potvrditButton"
-                    class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 w-[120px] transition">
-                    Potvrdiť objednávku
-                </button>
-            </div>
+    <!-- Submit Button -->
+    <div class="w-auto p-4 flex justify-center">
+        <button type="submit" id="potvrditButton"
+            class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 w-[120px] transition">
+            Potvrdiť objednávku
+        </button>
+    </div>
         </form>
     </div>
 
@@ -103,61 +103,73 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-          const form    = document.getElementById("orderForm");
-          const overlay = document.getElementById("overlay");
-          if (!form || !overlay) return;
+  const form = document.getElementById("orderForm");
+  const overlay = document.getElementById("overlay");
+  if (!form || !overlay) return;
 
-          form.addEventListener("submit", function (e) {
-            e.preventDefault();
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-            const delivery = document.querySelector('input[name="sposob_dorucenia"]:checked');
-            const payment  = document.querySelector('input[name="sposob_platby"]:checked');
-            if (!delivery || !payment) {
-              alert("Prosím vyplňte všetky povinné polia (doručenie a platba).");
-              return;
-            }
+    // Updated name attributes to match the ones in the HTML
+    const delivery = document.querySelector('input[name="shipping_method"]:checked');
+    const payment = document.querySelector('input[name="payment_method"]:checked');
+    if (!delivery || !payment) {
+      alert("Prosím vyplňte všetky povinné polia (doručenie a platba).");
+      return;
+    }
 
-            const userId = @json(Auth::check() ? Auth::id() : null);
+    const userId = @json(Auth::check() ? Auth::id() : null);
 
+    const showOverlay = (event) => {
+      overlay.classList.remove("hidden");
+      setTimeout(() => {
+        overlay.classList.add("hidden");
+        window.location.href = "/";
+      }, 3000);
+      //event.target.submit();  // Submit the form after overlay
+    };
 
-            const showOverlay = () => {
-              overlay.classList.remove("hidden");
-              setTimeout(() => {
-                overlay.classList.add("hidden");
-                window.location.href = "/";
-              }, 3000);
-              event.target.submit();
-            };
-
-            if (userId !== null) {
-              fetch("{{ route('cart.clear') }}", {
-                method: "DELETE",
-                credentials: "same-origin",
-                headers: {
-                  "Content-Type": "application/json",
-                  "Accept": "application/json",
-                  "X-CSRF-TOKEN": document
-                    .querySelector('meta[name="csrf-token"]')
-                    .getAttribute("content")
-                },
-                body: JSON.stringify({ user_id: userId })
-              })
-              .then(response => {
-                if (!response.ok) throw new Error("Serverová chyba");
-                return response.json();
-              })
-              .then(() => {
-                showOverlay();
-              })
-
-            } else {
-              showOverlay();
-            }
-
-          });
+    if (userId !== null) {
+      fetch("{{ route('cart.clear') }}", {
+        method: "DELETE",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "X-CSRF-TOKEN": document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content")
+        },
+        body: JSON.stringify({
+      user_id:         userId,
+      shipping_method: delivery.value,
+      payment_method:  payment.value
+    })
+      })
+        .then(response => {
+          if (!response.ok) {
+            console.error("Fetch response error:", response);
+            throw new Error("Serverová chyba");
+          }
+          return response.json();
+        })
+        .then(() => {
+          showOverlay(e);  // Pass the event here
+        })
+        .catch((err) => {
+          console.error("Chyba pri požiadavke:", err);
+          alert(err.message);
         });
-        </script>
 
-</body>
+    } else {
+      showOverlay(e);
+    }
+  });
+});
+
+      </script>
+
+
+    </body>
 
 </html>

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\PaymentMethod;
+use App\Models\ShippingMethod;
 use App\Models\User;
 
 class CartController extends Controller
@@ -193,60 +195,87 @@ class CartController extends Controller
         return back()->with('successMessage', 'Cart updated successfully!');
     }
     public function clearCart(Request $request)
-{
-    $user = Auth::user();
-    $userId = $user ? $user->id : null;
+    {
+        $userId = $request->user()?->id; // ✅ with null-safe operator
+        $shippingMethodId = (int) $request->input('shipping_method');
+        $paymentMethodId = (int) $request->input('payment_method');
+        Log::info('Shipping Method 1ID: ' . $shippingMethodId);
+        Log::info('Payment Method 1ID: ' . $paymentMethodId);
 
-    Log::debug('submitOrderAndClearCart method triggered', ['user_id' => $userId]);
 
-    // Get the cart from session
-    $cart = session()->get('cart', []);
+        /*$shippingMethodIdd = trim($shippingMethodId);
+        $paymentMethodIdd = trim($paymentMethodId);
+        Log::debug('Shipping Method 2ID: ' . $shippingMethodIdd);
+        Log::debug('Payment Method 2ID: ' . $paymentMethodIdd);
 
-    if (empty($cart)) {
-        return redirect()->back()->with('error', 'Košík je prázdny.');
-    }
+        $shippingMethodIddd= (int) $shippingMethodIdd;
+        $paymentMethodIddd = (int) $paymentMethodIdd; // Cast to integer
 
-    // ✅ If user is logged in, submit the order and store it in the database
-    if ($user) {
-        // Submit the order
-        $order = Order::create([
-            'user_id' => $userId,  // Make sure the user_id is set correctly
-        ]);
+        // Log the casted values and their types
+        Log::debug('Casted Shipping Method IDddd: ' . $shippingMethodIddd);
+        Log::debug('Casted Payment Method IDdddd: ' . $paymentMethodIddd);
+*/
 
-        foreach ($cart as $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $item['product_id'],
-                'quantity' => $item['quantity'],
-                'price' => $item['price'],
+        Log::debug('clearCart method triggered', ['user_id' => $userId]);
+        // ✅ Submit the order FIRST (if cart exists)
+        $cart = session()->get('cart', []);
+
+        //if (empty($cart)) {
+            //return response()->json(['error' => 'Košík je prázdny.'], 400);
+        //}
+
+        if ($userId) {
+            Log::debug('clearCart method triggered', ['user_id' => $userId]);
+            Log::info('Shipping Method 2ID: ' . $shippingMethodId);
+            Log::info('Payment Method 2ID: ' . $paymentMethodId);
+
+            $order = Order::create([
+                'user_id' => $userId,
+                'shipping_method_id' => $shippingMethodId,
+                'payment_method_id' => $paymentMethodId,
             ]);
+
+            foreach ($cart as $item) {
+                $price = is_array($item) ? ($item['price'] ?? 0) : ($item->product->price ?? 0);
+                $quantity = is_array($item) ? ($item['quantity'] ?? 0) : ($item->quantity ?? 0);
+
+                if ($price > 0 && $quantity > 0) {
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $item->product_id,
+                        'quantity' => $quantity,
+                        'price' => $price,
+                    ]);
+                } else {
+                    Log::error('Invalid cart item detected', ['cart_item' => $item]);
+                }
+            }
+
+            Log::info('Order submitted and stored.', ['order_id' => $order->id]);
+        } else {
+            Log::info('Shipping Method 3ID: ' . $shippingMethodId);
+            Log::info('Payment Method 3ID: ' . $paymentMethodId);
+            Log::info('Order submission skipped - user not logged in.');
         }
 
-        // Log order creation
-        Log::info('Order created and items added.', ['order_id' => $order->id]);
+        // ✅ Then clear the cart
+        if ($userId) {
+            CartItem::where('user_id', $userId)->delete();
+            Log::info('User cart cleared from database.', ['user_id' => $userId]);
+        } else {
+            session()->forget('cart');
+            Cookie::queue('cart', json_encode([]), 60 * 24 * 7);
+            $cart = session()->get('cart', []);
+            Log::info('Session cart cleared.', ['cart' => $cart]);
+        }
 
-        // Clear the cart from the database (if the user is logged in)
-        CartItem::where('user_id', $userId)->delete();
-        Log::info('User cart cleared from database.', ['user_id' => $userId]);
-    } else {
-        // If the user is not logged in, just clear the session cart
-        session()->forget('cart');
-        Cookie::queue('cart', json_encode([]), 60 * 24 * 7);
-
-        $cart = session()->get('cart', []);
-        Log::info('Session cart cleared without submitting the order.', ['cart' => $cart]);
+        // ✅ Final response
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Košík bol úspešne vymazaný'
+            ], 200);
+        }
+        // Redirect the user back to the homepage or the desired page
+        return redirect('/')->with('message', 'Cart cleared successfully.');
     }
-
-    // ✅ Clear the session cart (after submission, whether logged in or not)
-    session()->forget('cart');
-    Cookie::queue('cart', json_encode([]), 60 * 24 * 7);
-
-    // Redirect to the homepage after clearing the cart
-    return redirect('/');
-}
-
-
-
-
-
 }
