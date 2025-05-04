@@ -244,7 +244,7 @@ class CartController extends Controller
                         'order_id' => $order->id,
                         'product_id' => $item->product_id,
                         'quantity' => $quantity,
-                        'price' => $price,
+                        'price' => $price * $quantity,
                     ]);
                 } else {
                     Log::error('Invalid cart item detected', ['cart_item' => $item]);
