@@ -113,14 +113,14 @@ class CartController extends Controller
                     !is_null($item['product_id']) && !is_null($item['name']) && !is_null($item['price']) && !is_null($item['quantity']);
             });
 
-            // Re-save sanitized cart back to session
+
             session()->put('cart', $cart);
 
             Log::info('Guest user');
             Log::info('Guest cart items', ['cart' => $cart]);
         }
 
-        // Optional: show success flash message
+
         $successMessage = session('success') ?? null;
         Log::info('Current Cart:', ['cart' => session('cart')]);
 
@@ -141,7 +141,7 @@ class CartController extends Controller
         Log::info('Product ID to remove:', ['id' => $id]);
 
         if ($user) {
-            // User is logged in, delete the cart item from the database
+
             $cartItem = $user->cartItems()->where('product_id', $id)->first();
 
             if ($cartItem) {
@@ -196,33 +196,19 @@ class CartController extends Controller
     }
     public function clearCart(Request $request)
     {
-        $userId = $request->user()?->id; // ✅ with null-safe operator
+        $userId = $request->user()?->id;
         $shippingMethodId = (int) $request->input('shipping_method');
         $paymentMethodId = (int) $request->input('payment_method');
         Log::info('Shipping Method 1ID: ' . $shippingMethodId);
         Log::info('Payment Method 1ID: ' . $paymentMethodId);
 
 
-        /*$shippingMethodIdd = trim($shippingMethodId);
-        $paymentMethodIdd = trim($paymentMethodId);
-        Log::debug('Shipping Method 2ID: ' . $shippingMethodIdd);
-        Log::debug('Payment Method 2ID: ' . $paymentMethodIdd);
 
-        $shippingMethodIddd= (int) $shippingMethodIdd;
-        $paymentMethodIddd = (int) $paymentMethodIdd; // Cast to integer
-
-        // Log the casted values and their types
-        Log::debug('Casted Shipping Method IDddd: ' . $shippingMethodIddd);
-        Log::debug('Casted Payment Method IDdddd: ' . $paymentMethodIddd);
-*/
 
         Log::debug('clearCart method triggered', ['user_id' => $userId]);
-        // ✅ Submit the order FIRST (if cart exists)
+
         $cart = session()->get('cart', []);
 
-        //if (empty($cart)) {
-            //return response()->json(['error' => 'Košík je prázdny.'], 400);
-        //}
 
         if ($userId) {
             Log::debug('clearCart method triggered', ['user_id' => $userId]);
@@ -258,7 +244,6 @@ class CartController extends Controller
             Log::info('Order submission skipped - user not logged in.');
         }
 
-        // ✅ Then clear the cart
         if ($userId) {
             CartItem::where('user_id', $userId)->delete();
             Log::info('User cart cleared from database.', ['user_id' => $userId]);
@@ -269,13 +254,12 @@ class CartController extends Controller
             Log::info('Session cart cleared.', ['cart' => $cart]);
         }
 
-        // ✅ Final response
         if ($request->expectsJson()) {
             return response()->json([
                 'message' => 'Košík bol úspešne vymazaný'
             ], 200);
         }
-        // Redirect the user back to the homepage or the desired page
+
         return redirect('/')->with('message', 'Cart cleared successfully.');
     }
 }

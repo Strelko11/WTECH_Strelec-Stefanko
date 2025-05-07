@@ -155,13 +155,15 @@
                                 </div>
                             </div>
 
-                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="mt-4 w-full lg:w-auto lg:absolute lg:bottom-4 lg:right-4">
+                            @unless(optional(auth()->user())->role === 'admin')
+                                <form method="POST" action="{{ route('cart.add', $product->id) }}" class="mt-4 w-full lg:w-auto lg:absolute lg:bottom-4 lg:right-4">
                                 @csrf
                                 <input type="hidden" name="quantity" value="1">
                                 <button class="block w-full lg:inline-block px-4 py-2 lg:px-6 lg:py-2 text-sm lg:text-base bg-gray-600 text-white rounded-lg shadow hover:bg-gray-800 transition">
-                                    Kúpiť
+                                     Kúpiť
                                 </button>
-                                </form>
+                            </form>
+                            @endunless
                         </div>
 
                     </div>

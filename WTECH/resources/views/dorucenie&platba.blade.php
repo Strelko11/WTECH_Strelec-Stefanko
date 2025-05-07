@@ -110,7 +110,7 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Updated name attributes to match the ones in the HTML
+  
     const delivery = document.querySelector('input[name="shipping_method"]:checked');
     const payment = document.querySelector('input[name="payment_method"]:checked');
     if (!delivery || !payment) {
@@ -126,7 +126,7 @@
         overlay.classList.add("hidden");
         window.location.href = "/";
       }, 3000);
-      //event.target.submit();  // Submit the form after overlay
+      //event.target.submit();
     };
 
     if (userId !== null) {
@@ -154,7 +154,7 @@
           return response.json();
         })
         .then(() => {
-          showOverlay(e);  // Pass the event here
+          showOverlay(e);
         })
         .catch((err) => {
           console.error("Chyba pri požiadavke:", err);

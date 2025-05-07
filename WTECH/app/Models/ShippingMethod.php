@@ -11,7 +11,7 @@ class ShippingMethod extends Model
     public $timestamps = false;
 
 
-    // Only the 'name' column is mass assignable
+
     protected $fillable = ['name'];
-    
+
 }

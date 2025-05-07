@@ -421,7 +421,7 @@
                 <label class="block text-gray-900 font-medium mb-1">Obrázky (2–4)</label>
                 <div id="previews" class="grid grid-cols-4 gap-2 mb-2">
                     @php
-$imageFiles = $product->images; // Get images related to the product
+                    $imageFiles = $product->images; // Get images related to the product
                     @endphp
 
                     @foreach ($imageFiles as $index => $image)
@@ -442,9 +442,9 @@ $imageFiles = $product->images; // Get images related to the product
                         </div>
                     @endforeach
 
-                    <!-- Fallback to placeholder images if less than 4 images -->
-@php $startIndex = count($imageFiles); @endphp
-@for ($i = $startIndex; $i < 4; $i++)
+
+                        @php $startIndex = count($imageFiles); @endphp
+                        @for ($i = $startIndex; $i < 4; $i++)
                         <div class="relative">
                             <label for="fileInput{{ $i }}" class="block cursor-pointer">
                                 <img id="preview{{ $i }}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Náhľad {{ $i + 1 }}"
@@ -477,7 +477,7 @@ $imageFiles = $product->images; // Get images related to the product
                 Update product
             </button>
 
-            <div id="deletedImagesContainer"></div>  <!-- To hold the deleted images URLs -->
+            <div id="deletedImagesContainer"></div>
 
             </form>
             </div>
@@ -495,8 +495,8 @@ $imageFiles = $product->images; // Get images related to the product
                 const form = document.getElementById('productForm');
                 const errorP = document.getElementById('imageError');
 
-                // Get the count of preloaded images from the backend using json_encode() to ensure it's passed as a number
-                let preloadedCount = @json(count($imageFiles));  // Let this variable be mutable
+
+                let preloadedCount = @json(count($imageFiles)); 
 
                 // Previews for image input changes
                 inputs.forEach((input, idx) => {

@@ -213,26 +213,25 @@
             console.log("produktCounter.js loaded");
 
 
-            // Function to update the price
+
             function updatePrice() {
                 let quantity = parseInt(quantityInput.value);
                 if (isNaN(quantity) || quantity <= 0) {
-                    quantity = 1; // default to 1 if the input is not a valid number
+                    quantity = 1;
                     quantityInput.value = 1;
                 }
                 totalPriceElement.innerHTML = `${(unitPrice * quantity).toFixed(2).replace('.', ',')} €`;
             }
 
-           
 
-            // Update price when user presses enter
+
+
             quantityInput.addEventListener("keydown", function (event) {
                 if (event.key === "Enter") {
                     updatePrice();
                 }
             });
 
-            // Update price when user clicks away (on blur)
             quantityInput.addEventListener("blur", function () {
                 updatePrice();
             });

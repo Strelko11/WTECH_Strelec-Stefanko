@@ -113,10 +113,10 @@ class ProductController extends Controller
         return view('products.form');
     }
 
-    // Uloženie nového produktu
+  
     public function store(Request $request)
     {
-        // 1) Validácia
+
         $data = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
@@ -191,7 +191,7 @@ class ProductController extends Controller
             ->with('success', 'Produkt bol úspešne vymazaný.');
     }
 
-    // In your controller (e.g., ProductController.php)
+
     public function edit($id)
     {
         // Pass the product ID to the view
@@ -272,8 +272,7 @@ class ProductController extends Controller
         }
 
         // Handle image deletion if any images are deleted
-        // Handle image deletion if any images are deleted
-        // Handle image deletion if any images are deleted
+
         if ($request->has('images_to_delete')) {
             foreach ($request->images_to_delete as $imagePath) {
                 // Ensure the image path is relative and matches your storage setup

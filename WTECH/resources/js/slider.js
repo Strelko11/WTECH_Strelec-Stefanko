@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!range || !minInput || !maxInput) return;
 
-    // Čítame hodnoty z inputov (zachytia aj hodnoty z request() po refreshi)
+
     const minValue = parseInt(minInput.value) || 0;
     const maxValue = parseInt(maxInput.value) || 2000;
 
@@ -23,13 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Posúva hodnoty zo slidera do inputov
+
     range.noUiSlider.on('update', (values) => {
         minInput.value = Math.round(values[0]);
         maxInput.value = Math.round(values[1]);
     });
 
-    // Keď prepíšeš hodnotu v inpute, posunie sa aj slider
+
     minInput.addEventListener('change', function () {
         range.noUiSlider.set([this.value, null]);
     });

@@ -451,7 +451,7 @@
     const form = document.getElementById('productForm');
     const errorP = document.getElementById('imageError');
 
-    // Pre náhľady jednotlivých polí
+
     inputs.forEach((input, idx) => {
       input.addEventListener('change', () => {
         const file = input.files[0];
@@ -465,7 +465,7 @@
       });
     });
 
-    // Kontrola počtu pri submit
+   
     form.addEventListener('submit', e => {
       const selectedCount = inputs.filter(i => i.files.length > 0).length;
       if (selectedCount < 2 || selectedCount > 4) {

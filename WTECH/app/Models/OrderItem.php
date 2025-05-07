@@ -9,7 +9,7 @@ class OrderItem extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'order_id',   // Add order_id here
+        'order_id',  
         'product_id',
         'quantity',
         'price',
