@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,3 +36,70 @@ Route::get('/upravProdukt', function () {
 Route::get('/dorucenie&platba', function () {
     return view('dorucenie&platba');
 })->name('dorucenie&platba');
+
+use App\Http\Controllers\ProductController;
+Route::get('/produkty/{category}', [ProductController::class, 'showByCategory'])->name('zKategorie');
+Route::get('/produktView', [ProductController::class, 'showProduct'])->name('produktView');
+Route::get('/vyhladavanie', [ProductController::class, 'search'])->name('vyhladavanie');
+
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin', [AdminController::class, 'index'])->name('adminObrazovka');
+
+
+
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/kosik', [CartController::class, 'showCart'])->name('cart.show');
+Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+// routes/web.php (Laravel)
+Route::post('/update-cart', [CartController::class, 'updateCart']);
+
+
+Route::get('/clear-cart', function () {
+    session()->forget('cart');
+    return 'Cart cleared!';
+});
+
+Route::get('/check-user-login', function () {
+    if (Auth::check()) {
+        return response()->json([
+            'loggedIn' => true,
+            'user_id' => Auth::id()  // Return the user ID if the user is logged in
+        ]);
+    }
+
+    return response()->json([
+        'loggedIn' => false
+    ]);
+});
+
+// routes/web.php
+Route::delete('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear');
+
+
+
+Route::get('/admin/products/create', [ProductController::class, 'create'])
+     ->name('products.create');
+
+// Uloženie nového produktu
+Route::post('/admin/products', [ProductController::class, 'store'])
+     ->name('products.store');
+
+     Route::delete(
+        '/admin/products/{product}',
+        [ProductController::class, 'destroy']
+    )->name('products.destroy');
+
+    // In web.php (routes file)
+Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('upravProdukt');
+// In routes/web.php
+Route::resource('product', ProductController::class);
+
+// Or explicitly define the update route:
+Route::put('product/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::get('product/{product}', [ProductController::class, 'showProduct'])->name('product.show');

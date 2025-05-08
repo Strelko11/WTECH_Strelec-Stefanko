@@ -1,115 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Tech Sphere</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="{{ mix('resources/js/produktCounter.js') }}" defer></script>
-
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/updateSession.js'])
+    <script src="{{ mix('resources/js/cart.js') }}" defer></script>
 </head>
+
 <body class="flex-grow bg-gray-50">
+    @include('navbar')
 
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center z-50">
-        <a href="{{ route('welcome') }}" id="company" class="text-xl font-semibold flex items-center">
-            <i class="fas fa-globe mr-2"></i> TechSphere
-        </a>
-        <input type="text" class="w-1/2 px-4 py-2 border rounded-lg  text-white " placeholder="Search...">
-        <div class="flex space-x-4">
-            <a href="{{ route('kosikView') }}" class="text-white text-xl hover:scale-105 transition-transform"><i class="fas fa-shopping-cart"></i></a>
+    <div class="max-w-5xl mx-auto mt-40 px-4">
+        <h2 class="text-2xl font-bold mb-6">Košík</h2>
+        @php
+            $grandTotal = 0;
+        @endphp
 
-            <div class="relative group inline-block">
-                <button class="text-white text-xl focus:outline-none">
-                    <i class="fas fa-user"></i>
-                </button>
-                <div class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg
-                opacity-0 invisible group-hover:visible group-hover:opacity-100
-                transition-all duration-200 border border-gray-300 z-50">
-                    <div class="px-4 py-3 text-sm text-black">
-                        <div>Meno používateľa</div>
-                        <div class="font-medium truncate">E-mail používateľa</div>
-                    </div>
-                    <a href="{{ route('loginForm') }}" class="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Prihlásiť sa</a>
-                    <a href="{{ route('adminObrazovka') }}" class="block px-4 py-2 hover:bg-gray-300">Admin</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-b-lg">Sign out</a>
+        @foreach($cart as $id => $item)
+            @php
+                // Price and quantity extraction
+                $price = is_array($item) ? ($item['price'] ?? 0) : ($item->product->price ?? 0);
+                $quantity = is_array($item) ? ($item['quantity'] ?? 0) : ($item->quantity ?? 0);
+
+                // Product ID extraction
+                $product_id = is_array($item) ? ($item['product_id'] ?? null) : ($item->product_id ?? null);
+
+                $grandTotal += $price * $quantity;
+            @endphp
+
+            @php
+                // Log based on whether the item is an array or object
+                if (is_object($item)) {
+                    // If it's an object, log product_id along with other details
+                    \Log::info('Cart Item Object:', [
+                        'product_id' => $item->product_id,
+                        'price' => $price,
+                        'quantity' => $quantity
+                    ]);
+                } elseif (is_array($item)) {
+                    // If it's an array, log product_id and the whole item array
+                    \Log::info('Cart Item Array:', [
+                        'product_id' => $product_id,
+                        'item' => $item
+                    ]);
+                }
+            @endphp
+
+            <section data-id="{{ $product_id }}" data-unit-price="{{ $price }}"
+                class="mt-8 w-full max-w-5xl mx-auto px-2 py-6 bg-white rounded-lg custom-shadow flex flex-col md:flex-row items-center justify-start gap-6 border-l border-r border-gray-500">
+
+                {{-- Product Image --}}
+                <div
+                    class="h-36 w-40 bg-[url('{{ Storage::url($item['image'] ?? $item->product->images->first()->image_url) }}')] bg-contain bg-center rounded-md bg-no-repeat">
                 </div>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Product Section -->
-    <section class="mt-32 w-full max-w-4xl mx-auto px-6 py-8 bg-white rounded-lg custom-shadow flex items-center justify-start gap-6  border-l border-r border-gray-500">
-        <div id="Produkt" class="h-36 w-36 bg-[url('https://s7d1.scene7.com/is/image/dish/S25_Icyblue_Hero_P1?$ProductBase$&fmt=webp-alpha')] bg-contain bg-no-repeat bg-center rounded-md"></div>
-        <div class="flex items-center space-x-4">
-            <button class="quantity-btn" id="decrease">−</button>
-            <input type="text" id="quantity" value="1" readonly class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
-            <button class="quantity-btn" id="increase">+</button>
-        </div>
-        <div class="ml-6 flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
-            <span class="font-bold">iPhone 16 Pro Max 256 GB čierny titán</span>
-            <span>Séria: 16</span>
-            <div class="flex justify-center md:justify-start w-full">
-                <span>Pamäť: 256GB</span>
-                <span class="ml-4">RAM: 8GB</span>
-            </div>
-        </div>
-        <div class="flex items-center space-x-4">
-            <span class="font-semibold text-lg text-gray-700">Cena:</span>
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black p-3 rounded-lg shadow-md font-medium text-xl border border-gray-200">
-                1500€
-            </div>
-        </div>
+                {{-- Quantity Controls & Product Details --}}
+                <div class="ml-6 flex flex-col md:flex-row items-center space-x-3">
+                    {{-- Quantity Controls --}}
+                    <div class="flex items-center space-x-4">
+                        <button class="quantity-btn" id="decrease-{{ $product_id }}">−</button>
+                        <input type="text" name="quantity[{{ $product_id }}]" value="{{ $quantity }}"
+                            class="w-16 text-center border border-gray-300 rounded-md py-2 px-4 text-xl">
+                        <button class="quantity-btn" id="increase-{{ $product_id }}">+</button>
+                    </div>
 
-    </section>
+                    {{-- Product Details --}}
+                    <div class="flex flex-col text-center md:text-left text-gray-900 text-lg w-full">
+                        <span class="font-bold">{{ $item['name'] ?? $item->product->name }}</span>
+                        @if(!empty($item['series']))
+                            <span>Séria: {{ $item['series'] }}</span>
+                        @endif
+                        <div class="flex justify-center md:justify-start w-full">
+                            @if(!empty($item['memory']))
+                                <span>Pamäť: {{ $item['memory'] }}</span>
+                            @endif
+                            @if(!empty($item['ram']))
+                                <span class="ml-4">RAM: {{ $item['ram'] }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Contact Form -->
-    <div class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg custom-shadow mt-8 border-l border-r border-gray-500">
-        <form action="{{ route('dorucenie&platba') }}" method="GET" class="space-y-6">
-            <div class="flex items-center">
-                <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
-                <input type="text" id="meno" name="meno" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="priezvisko" class="w-32 text-sm font-medium text-gray-700">Priezvisko</label>
-                <input type="text" id="priezvisko" name="priezvisko" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="email" class="w-32 text-sm font-medium text-gray-700">E-mail</label>
-                <input type="email" id="email" name="email" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Telefón</label>
-                <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Ulica</label>
-                <input type="tel" id="telefon" name="telefon" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="cislo-domu" class="w-32 text-sm font-medium text-gray-700">Číslo domu</label>
-                <input type="text" id="cislo-domu" name="cislo-domu" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="obec" class="w-32 text-sm font-medium text-gray-700">Obec</label>
-                <input type="text" id="obec" name="obec" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="flex items-center">
-                <label for="psc" class="w-32 text-sm font-medium text-gray-700">PSČ</label>
-                <input type="text" id="psc" name="psc" class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition text-center">
-                Potvrdiť
-            </button>
+                {{-- Total Price & Delete --}}
+                <div class="flex items-center space-x-2">
+                    <span class="font-semibold text-lg text-gray-700">Spolu:</span>
+                    <div
+                        class="bg-gradient-to-r from-blue-500 to-indigo-600 text-black px-4 py-2 rounded-lg shadow-md font-medium text-xl border border-gray-200 total-price inline-block whitespace-nowrap">
+                        {{ number_format($price * $quantity, 2, ',', ' ') }} €
+                    </div>
 
-        </form>
+
+                    {{-- Delete button --}}
+                    <form action="{{ route('cart.remove', ['id' => $product_id]) }}" method="POST" class="pr-3 "
+                        onsubmit="return confirm('Naozaj chcete odstrániť tento produkt z košíka?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        @endforeach
+
+        <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="{{ route('welcome') }}" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-800">
+                Pokračovať v nákupe
+            </a>
+
+            @if(count($cart) > 0)
+                <div
+                    class="bg-gradient-to-r from-green-400 to-blue-500 text-black px-6 py-3 rounded-lg shadow-md font-semibold text-lg border border-gray-300">
+                    <span id="grand-total">{{ number_format($grandTotal, 2, ',', ' ') }} €</span>
+                </div>
+            @endif
+        </div>
     </div>
+
+    <div class="flex items-center justify-center mt-10 px-4">
+        <div
+            class="w-full max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg custom-shadow border-l border-r border-gray-500">
+
+            <form action="{{ route('dorucenie&platba') }}" method="GET" class="space-y-6">
+                <div class="flex items-center">
+                    <label for="meno" class="w-32 text-sm font-medium text-gray-700">Meno</label>
+                    <input type="text" id="meno" name="meno"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+                <div class="flex items-center">
+                    <label for="priezvisko" class="w-32 text-sm font-medium text-gray-700">Priezvisko</label>
+                    <input type="text" id="priezvisko" name="priezvisko"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+                <div class="flex items-center">
+                    <label for="email" class="w-32 text-sm font-medium text-gray-700">E-mail</label>
+                    <input type="email" id="email" name="email"
+                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+
+                <div class="flex items-center">
+                    <label for="telefon" class="w-32 text-sm font-medium text-gray-700">Telefón</label>
+                    <input type="tel" id="telefon" name="telefon"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        pattern="[0-9]+"
+                        required>
+                </div>
+                <div class="flex items-center">
+                    <label for="ulica" class="w-32 text-sm font-medium text-gray-700">Ulica</label>
+                    <input type="text" id="ulica" name="ulica"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+                <div class="flex items-center">
+                    <label for="cislo-domu" class="w-32 text-sm font-medium text-gray-700">Číslo domu</label>
+                    <input type="text" id="cislo-domu" name="cislo-domu"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+                <div class="flex items-center">
+                    <label for="obec" class="w-32 text-sm font-medium text-gray-700">Obec</label>
+                    <input type="text" id="obec" name="obec"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+                <div class="flex items-center">
+                    <label for="psc" class="w-32 text-sm font-medium text-gray-700">PSČ</label>
+                    <input type="text" id="psc" name="psc"
+                        class="w-full rounded-md border border-gray-300 h-12 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+                <button type="submit"
+                    class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-gray-800 flex justify-center w-[120px] transition text-center">
+                    Potvrdiť
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include External Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const quantityInputs = document.querySelectorAll("input[name^='quantity']");
+
+            function updatePrices(input) {
+                const section = input.closest("section");
+                const unitPrice = parseFloat(section.dataset.unitPrice);
+                const quantity = parseInt(input.value) || 0;
+
+                // Update total price for the item
+                const totalPriceElem = section.querySelector(".total-price");
+                const total = (unitPrice * quantity).toFixed(2).replace('.', ',');
+                totalPriceElem.textContent = `${total} €`;
+
+                // Recalculate grand total
+                let grandTotal = 0;
+                document.querySelectorAll("section[data-unit-price]").forEach(sec => {
+                    const unit = parseFloat(sec.dataset.unitPrice);
+                    const qty = parseInt(sec.querySelector("input[name^='quantity']").value) || 0;
+                    grandTotal += unit * qty;
+                });
+
+                const grandTotalElem = document.getElementById("grand-total");
+                if (grandTotalElem) {
+                    grandTotalElem.textContent = `${grandTotal.toFixed(2).replace('.', ',')} €`;
+                }
+            }
+
+            quantityInputs.forEach(input => {
+                input.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        updatePrices(input);
+                    }
+                });
+
+                input.addEventListener("blur", function () {
+                    updatePrices(input);
+                });
+            });
+        });
+    </script>
+
+
 </body>
-<footer class="text-center py-4 bg-gray-900 border-t text-white mt-5">
-    <p>&copy; 2025 TechSphere. Všetky práva vyhradené.</p>
-</footer>
+
 </html>
+

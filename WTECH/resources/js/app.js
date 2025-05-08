@@ -1,9 +1,4 @@
-const images = [
-    "https://image.alza.cz/products/RI051c4/RI051c4.jpg?width=2000&height=2000",
-    "https://image.alza.cz/products/RI051c4/RI051c4-01.jpg?width=2000&height=2000",
-    "https://image.alza.cz/products/RI051c4/RI051c4-02.jpg?width=1400&height=1400",
-    "https://image.alza.cz/products/RI051c4/RI051c4-03.jpg?width=1400&height=1400"
-];
+const images = window.galleryImages || [];
 
 let currentIndex = 0;
 const modal = document.getElementById("gallery-modal");
